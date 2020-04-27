@@ -1,4 +1,5 @@
-import Button, { ButtonProps } from 'antd/lib/button'
+import { Button } from 'antd'
+import { ButtonProps } from 'antd/lib/button'
 import React from 'react'
 import styled from 'styled-components'
 import { color, colors } from '../theme'
