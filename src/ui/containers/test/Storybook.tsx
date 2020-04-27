@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../../base/Card'
+import Highlighter from '../../base/Highlighter'
 import BlueButton from '../../components/Buttons/BlueButton'
 import PrimaryButton from '../../components/Buttons/PrimaryButton'
 import RedButton from '../../components/Buttons/RedButton'
@@ -11,5 +12,6 @@ export default () => (
     <RedButton text="Join with Google" />
     <BlueButton text="Join with Facebook" />
     <Card>Hi</Card>
+    <Highlighter color="red">hey</Highlighter>
   </div>
 )
