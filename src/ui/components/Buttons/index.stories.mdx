@@ -1,0 +1,33 @@
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import Button from '../../base/Button'
+import PrimaryButtonC from './PrimaryButton'
+import SecondaryButtonC from './SecondaryButton'
+import RedButtonC from './RedButton'
+import BlueButtonC from './BlueButton'
+
+<Meta title="Buttons" component={Button} />
+
+# Buttons
+## Standard brand buttons
+
+<Preview withToolbar>
+  <Story name="standard">
+    <PrimaryButtonC text="Join now!"/>
+  </Story>
+</Preview>
+
+### Variations
+Use only the provided composite variations provided:
+<Preview withToolbar>
+    <Story name="variations">
+        <div>
+            <PrimaryButtonC text="Primary Button"/>
+            <SecondaryButtonC text="Secondary Button"/>
+            <RedButtonC text="Red Button"/>
+            <BlueButtonC text="Blue Button"/>
+        </div>
+    </Story>
+</Preview>
+
+### Props
+<Props of={Button} />

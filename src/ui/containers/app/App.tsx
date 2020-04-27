@@ -1,12 +1,7 @@
 import React from 'react'
-import Storybook from '../test/Storybook'
 
 function App() {
-  return (
-    <div>
-      <Storybook />
-    </div>
-  )
+  return <div>Hello world</div>
 }
 
 export default App

@@ -82,6 +82,6 @@
     },
     "rulesDirectory": [],
     "exclude": [
-        "**/*.stories.tsx"
+        "**/*.stories.mdx"
     ]
 }

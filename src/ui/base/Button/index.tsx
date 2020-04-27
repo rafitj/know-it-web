@@ -22,7 +22,7 @@ const ButtonContainer = styled.div<IButtonProps>`
     border-radius: 8px;
     border: 2px solid;
     padding: 8px 25px;
-    margin: 3px;
+    margin: 5px;
     background-color: ${(props) => colors[props.backgroundColor]};
     border-color: ${(props) => colors[props.borderColor]};
     color: ${(props) => colors[props.fontColor]};
@@ -37,7 +37,6 @@ const ButtonContainer = styled.div<IButtonProps>`
     outline: none;
   }
 `
-
 export default ({
   borderColor,
   text,
