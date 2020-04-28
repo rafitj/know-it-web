@@ -28,6 +28,18 @@ const ButtonContainer = styled.div<IButtonProps>`
     color: ${(props) => colors[props.fontColor]};
     box-shadow: ${`3px 3px ${colors.grey}`};
   }
+  .ant-btn:disabled {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+  .ant-btn:disabled:hover {
+    transform: none;
+    cursor: default;
+    box-shadow: none;
+  }
+  .ant-btn-block {
+    width: 100%;
+  }
   .ant-btn:hover {
     transform: translate(2px, 2px);
     cursor: pointer;
