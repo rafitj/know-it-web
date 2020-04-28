@@ -1,7 +1,8 @@
 import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import Card from './'
-import PrimaryButton from '../Button/PrimaryButton'
-import SecondaryButton from '../Button/SecondaryButton'
+import Card from './';
+import PrimaryButton from '../Button/PrimaryButton';
+import SecondaryButton from '../Button/SecondaryButton';
+import Text from '../Typography/Text';
 
 <Meta title="Cards" component={Card} />
 
@@ -12,7 +13,7 @@ Children must be provided to a Card component.
 <Preview withToolbar>
   <Story name="standard">
     <Card>
-        Registration Complete!
+        <Text>Registration Complete!</Text>
         <PrimaryButton text="Take a tour" />
         <SecondaryButton text="Chill I got this" />
     </Card>
@@ -26,14 +27,28 @@ Cards assume auto width and height so it is suggested to provide explicit values
   <Story name="sizes">
     <div>
         <Card width={500}>
-            Width = 500
+            <Text>
+                Width = 500
+            </Text>
         </Card>
         <Card>
-            Auto width
+            <Text> Auto width </Text>
         </Card>
     </div>
   </Story>
 </Preview>
+
+### Colors
+Cards can only be black or white. Cards are not grid elements, they are styled, use `reflexbox` instead.
+<Preview withToolbar>
+  <Story name="colors">
+    <div>
+        <Card width={500} invert></Card>
+        <Card width={500}></Card>
+    </div>
+  </Story>
+</Preview>
+
 
 
 ### Props
