@@ -1,0 +1,21 @@
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
+import Input from '../../base/Input'
+import FormInput from './FormInput'
+
+<Meta title="Inputs" component={Input} />
+
+# Inputs
+
+## Standard inputs for forms and user input
+
+Forms are ideally provided with onChange handlers.
+
+<Preview withToolbar>
+  <Story name="Standard">
+    <FormInput label="Username" defaultVal="Rick John" />
+  </Story>
+</Preview>
+
+### Props
+
+<Props of={Input} />
