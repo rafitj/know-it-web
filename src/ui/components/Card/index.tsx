@@ -7,15 +7,23 @@ export interface CardProps {
   height?: number
   invert?: boolean
   block?: boolean
+  textAlign?: 'center' | 'left' | 'right'
 }
 
-export default ({ children, width, height, invert, block }: CardProps) => (
+export default ({
+  children,
+  width,
+  height,
+  invert,
+  block,
+  textAlign = 'center',
+}: CardProps) => (
   <Card
     invert={invert}
     width={width}
     height={height}
     block={block}
-    textAlign="center"
+    textAlign={textAlign}
   >
     {children}
   </Card>

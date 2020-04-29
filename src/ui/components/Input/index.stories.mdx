@@ -1,6 +1,7 @@
 import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
 import Input from '../../base/Input'
 import FormInput from './FormInput'
+import SimpleInput from './SimpleInput'
 
 <Meta title="Inputs" component={Input} />
 
@@ -8,11 +9,16 @@ import FormInput from './FormInput'
 
 ## Standard inputs for forms and user input
 
-Forms are ideally provided with onChange handlers.
+Forms come in two forms. Ideally they are provided with `onChange` handlers.
 
 <Preview withToolbar>
   <Story name="Standard">
-    <FormInput label="Username" defaultVal="Rick John" />
+    <div>
+      <FormInput label="Username" placeholder="Rick John" />
+      <FormInput password label="Password" />
+      <SimpleInput placeholder="Simple Input" />
+      <SimpleInput password />
+    </div>
   </Story>
 </Preview>
 
