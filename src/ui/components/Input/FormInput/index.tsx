@@ -27,7 +27,7 @@ const StyledInputContainer = styled.div`
     font-size: 1rem;
     color: ${colors.black};
     border: 2px solid ${colors.black};
-    padding: 4.5px 5px 5px 5px;
+    padding: 4px 5px 5px 5px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
   }
