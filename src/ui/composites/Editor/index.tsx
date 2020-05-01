@@ -9,7 +9,16 @@ import Card from 'ui/components/Card'
 import Text from 'ui/components/Typography/Text'
 import { EDITOR_TOOLS, defaultData } from './editor-tools'
 
-export interface EditorProps {}
+export interface Note {
+  id: number
+  folderId: number
+  name: string
+  data: string
+}
+
+export interface EditorProps {
+  noteId?: number
+}
 
 const EditorContainer = styled.div`
   &:hover {
@@ -20,10 +29,13 @@ const EditorContainer = styled.div`
     padding-bottom: 2rem !important;
   }
 `
-export default ({}: EditorProps) => {
-  const [data, setData] = React.useState<OutputData>(defaultData)
+export default ({ noteId }: EditorProps) => {
+  const [data, setData] = React.useState<OutputData>(defaultData(noteId))
+
   const [status, setStatus] = React.useState('Loading')
+
   let editorInstance: EditorJsType
+
   const onEdit = async (API: EditorAPI) => {
     const savedData = await editorInstance.save()
     setData(savedData)

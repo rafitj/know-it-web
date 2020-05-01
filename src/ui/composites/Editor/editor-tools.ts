@@ -34,12 +34,12 @@ export const EDITOR_TOOLS = {
   simpleImage: { class: SimpleImage, inlineToolbar: true },
 }
 
-export const defaultData = {
+export const defaultData = (noteId?: number) => ({
   blocks: [
     {
       type: 'header',
       data: {
-        text: 'New Note',
+        text: `Note ID: ${noteId}`,
         level: 2,
       },
     },
@@ -59,4 +59,4 @@ export const defaultData = {
       },
     },
   ],
-}
+})
