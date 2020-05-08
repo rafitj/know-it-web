@@ -13,6 +13,7 @@ import Quote from '@editorjs/quote'
 import Raw from '@editorjs/raw'
 import SimpleImage from '@editorjs/simple-image'
 import Table from '@editorjs/table'
+import { QABlock } from './qablock'
 
 export const EDITOR_TOOLS = {
   embed: { class: Embed, inlineToolbar: true },
@@ -30,6 +31,7 @@ export const EDITOR_TOOLS = {
   delimiter: { class: Delimiter, inlineToolbar: true },
   inlineCode: { class: InlineCode, inlineToolbar: true },
   simpleImage: { class: SimpleImage, inlineToolbar: true },
+  qa: { class: QABlock, inlineToolbar: true },
 }
 
 export const defaultData = (noteId?: number) => ({
