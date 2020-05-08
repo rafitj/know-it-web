@@ -13,14 +13,12 @@ import Quote from '@editorjs/quote'
 import Raw from '@editorjs/raw'
 import SimpleImage from '@editorjs/simple-image'
 import Table from '@editorjs/table'
-import Warning from '@editorjs/warning'
 
 export const EDITOR_TOOLS = {
   embed: { class: Embed, inlineToolbar: true },
   table: { class: Table, inlineToolbar: true },
   paragraph: { class: Paragraph, inlineToolbar: true },
   list: { class: List, inlineToolbar: true },
-  warning: { class: Warning, inlineToolbar: true },
   code: { class: Code, inlineToolbar: true },
   linkTool: { class: LinkTool, inlineToolbar: true },
   image: { class: Image, inlineToolbar: true },

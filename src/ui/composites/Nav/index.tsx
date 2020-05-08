@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import HighlightText from 'ui/components/Typography/HighlightText'
 import StrongText from 'ui/components/Typography/StrongText'
+import Text from 'ui/components/Typography/Text'
 
 export default () => {
   return (
@@ -10,7 +11,7 @@ export default () => {
         <StrongText>Logo</StrongText>
       </Box>
       <Box>
-        <Flex justifyContent="space-between">
+        <Flex justifyContent="space-between" alignItems="center">
           <Box mx={3}>
             <HighlightText highlight="red">Product</HighlightText>
           </Box>
@@ -19,6 +20,9 @@ export default () => {
           </Box>
           <Box mx={3}>
             <HighlightText highlight="green">Pricing</HighlightText>
+          </Box>
+          <Box>
+            <Text invert>Login</Text>
           </Box>
         </Flex>
       </Box>
