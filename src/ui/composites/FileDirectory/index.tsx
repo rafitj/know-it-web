@@ -1,17 +1,17 @@
+import 'antd/dist/antd.css'
 import React, { useState } from 'react'
+import { Folder } from 'types/files'
+import Subheader from 'ui/components/Typography/Subheader'
 import Drawer from '../../base/Drawer'
-import Menu, { SubMenu, Item as MenuItem } from '../../base/Menu'
 import {
   AddCircle,
-  IconWrap,
-  Folder as FolderIcon,
-  Note as NoteIcon,
   Drawer as DrawerIcon,
+  Folder as FolderIcon,
+  IconWrap,
+  Note as NoteIcon,
 } from '../../base/Icons'
-import { Folder } from 'types/files'
-import 'antd/dist/antd.css'
+import Menu, { Item as MenuItem, SubMenu } from '../../base/Menu'
 import SimpleInput from '../../components/Input/SimpleInput'
-import Subheader from 'ui/components/Typography/Subheader'
 export interface FileDirectory {
   folders: Folder[]
   newNote: (name: string, folderId: number) => void

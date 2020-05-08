@@ -11,9 +11,7 @@ export interface TextProps {
 const Text = styled(AntDText)<TextProps>`
   color: ${(props) => (props.invert ? colors.white : colors.black)};
   font-size: 1rem;
-  margin: 16px;
-  line-height: 1.7;
-  padding: 8px;
+  line-height: 2;
 `
 
 export default ({ children: text, invert }: TextProps) => (

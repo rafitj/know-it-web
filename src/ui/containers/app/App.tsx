@@ -1,15 +1,16 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Home from '../Home'
 import NoteSpace from '../NoteSpace'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/note-space">
+        <Route exact={true} path="/note-space">
           <NoteSpace />
         </Route>
-        <Route exact path="/">
-          <h1>Home</h1>
+        <Route exact={true} path="/">
+          <Home />
         </Route>
       </Switch>
     </Router>
