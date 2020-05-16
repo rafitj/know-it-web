@@ -5,9 +5,8 @@ import EditorJsType, {
 import React from 'react'
 import EditorJs from 'react-editor-js'
 import styled from 'styled-components'
-import { Card } from 'ui/components/Card'
-import { Text } from 'ui/components/Typography/Text'
 import { EDITOR_TOOLS, defaultData } from './editor-tools'
+import { Box } from 'reflexbox'
 
 export interface Note {
   id: number
@@ -21,12 +20,20 @@ export interface EditorProps {
 }
 
 const EditorContainer = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  font-family: Arial;
+  text-align: left;
   &:hover {
     cursor: text;
   }
   .codex-editor__redactor {
     padding: 0 !important;
     padding-bottom: 2rem !important;
+  }
+  .ce-block__content {
+    margin: 0 5rem;
+    max-width: none;
   }
 `
 export const Editor = ({ noteId }: EditorProps) => {
@@ -44,9 +51,10 @@ export const Editor = ({ noteId }: EditorProps) => {
       setStatus('')
     }, 1000)
   }
+  console.log(status)
   return (
     <>
-      <Card width={750} height={1000} textAlign={'left'}>
+      <Box>
         <EditorContainer>
           <EditorJs
             instanceRef={(instance) => (editorInstance = instance)}
@@ -62,8 +70,7 @@ export const Editor = ({ noteId }: EditorProps) => {
             }}
           />
         </EditorContainer>
-      </Card>
-      <Text>{status}</Text>
+      </Box>
     </>
   )
 }
