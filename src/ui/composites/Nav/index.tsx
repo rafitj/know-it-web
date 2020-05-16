@@ -4,7 +4,7 @@ import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 import { HighlightText } from 'ui/components/Typography/HighlightText'
 import { StrongText } from 'ui/components/Typography/StrongText'
 
-export default () => {
+export const Nav = () => {
   return (
     <Flex alignItems="center" justifyContent="space-between" px={5} py={2}>
       <Box>

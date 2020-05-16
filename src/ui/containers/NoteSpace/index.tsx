@@ -4,7 +4,7 @@ import { Box, Flex } from 'reflexbox'
 import { Editor } from '../../composites/Editor'
 // import { FileDirectory } from '../../composites/FileDirectory'
 
-export default () => {
+export const NoteSpace = () => {
   // const [noteId, setNoteId] = useState(0)
   // const [folders, setFolders] = useState<Folder[]>([])
   // const pseudoID = () => Math.floor(Math.random() * 100000)
