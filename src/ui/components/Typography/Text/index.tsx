@@ -1,21 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import { colors } from '../../../base/theme'
-import Typography, { Text as AntDText } from '../../../base/Typography'
+import { Text as AntDText, Typography } from '../../../base/Typography'
 
 export interface TextProps {
   children?: React.ReactNode
   invert?: boolean
 }
 
-const Text = styled(AntDText)<TextProps>`
+const StyledText = styled(AntDText)<TextProps>`
   color: ${(props) => (props.invert ? colors.white : colors.black)};
-  font-size: 1rem;
-  line-height: 2;
+  font-size: 1.1rem;
+  line-height: 2.25;
 `
 
-export default ({ children: text, invert }: TextProps) => (
+export const Text = ({ children: text, invert }: TextProps) => (
   <Typography>
-    <Text invert={invert}>{text}</Text>
+    <StyledText invert={invert}>{text}</StyledText>
   </Typography>
 )

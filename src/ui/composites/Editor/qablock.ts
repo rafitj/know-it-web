@@ -8,18 +8,17 @@ export class QABlock {
   }
 
   render() {
-    var question = document.createElement('input')
+    const question = document.createElement('input')
     question.placeholder = 'Question'
-    var answer = document.createElement('input')
+    const answer = document.createElement('input')
     answer.placeholder = 'Answer'
-    var block = document.createElement('div')
+    const block = document.createElement('div')
     block.append(question)
     block.append(answer)
     return block
   }
 
   save(blockContent: any) {
-    console.log(blockContent.getElementsByTagName('INPUT'))
     return {
       question: blockContent.getElementsByTagName('INPUT')[0].value,
       answer: blockContent.getElementsByTagName('INPUT')[1].value,

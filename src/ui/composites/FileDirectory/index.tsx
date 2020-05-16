@@ -1,8 +1,8 @@
 import 'antd/dist/antd.css'
 import React, { useState } from 'react'
 import { Folder } from 'types/files'
-import Subheader from 'ui/components/Typography/Subheader'
-import Drawer from '../../base/Drawer'
+import { SubHeader } from 'ui/components/Typography/Subheader'
+import { Drawer } from '../../base/Drawer'
 import {
   AddCircle,
   Drawer as DrawerIcon,
@@ -10,21 +10,21 @@ import {
   IconWrap,
   Note as NoteIcon,
 } from '../../base/Icons'
-import Menu, { Item as MenuItem, SubMenu } from '../../base/Menu'
-import SimpleInput from '../../components/Input/SimpleInput'
-export interface FileDirectory {
+import { Item as MenuItem, Menu, SubMenu } from '../../base/Menu'
+import { SimpleInput } from '../../components/Input/SimpleInput'
+export interface IFileDirectory {
   folders: Folder[]
   newNote: (name: string, folderId: number) => void
   newFolder: (name: string) => void
   setCurrFile: (fileId: number) => void
 }
 
-export default ({
+export const FileDirectory = ({
   folders,
   newNote,
   newFolder,
   setCurrFile,
-}: FileDirectory) => {
+}: IFileDirectory) => {
   const [currFolder, setCurrFolder] = useState(0)
   const [drawerOpen, setDrawerOpen] = useState(true)
   const [newFolderName, setNewFolderName] = useState('')
@@ -39,7 +39,7 @@ export default ({
         }}
         placement="left"
       >
-        <Subheader color="white">My Files</Subheader>
+        <SubHeader color="white">My Files</SubHeader>
         <Menu mode="inline" theme="dark">
           {folders.map((folder) => (
             <SubMenu

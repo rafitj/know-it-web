@@ -5,8 +5,8 @@ import EditorJsType, {
 import React from 'react'
 import EditorJs from 'react-editor-js'
 import styled from 'styled-components'
-import Card from 'ui/components/Card'
-import Text from 'ui/components/Typography/Text'
+import { Card } from 'ui/components/Card'
+import { Text } from 'ui/components/Typography/Text'
 import { EDITOR_TOOLS, defaultData } from './editor-tools'
 
 export interface Note {
@@ -29,7 +29,7 @@ const EditorContainer = styled.div`
     padding-bottom: 2rem !important;
   }
 `
-export default ({ noteId }: EditorProps) => {
+export const Editor = ({ noteId }: EditorProps) => {
   const [data, setData] = React.useState<OutputData>(defaultData(noteId))
 
   const [status, setStatus] = React.useState('Loading')
@@ -45,23 +45,25 @@ export default ({ noteId }: EditorProps) => {
     }, 1000)
   }
   return (
-    <Card width={750} textAlign={'left'}>
+    <>
+      <Card width={750} height={1000} textAlign={'left'}>
+        <EditorContainer>
+          <EditorJs
+            instanceRef={(instance) => (editorInstance = instance)}
+            tools={EDITOR_TOOLS}
+            data={data}
+            autofocus={true}
+            onChange={onEdit}
+            onReady={() => {
+              setStatus('Ready')
+              setTimeout(() => {
+                setStatus('')
+              }, 1000)
+            }}
+          />
+        </EditorContainer>
+      </Card>
       <Text>{status}</Text>
-      <EditorContainer>
-        <EditorJs
-          instanceRef={(instance) => (editorInstance = instance)}
-          tools={EDITOR_TOOLS}
-          data={data}
-          autofocus={true}
-          onChange={onEdit}
-          onReady={() => {
-            setStatus('Ready')
-            setTimeout(() => {
-              setStatus('')
-            }, 1000)
-          }}
-        />
-      </EditorContainer>
-    </Card>
+    </>
   )
 }

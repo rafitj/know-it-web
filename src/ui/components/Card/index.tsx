@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../../base/Card'
+import { Card as CardBase } from '../../base/Card'
 
 export interface CardProps {
   children: React.ReactNode
@@ -10,7 +10,7 @@ export interface CardProps {
   textAlign?: 'center' | 'left' | 'right'
 }
 
-export default ({
+export const Card = ({
   children,
   width,
   height,
@@ -18,7 +18,7 @@ export default ({
   block,
   textAlign = 'center',
 }: CardProps) => (
-  <Card
+  <CardBase
     invert={invert}
     width={width}
     height={height}
@@ -26,5 +26,5 @@ export default ({
     textAlign={textAlign}
   >
     {children}
-  </Card>
+  </CardBase>
 )

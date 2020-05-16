@@ -1,20 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import { colors } from '../../../base/theme'
-import Typography, { Text } from '../../../base/Typography'
+import { Text, Typography } from '../../../base/Typography'
 
 export interface HeaderProps {
   children?: React.ReactNode
 }
 
-const Header = styled(Text)`
+const StyledHeader = styled(Text)`
   color: ${colors.black};
   font-size: 2rem;
   margin: 16px;
 `
 
-export default ({ children: text }: HeaderProps) => (
+export const Header = ({ children: text }: HeaderProps) => (
   <Typography>
-    <Header>{text}</Header>
+    <StyledHeader>{text}</StyledHeader>
   </Typography>
 )

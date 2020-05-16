@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Input, { AntDInputProps, PasswordInput } from '../../../base/Input'
+import { AntDInputProps, Input, PasswordInput } from '../../../base/Input'
 import { colors } from '../../../base/theme'
+
 export interface FormInputProps extends AntDInputProps {
   label?: string
   defaultVal?: string
@@ -42,7 +43,12 @@ const StyledInputContainer = styled.div`
   }
 `
 
-export default ({ label, defaultVal, password, ...rest }: FormInputProps) =>
+export const FormInput = ({
+  label,
+  defaultVal,
+  password,
+  ...rest
+}: FormInputProps) =>
   password ? (
     <StyledInputContainer>
       <PasswordInput addonBefore={label} {...rest} />

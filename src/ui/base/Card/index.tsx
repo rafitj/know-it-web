@@ -1,4 +1,4 @@
-import { Card } from 'antd'
+import { Card as AntDCard } from 'antd'
 import { CardProps } from 'antd/lib/card'
 import React from 'react'
 import styled from 'styled-components'
@@ -32,7 +32,7 @@ const CardContainer = styled.div<ICardProps>`
   }
 `
 
-export default ({
+export const Card = ({
   children,
   width,
   height,
@@ -48,6 +48,6 @@ export default ({
     textAlign={textAlign}
     block={block}
   >
-    <Card {...antdprops}>{children}</Card>
+    <AntDCard {...antdprops}>{children}</AntDCard>
   </CardContainer>
 )

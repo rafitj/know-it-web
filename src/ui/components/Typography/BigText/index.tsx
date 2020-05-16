@@ -1,19 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import { colors } from '../../../base/theme'
-import Typography, { Title } from '../../../base/Typography'
+import { Title, Typography } from '../../../base/Typography'
 
 export interface BigTextProps {
   children?: React.ReactNode
 }
 
-const BigText = styled(Title)`
-  color: ${colors.black};
-  font-size: 6rem;
+const StyledBigText = styled(Title)`
+  color: ${colors.black} !important;
+  font-size: 4rem !important;
+  margin-bottom: 1rem !important;
 `
 
-export default ({ children: text }: BigTextProps) => (
+export const BigText = ({ children: text }: BigTextProps) => (
   <Typography>
-    <BigText>{text}</BigText>
+    <StyledBigText>{text}</StyledBigText>
   </Typography>
 )

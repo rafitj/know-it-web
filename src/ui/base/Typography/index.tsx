@@ -1,8 +1,8 @@
-import { Typography } from 'antd'
+import { Typography as AntDTypography } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
 
-export const { Text, Title, Paragraph } = Typography
+export const { Text, Title, Paragraph } = AntDTypography
 
 export interface ITypographyProps {
   children: React.ReactNode
@@ -11,6 +11,6 @@ export interface ITypographyProps {
 const TextContainer = styled.div`
   font-family: Arial;
 `
-export default ({ children }: ITypographyProps) => (
+export const Typography = ({ children }: ITypographyProps) => (
   <TextContainer>{children}</TextContainer>
 )

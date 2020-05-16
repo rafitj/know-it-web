@@ -18,9 +18,5 @@ export const IconWrap = styled(Box)<IIconWrap>`
   &:hover {
     cursor: pointer;
   }
+  display: inline-block;
 `
-export default ({ iconColor, children, ...boxprops }: IIconWrap) => (
-  <IconWrap iconColor={iconColor} {...boxprops}>
-    {children}
-  </IconWrap>
-)
