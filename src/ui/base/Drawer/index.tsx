@@ -13,6 +13,11 @@ export interface IDrawerProps extends AntDDrawerProps {
 const StyledDrawer = styled(AntDDrawer)`
   .ant-drawer-body {
     background-color: ${colors.black};
+    padding: 10px 0;
+  }
+
+  .ant-drawer-content-wrapper {
+    width 100% !important;
   }
 `
 
