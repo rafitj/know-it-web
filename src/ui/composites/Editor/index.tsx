@@ -4,9 +4,9 @@ import EditorJsType, {
 } from '@editorjs/editorjs/types'
 import React from 'react'
 import EditorJs from 'react-editor-js'
+import { Box } from 'reflexbox'
 import styled from 'styled-components'
 import { EDITOR_TOOLS, defaultData } from './editor-tools'
-import { Box } from 'reflexbox'
 
 export interface Note {
   id: number
@@ -20,7 +20,7 @@ export interface EditorProps {
 }
 
 const EditorContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   font-family: Arial;
   text-align: left;
@@ -43,7 +43,7 @@ export const Editor = ({ noteId }: EditorProps) => {
 
   let editorInstance: EditorJsType
 
-  const onEdit = async (API: EditorAPI) => {
+  const onEdit = async (api: EditorAPI) => {
     const savedData = await editorInstance.save()
     setData(savedData)
     setStatus('Saved')
@@ -51,13 +51,16 @@ export const Editor = ({ noteId }: EditorProps) => {
       setStatus('')
     }, 1000)
   }
+
   console.log(status)
   return (
     <>
       <Box>
-        <EditorContainer>
+        <EditorContainer onKeyUp={(e) => { console.log(e.keyCode) }}>
           <EditorJs
-            instanceRef={(instance) => (editorInstance = instance)}
+            instanceRef={(instance) => {
+              editorInstance = instance
+            }}
             tools={EDITOR_TOOLS}
             data={data}
             autofocus={true}
