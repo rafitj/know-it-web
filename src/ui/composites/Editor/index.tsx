@@ -6,6 +6,7 @@ import React from 'react'
 import EditorJs from 'react-editor-js'
 import { Box } from 'reflexbox'
 import styled from 'styled-components'
+import { colors } from 'ui/base/theme'
 import { EDITOR_TOOLS, defaultData } from './editor-tools'
 
 export interface Note {
@@ -24,18 +25,34 @@ const EditorContainer = styled.div`
   min-height: 100vh;
   font-family: Arial;
   text-align: left;
-  &:hover {
-    cursor: text;
-  }
+  color: ${colors.black};
+  cursor: text;
   .codex-editor__redactor {
     padding: 0 !important;
     padding-bottom: 2rem !important;
   }
   .ce-block__content {
-    margin: 0 5rem;
+    margin: 0 2rem;
     max-width: none;
   }
+  .codex-editor {
+    margin-top: 0;
+  }
+  .ce-toolbar__actions {
+    display: none;
+  }
+  .ce-toolbar__plus {
+   left: -25px;
+  }
+  .ce-toolbar {
+    right: auto;
+    left: 25px;
+  }
+  .ce-toolbox {
+    background-color: ${colors.white};
+  }
 `
+
 export const Editor = ({ noteId }: EditorProps) => {
   const [data, setData] = React.useState<OutputData>(defaultData(noteId))
   const [status, setStatus] = React.useState('Loading')
@@ -54,42 +71,33 @@ export const Editor = ({ noteId }: EditorProps) => {
 
   console.log(status)
   return (
-    <>
-      <Box>
-        <EditorContainer
-          onKeyUp={(e) => {
-            console.log(e.keyCode)
+    <Box width={1}>
+      <EditorContainer
+        onKeyUp={(e) => {
+          console.log(e.keyCode)
+        }}
+        onClick={() => {
+          if (editorInstance) {
+            editorInstance.focus(true)
+          }
+        }}
+      >
+        <EditorJs
+          instanceRef={(instance) => {
+            setEditorInstance(instance)
           }}
-          onClick={() => {
-            if (editorInstance) {
-              const index = editorInstance.blocks.getBlocksCount()
-              editorInstance.blocks.insert(
-                undefined,
-                undefined,
-                undefined,
-                index + 1,
-                true
-              )
-            }
+          tools={EDITOR_TOOLS}
+          data={data}
+          autofocus={true}
+          onChange={onEdit}
+          onReady={() => {
+            setStatus('Ready')
+            setTimeout(() => {
+              setStatus('')
+            }, 1000)
           }}
-        >
-          <EditorJs
-            instanceRef={(instance) => {
-              setEditorInstance(instance)
-            }}
-            tools={EDITOR_TOOLS}
-            data={data}
-            autofocus={true}
-            onChange={onEdit}
-            onReady={() => {
-              setStatus('Ready')
-              setTimeout(() => {
-                setStatus('')
-              }, 1000)
-            }}
-          />
-        </EditorContainer>
-      </Box>
-    </>
+        />
+      </EditorContainer>
+    </Box>
   )
 }

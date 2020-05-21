@@ -1,14 +1,20 @@
+import { Layout } from 'antd'
 import React from 'react'
-import { Box, Flex } from 'reflexbox'
 import { Folder } from 'types/files'
+import { colors } from 'ui/base/theme'
+import { Card } from 'ui/components/Card'
 import { Editor } from '../../composites/Editor'
-import { FileDirectory } from '../../composites/FileDirectory'
+import { NoteSideBar } from '../../composites/NoteSideBar'
+
+const { Header, Content, Footer } = Layout
 
 export const NoteSpace = () => {
+  const [collapsed, setCollapsed] = React.useState(false)
+  const onCollapse = (collapse: boolean) => {
+    setCollapsed(collapse)
+  }
   const [noteId, setNoteId] = React.useState(0)
-  const [drawerOpen, setDrawerOpen] = React.useState(true)
   const [folders, setFolders] = React.useState<Folder[]>([])
-  const [timer, setTimer] = React.useState(10000)
   const pseudoID = () => Math.floor(Math.random() * 100000)
   const newFolder = (name: string) => {
     setFolders([...folders, { id: pseudoID(), name, notes: [], color: 'blue' }])
@@ -24,44 +30,35 @@ export const NoteSpace = () => {
     setNoteId(note.id)
   }
 
-  const autoClose = () => {
-    setTimeout(() => {
-      setDrawerOpen(false)
-    }, timer)
-  }
-
   return (
     <>
-      <Flex>
-        <Box
-          width={drawerOpen ? [1.75 / 12] : [0.25 / 12]}
-          textAlign="center"
-          style={{ transition: 'all 0.25s ease' }}
-          onMouseLeave={autoClose}
-          onMouseOver={() => {
-            setTimer(10000)
-            setDrawerOpen(true)
+      <Layout style={{ minHeight: '100vh' }}>
+        <NoteSideBar
+          folders={folders}
+          newNote={newNote}
+          newFolder={newFolder}
+          setCurrFile={(noteId) => {
+            setNoteId(noteId)
+          }}
+          collapsed={collapsed}
+          onCollapse={onCollapse}
+        />
+        <Layout
+          style={{
+            transition: 'all 0.25s ease',
+            backgroundColor: colors.whiteHover,
+            marginLeft: collapsed ? '75px' : '200px',
           }}
         >
-          <FileDirectory
-            folders={folders}
-            newNote={newNote}
-            newFolder={newFolder}
-            setCurrFile={(noteId) => {
-              setNoteId(noteId)
-            }}
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-          />
-        </Box>
-        <Box
-          width={drawerOpen ? [10.25 / 12] : [11.75 / 12]}
-          textAlign="center"
-          style={{ transition: 'all 0.25s ease' }}
-        >
-          <Editor noteId={noteId} />
-        </Box>
-      </Flex>
+          <Header style={{ backgroundColor: colors.whiteHover, padding: 0 }} />
+          <Content style={{ backgroundColor: colors.white, margin: '0 36px' }}>
+            <Card>
+              <Editor noteId={noteId} />
+            </Card>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}/>
+        </Layout>
+      </Layout>
     </>
   )
 }
