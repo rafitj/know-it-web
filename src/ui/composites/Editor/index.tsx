@@ -22,7 +22,7 @@ export const Editor = ({ noteId }: EditorProps) => {
   const [data, setData] = React.useState<OutputData>(defaultData(noteId))
   const [status, setStatus] = React.useState('Loading')
   const [editorInstance, setEditorInstance] = React.useState<EditorJsType>()
-
+  console.log(noteId)
   const onEdit = async (api: EditorAPI) => {
     if (editorInstance) {
       const savedData = await editorInstance.save()
@@ -33,6 +33,13 @@ export const Editor = ({ noteId }: EditorProps) => {
       }, 1000)
     }
   }
+
+  React.useEffect(() => {
+    if (editorInstance?.blocks) {
+      editorInstance?.blocks.clear()
+      editorInstance?.blocks.render(defaultData(noteId))
+    }
+  })
 
   console.log(status)
   return (

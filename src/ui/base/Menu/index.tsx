@@ -18,23 +18,36 @@ export const MenuItem = ({ children, ...antdprops }: IMenuItemProps) => (
 export interface ISubMenuProps extends SubMenuProps {
   highlight?: color
   children: React.ReactNode
+  selected?: boolean
 }
 
 const StyledSubMenu = styled(AntDSubMenu)<ISubMenuProps>`
-  &.ant-menu-submenu-inline {
+  opacity: ${(props) => (props.selected ? 1 : 0.85)};
+  .ant-menu-submenu-title {
     ${(props) =>
       props.highlight
         ? 'border-left: 5px solid' + colors[props.highlight]
         : ''};
+    ${(props) =>
+      props.selected
+        ? `background-color: ${colors.darkBlack} !important;`
+        : ''};
   }
+
+  &.ant-menu-submenu-active {
+    opacity: 1;
+  }
+  transition: all 0.25s ease;
+  margin-bottom: 15px;
 `
 
 export const SubMenu = ({
   highlight,
   children,
+  selected,
   ...antdprops
 }: ISubMenuProps) => (
-  <StyledSubMenu highlight={highlight} {...antdprops}>
+  <StyledSubMenu selected={selected} highlight={highlight} {...antdprops}>
     {children}
   </StyledSubMenu>
 )
@@ -64,6 +77,9 @@ const MenuContainer = styled.div`
   }
   .ant-menu-item {
     transition: all 0.25s ease;
+  }
+  .ant-menu-sub {
+    background: transparent !important;
   }
   .ant-menu-dark.ant-menu-item-active,
   .ant-menu-dark.ant-menu-item-selected {

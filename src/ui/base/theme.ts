@@ -8,6 +8,7 @@ export const colors = {
   green: '#C5FFCA',
   purple: '#D5BBFF',
   whiteHover: '#E8E8E8',
+  darkBlack: '#121212',
   transparent: 'transparent',
 }
 
