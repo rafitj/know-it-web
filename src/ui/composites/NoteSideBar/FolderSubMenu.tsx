@@ -8,9 +8,14 @@ import { FileMenuItem } from './FileMenuItem'
 export interface IFolderSubMenu {
   folder: Folder
   setCurrFile: (fileId: number) => void
+  setCurrFolder: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const FolderSubMenu = ({ folder, setCurrFile }: IFolderSubMenu) => {
+export const FolderSubMenu = ({
+  folder,
+  setCurrFile,
+  setCurrFolder,
+}: IFolderSubMenu) => {
   return (
     <SubMenu
       highlight={folder.color}
@@ -23,6 +28,7 @@ export const FolderSubMenu = ({ folder, setCurrFile }: IFolderSubMenu) => {
           </Flex>
         </span>
       }
+      onTitleClick={() => setCurrFolder(folder.id)}
     >
       {folder.notes.map((note) => (
         <FileMenuItem note={note} setCurrFile={setCurrFile} />

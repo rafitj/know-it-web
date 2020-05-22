@@ -24,7 +24,7 @@ const CardContainer = styled.div<ICardProps>`
     box-shadow: ${`3px 3px ${colors.grey}`};
     text-align: ${(props) => props.textAlign};
     background-color: ${(props) =>
-    props.invert ? colors.black : colors.white};
+      props.invert ? colors.black : colors.white};
     width: ${(props) => (props.width ? props.width + 'px' : 'auto')};
     height: ${(props) => (props.height ? props.height + 'px' : 'auto')};
     display: ${(props) => (props.block ? 'block' : 'inline-block')};
@@ -40,13 +40,13 @@ export const Card = ({
   block,
   ...antdprops
 }: ICardProps) => (
-    <CardContainer
-      invert={invert}
-      width={width}
-      height={height}
-      textAlign={textAlign}
-      block={block}
-    >
-      <AntDCard {...antdprops}>{children}</AntDCard>
-    </CardContainer>
-  )
+  <CardContainer
+    invert={invert}
+    width={width}
+    height={height}
+    textAlign={textAlign}
+    block={block}
+  >
+    <AntDCard {...antdprops}>{children}</AntDCard>
+  </CardContainer>
+)

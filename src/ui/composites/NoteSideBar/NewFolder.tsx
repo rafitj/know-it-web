@@ -3,7 +3,7 @@ import 'antd/dist/antd.css'
 import React, { useState } from 'react'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
-import { FolderPlus as FolderIcon, IconWrap } from 'ui/base/Icons'
+import { IconWrap, Plus as PlusIcon } from 'ui/base/Icons'
 
 const LineInput = styled(Input)`
   &.ant-input {
@@ -46,7 +46,7 @@ export const NewFolder = ({ newFolder }: INewFolder) => {
           }
         }}
       >
-        <FolderIcon size={15} />
+        <PlusIcon size={15} />
       </IconWrap>
     </Flex>
   )
