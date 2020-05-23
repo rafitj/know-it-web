@@ -31,7 +31,7 @@ const ButtonContainer = styled.div<IButtonProps>`
     background-color: ${(props) => colors[props.backgroundColor]};
     border-color: ${(props) => colors[props.borderColor]};
     color: ${(props) => colors[props.fontColor]};
-    box-shadow: ${`3px 3px ${colors.grey}`};
+    box-shadow: ${`5px 5px ${colors.grey}`};
     font-size: 1.1rem;
   }
   .ant-btn:disabled {

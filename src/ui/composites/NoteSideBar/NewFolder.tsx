@@ -16,6 +16,7 @@ const LineInput = styled(Input)`
 export interface INewFolder {
   newFolder: (name: string) => void
   setAddFolderMode: React.Dispatch<React.SetStateAction<boolean>>
+  setCurrFolder: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const NewFolder = ({ newFolder, setAddFolderMode }: INewFolder) => {

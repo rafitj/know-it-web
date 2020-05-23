@@ -31,38 +31,44 @@ export const AuthForm = ({
   reroute,
 }: IAuthForm) => {
   return (
-    <Flex justifyContent="center" p={6}>
-      <Flex flexDirection="column" alignItems="center" justifyContent="center">
-        <BigText>{title}</BigText>
-        <Box width={1} my={2}>
-          <Card>
-            <Box alignItems="center">
-              <Box>
-                <SimpleInput placeholder="Email" />
+    <>
+      <Flex justifyContent="center" p={6}>
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <BigText>{title}</BigText>
+          <Box width={1} my={2}>
+            <Card>
+              <Box alignItems="center">
+                <Box>
+                  <SimpleInput placeholder="Email" />
+                </Box>
+                <Box my={3}>
+                  <SimpleInput password={true} placeholder="Password" />
+                </Box>
+                <PrimaryButton icon={<Send />} text={emailText} />
               </Box>
-              <Box my={3}>
-                <SimpleInput password={true} placeholder="Password" />
-              </Box>
-              <PrimaryButton icon={<Send />} text={emailText} />
-            </Box>
-          </Card>
-        </Box>
-        <Box width={1} my={2}>
-          <RedButton icon={<Google />} text={googleText} block={true} />
-        </Box>
-        <Box width={1} my={2} mb={3}>
-          <BlueButton icon={<Facebook />} text={fbText} block={true} />
-        </Box>
-        <Line />
-        <Box mt={2}>{rerouteText}</Box>
-        <Box mt={3}>
-          <Link to={reroute}>
-            <HighlightedText highlight="black">
-              {rerouteBtnText}
-            </HighlightedText>
-          </Link>
-        </Box>
+            </Card>
+          </Box>
+          <Box width={1} my={2}>
+            <RedButton icon={<Google />} text={googleText} block={true} />
+          </Box>
+          <Box width={1} my={2} mb={3}>
+            <BlueButton icon={<Facebook />} text={fbText} block={true} />
+          </Box>
+          <Line />
+          <Box mt={2}>{rerouteText}</Box>
+          <Box mt={3}>
+            <Link to={reroute}>
+              <HighlightedText highlight="black">
+                {rerouteBtnText}
+              </HighlightedText>
+            </Link>
+          </Box>
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   )
 }

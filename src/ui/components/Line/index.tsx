@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { colors } from 'ui/base/theme'
+import { color, colors } from 'ui/base/theme'
 
-const StyledLine = styled.div`
-  background-color: ${colors.black};
+const StyledLine = styled.div<LineProps>`
+  background-color: ${(props) =>
+    props.color ? colors[props.color] : colors.black};
   height: 2px;
   width: 100%;
   margin: 8px 0;
 `
-
-export const Line = () => <StyledLine />
+interface LineProps {
+  color?: color
+}
+export const Line = ({ color }: LineProps) => <StyledLine color={color} />
