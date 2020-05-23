@@ -74,7 +74,12 @@ export const FileMenuItem = ({
     >
       <StyledMenuItem key={note.id} {...other}>
         <Flex justifyContent="space-between" alignItems="center">
-          <Box width={11 / 12}>{note.name}</Box>
+          <Box
+            width={11 / 12}
+            style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+          >
+            {note.name}
+          </Box>
           {selected && <StyledBadge count={1} />}
           <Popover placement="right" content={PopoverContent} trigger="click">
             <Settings size={15} style={{ marginRight: 3 }} />

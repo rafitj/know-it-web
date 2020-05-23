@@ -1,9 +1,9 @@
 import React from 'react'
-import { NoteTools } from 'types/note'
 import { Flex } from 'reflexbox'
-import { NoteSearch } from './NoteSearch'
+import { NoteTools } from 'types/note'
 import { NoteCards } from './NoteCards'
 import { NoteFilter } from './NoteFilter'
+import { NoteSearch } from './NoteSearch'
 export interface NoteToolProps {
   selectedTool: NoteTools
 }

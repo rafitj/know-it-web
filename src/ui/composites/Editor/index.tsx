@@ -4,8 +4,8 @@ import EditorJsType, {
 } from '@editorjs/editorjs/types'
 import React from 'react'
 import EditorJs from 'react-editor-js'
-import { EDITOR_TOOLS, defaultData } from './editor-tools'
 import './editor.css'
+import { EDITOR_TOOLS, defaultData } from './Tools/editor-tools'
 
 export interface Note {
   id: number
@@ -16,13 +16,19 @@ export interface Note {
 
 export interface EditorProps {
   noteId?: number
+  editorInstance?: EditorJsType
+  setEditorInstance: React.Dispatch<
+    React.SetStateAction<EditorJsType | undefined>
+  >
 }
 
-export const Editor = ({ noteId }: EditorProps) => {
+export const Editor = ({
+  noteId,
+  editorInstance,
+  setEditorInstance,
+}: EditorProps) => {
   const [data, setData] = React.useState<OutputData>(defaultData(noteId))
   const [status, setStatus] = React.useState('Loading')
-  const [editorInstance, setEditorInstance] = React.useState<EditorJsType>()
-  console.log(noteId)
   const onEdit = async (api: EditorAPI) => {
     if (editorInstance) {
       const savedData = await editorInstance.save()

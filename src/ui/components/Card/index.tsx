@@ -1,7 +1,8 @@
+import { CardProps as AntDCardProps } from 'antd/lib/card'
 import React from 'react'
 import { Card as CardBase } from '../../base/Card'
 
-export interface CardProps {
+export interface CardProps extends AntDCardProps {
   children: React.ReactNode
   width?: string
   height?: string
@@ -17,6 +18,7 @@ export const Card = ({
   invert,
   block,
   textAlign = 'center',
+  ...other
 }: CardProps) => (
   <CardBase
     invert={invert}
@@ -24,6 +26,7 @@ export const Card = ({
     height={height}
     block={block}
     textAlign={textAlign}
+    {...other}
   >
     {children}
   </CardBase>

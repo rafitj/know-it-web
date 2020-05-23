@@ -28,9 +28,11 @@ export const NoteSpace = () => {
   const [folders, setFolders] = React.useState<Folder[]>([])
   const pseudoID = () => Math.floor(Math.random() * 100000)
   const newFolder = (name: string) => {
-    setFolders([...folders, { id: pseudoID(), name, notes: [], color: 'blue' }])
+    const id = pseudoID()
+    setFolders([...folders, { id, name, notes: [], color: 'blue' }])
+    return id
   }
-  const newNote = (name: string, folderId: number) => {
+  const newFile = (name: string, folderId: number) => {
     const note = { id: pseudoID(), folderId, name, data: '' }
     const newFolders = folders.map((folder) =>
       folder.id === note.folderId
@@ -40,13 +42,30 @@ export const NoteSpace = () => {
     setFolders(newFolders)
     setCurrNoteId(note.id)
     setCurrNoteFolderId(note.folderId)
+    return note.id
   }
+  const newFolderAndFile = (folderName: string, fileName: string) => {
+    const folderId = pseudoID()
+    const newNote = { id: pseudoID(), folderId, name: fileName, data: '' }
+    setFolders([
+      ...folders,
+      {
+        id: folderId,
+        name: folderName,
+        notes: [newNote],
+        color: 'blue',
+      },
+    ])
+    setCurrNoteId(newNote.id)
+    setCurrNoteFolderId(newNote.folderId)
+  }
+
   return (
     <>
       <Layout style={{ minHeight: '100vh' }}>
         <NoteSideBar
           folders={folders}
-          newNote={newNote}
+          newFile={newFile}
           newFolder={newFolder}
           setCurrFile={(noteId) => {
             setCurrNoteId(noteId)
@@ -70,6 +89,7 @@ export const NoteSpace = () => {
             <NoteEditor
               currNoteId={currNoteId}
               currNoteFolderId={currNoteFolderId}
+              newFolderAndFile={newFolderAndFile}
             />
           </Content>
         </Layout>
