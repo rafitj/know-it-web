@@ -1,5 +1,5 @@
-import { HelpCircle } from 'ui/base/Icons'
-import { colors } from 'ui/base/theme'
+import './qablock.css'
+import { QAIcon } from './QAIcon'
 
 export class QABlock {
   css: any
@@ -12,44 +12,60 @@ export class QABlock {
   }
 
   static get toolbox() {
-    console.log(HelpCircle)
     return {
       title: 'QA Block',
-      icon: HelpCircle,
+      icon: QAIcon,
     }
   }
 
   render() {
+    const qatitle = document.createElement('div')
+    qatitle.classList.add('qa-title')
+
+    const qatitlelabel = document.createElement('span')
+    qatitlelabel.classList.add('qa-title-label')
+    qatitlelabel.textContent = 'Q/A'
+    qatitle.append(qatitlelabel)
+
+    const qatitleinput = document.createElement('div')
+    qatitleinput.contentEditable = 'true'
+    qatitleinput.classList.add('qa-title-input')
+    qatitle.append(qatitleinput)
+    qatitleinput.id = 'qa-title'
+
     const ablock = document.createElement('div')
+    ablock.classList.add('ablock')
     const qblock = document.createElement('div')
+    qblock.classList.add('qblock')
 
     const qlabel = document.createElement('div')
-    qlabel.style.cssText = `background-color:${colors.blue}; border-radius: 5px; display: inline-block; padding: 5px; margin: 4px;`
     qlabel.textContent = 'Q'
+    qlabel.classList.add('qlabel')
 
     const alabel = document.createElement('div')
-    alabel.style.cssText = `background-color:${colors.blue}; border-radius: 5px; display: inline-block; padding: 5px; margin: 4px; `
     alabel.textContent = 'A'
+    alabel.classList.add('alabel')
 
     const question = document.createElement('div')
     question.id = 'question-input'
     question.contentEditable = 'true'
-    question.style.cssText = 'border: none; padding: 10px;'
     question.style.cssText = 'display: inline-block;'
-    question.classList.add(this.css.wrapper, this.css.block)
+    question.classList.add('question-input', this.css.wrapper, this.css.block)
 
     const answer = document.createElement('div')
     answer.contentEditable = 'true'
     answer.id = 'answer-input'
-    answer.style.cssText = 'border: none; padding: 10px;'
     answer.style.cssText = 'display: inline-block;'
-    answer.classList.add(this.css.wrapper, this.css.block)
+    answer.classList.add('answer-input', this.css.wrapper, this.css.block)
 
     const block = document.createElement('div')
+    block.classList.add('qa-block')
+
     qblock.append(qlabel)
     ablock.append(alabel)
     qblock.append(question)
     ablock.append(answer)
+    block.append(qatitle)
     block.append(qblock)
     block.append(ablock)
     return block
@@ -57,6 +73,7 @@ export class QABlock {
 
   save(blockContent: any) {
     return {
+      title: document.getElementById('qa-title')?.innerHTML,
       question: document.getElementById('question-input')?.innerHTML,
       answer: document.getElementById('answer-input')?.innerHTML,
     }

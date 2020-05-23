@@ -5,7 +5,7 @@ import EditorJsType, {
 import React from 'react'
 import EditorJs from 'react-editor-js'
 import './editor.css'
-import { EDITOR_TOOLS, defaultData } from './Tools/editor-tools'
+import { defaultData, EDITOR_TOOLS } from './Tools/EditorTools'
 
 export interface Note {
   id: number
