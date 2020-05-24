@@ -19,6 +19,11 @@ export interface IAuthForm {
   rerouteText: string
   rerouteBtnText: string
   reroute: string
+  hasNameInput?: boolean
+  setPassword: (e: string) => void
+  setName?: (s: string) => void
+  setEmail: (s: string) => void
+  emailClick: () => void
 }
 
 export const AuthForm = ({
@@ -29,6 +34,11 @@ export const AuthForm = ({
   rerouteBtnText,
   rerouteText,
   reroute,
+  hasNameInput,
+  setPassword,
+  setEmail,
+  setName,
+  emailClick,
 }: IAuthForm) => {
   return (
     <>
@@ -41,14 +51,39 @@ export const AuthForm = ({
           <BigText>{title}</BigText>
           <Box width={1} my={2}>
             <Card>
-              <Box alignItems="center">
-                <Box>
-                  <SimpleInput placeholder="Email" />
+              <Box alignItems="center" mb={2}>
+                {hasNameInput && setName && (
+                  <Box>
+                    <SimpleInput
+                      placeholder="Name"
+                      onChange={(e) => {
+                        setName(e.target.value)
+                      }}
+                    />
+                  </Box>
+                )}
+                <Box my={3}>
+                  <SimpleInput
+                    placeholder="Email"
+                    onChange={(e) => {
+                      setEmail(e.target.value)
+                    }}
+                  />
                 </Box>
                 <Box my={3}>
-                  <SimpleInput password={true} placeholder="Password" />
+                  <SimpleInput
+                    password={true}
+                    placeholder="Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value)
+                    }}
+                  />
                 </Box>
-                <PrimaryButton icon={<Send />} text={emailText} />
+                <PrimaryButton
+                  icon={<Send />}
+                  text={emailText}
+                  onClick={emailClick}
+                />
               </Box>
             </Card>
           </Box>
