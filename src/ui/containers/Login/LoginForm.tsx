@@ -1,10 +1,11 @@
 import React from 'react'
-import { AuthForm } from 'ui/composites/AuthForm'
-import { UserStore } from 'stores/UserStore'
 import { useHistory } from 'react-router-dom'
-import { message } from 'antd'
+import { UserStore } from 'stores/UserStore'
+import { AuthForm } from 'ui/composites/AuthForm'
+
 export const LoginForm = () => {
   const history = useHistory()
+  const [showError, setShowError] = React.useState(false)
   const [passwordValue, setPasswordValue] = React.useState('')
   const [emailValue, setEmailValue] = React.useState('')
   const emailLogin = async () => {
@@ -16,7 +17,7 @@ export const LoginForm = () => {
     if (loginSuccess) {
       history.push('/note-space')
     } else {
-      message.error(<span>Yo could you try one more time?</span>, 2000)
+      setShowError(true)
     }
   }
   const setPassword = (password: string) => {
@@ -24,6 +25,9 @@ export const LoginForm = () => {
   }
   const setEmail = (email: string) => {
     setEmailValue(email)
+  }
+  const closeError = () => {
+    setShowError(false)
   }
   return (
     <AuthForm
@@ -37,6 +41,8 @@ export const LoginForm = () => {
       setPassword={setPassword}
       setEmail={setEmail}
       emailClick={emailLogin}
+      showError={showError}
+      closeError={closeError}
     />
   )
 }

@@ -2,6 +2,7 @@ import { Facebook, Google, Send } from 'grommet-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex } from 'reflexbox'
+import styled from 'styled-components'
 import { Card } from 'ui/base/Card'
 import { BlueButton } from 'ui/components/Button/BlueButton'
 import { PrimaryButton } from 'ui/components/Button/PrimaryButton'
@@ -10,6 +11,8 @@ import { SimpleInput } from 'ui/components/Input/SimpleInput'
 import { Line } from 'ui/components/Line'
 import { BigText } from 'ui/components/Typography/BigText'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
+import { Alert } from 'antd'
+import { colors } from '../../base/theme'
 
 export interface IAuthForm {
   title: string
@@ -24,7 +27,21 @@ export interface IAuthForm {
   setName?: (s: string) => void
   setEmail: (s: string) => void
   emailClick: () => void
+  showError?: boolean
+  closeError: () => void
 }
+
+const StyledAlert = styled(Alert)`
+  border-radius: 5px;
+  border: 2px solid ${colors.black};
+  background-color: ${colors.red};
+  .ant-alert-message {
+    display: none;
+  }
+  .ant-alert-description {
+    font-weight: bold;
+  }
+`
 
 export const AuthForm = ({
   title,
@@ -39,6 +56,8 @@ export const AuthForm = ({
   setEmail,
   setName,
   emailClick,
+  showError,
+  closeError,
 }: IAuthForm) => {
   return (
     <>
@@ -51,7 +70,7 @@ export const AuthForm = ({
           <BigText>{title}</BigText>
           <Box width={1} my={2}>
             <Card>
-              <Box alignItems="center" mb={2}>
+              <Box alignItems="center" mb={showError ? 1 : 0}>
                 {hasNameInput && setName && (
                   <Box>
                     <SimpleInput
@@ -84,6 +103,17 @@ export const AuthForm = ({
                   text={emailText}
                   onClick={emailClick}
                 />
+                {showError && (
+                  <Box mt={3}>
+                    <StyledAlert
+                      message=""
+                      description="Bro wtf are you doing?"
+                      type="error"
+                      closable={true}
+                      onClose={closeError}
+                    />
+                  </Box>
+                )}
               </Box>
             </Card>
           </Box>
