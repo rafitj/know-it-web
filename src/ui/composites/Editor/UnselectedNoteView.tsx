@@ -1,13 +1,17 @@
 import { Empty } from 'antd'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { FolderStore } from 'stores/FolderStore'
 import { NoteStore } from 'stores/NoteStore'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 
-export const UnselectedNoteView = () => {
+export const UnselectedNoteView = observer(() => {
   const makeTemplate = async () => {
-    const folder = await FolderStore.createFolder({ title: 'Template Folder' })
+    const folder = await FolderStore.createFolder({
+      title: 'Template Folder',
+      colour: 'purple',
+    })
     NoteStore.createNote({ title: 'Template File', folderId: folder.id })
   }
   return (
@@ -28,4 +32,4 @@ export const UnselectedNoteView = () => {
       </Flex>
     </Empty>
   )
-}
+})

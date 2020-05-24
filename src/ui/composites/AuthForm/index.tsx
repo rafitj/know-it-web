@@ -1,3 +1,4 @@
+import { Alert } from 'antd'
 import { Facebook, Google, Send } from 'grommet-icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -11,7 +12,6 @@ import { SimpleInput } from 'ui/components/Input/SimpleInput'
 import { Line } from 'ui/components/Line'
 import { BigText } from 'ui/components/Typography/BigText'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
-import { Alert } from 'antd'
 import { colors } from '../../base/theme'
 
 export interface IAuthForm {

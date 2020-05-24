@@ -22,11 +22,14 @@ export const NewFolder = observer(() => {
   const [newFolderName, setNewFolderName] = useState('')
   const addFolder = async (e?: any) => {
     if ((!e || e.key === 'Enter') && newFolderName !== '') {
-      const folder = await FolderStore.createFolder({ title: newFolderName })
+      const folder = await FolderStore.createFolder({
+        title: newFolderName,
+        colour: 'red',
+      })
       setNewFolderName('')
       NoteViewStore.setSelectedFolderId(folder.id)
+      NoteViewStore.setAddFolderMode(false)
     }
-    NoteViewStore.setAddFolderMode(false)
   }
   return (
     <Flex justifyContent="center" alignItems="center" px={3}>

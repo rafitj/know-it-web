@@ -6,7 +6,7 @@ import React from 'react'
 import EditorJs from 'react-editor-js'
 import { NoteStore } from 'stores/NoteStore'
 import './editor.css'
-import { defaultData, EDITOR_TOOLS } from './Tools/EditorTools'
+import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
 
 export interface Note {
   id: number

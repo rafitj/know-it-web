@@ -56,7 +56,7 @@ export const FolderSubMenu = observer(
           folder.notes.map((note) => (
             <FileMenuItem key={note.id} note={note} />
           ))}
-        {NoteViewStore.addFileMode && <NewFile />}
+        {selected && NoteViewStore.addFileMode && <NewFile />}
       </SubMenu>
     )
   }
