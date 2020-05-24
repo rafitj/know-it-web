@@ -1,12 +1,11 @@
-import EditorJsType, {
-  API as EditorAPI,
-  OutputData,
-} from '@editorjs/editorjs/types'
+import { API as EditorAPI, OutputData } from '@editorjs/editorjs'
+import { observer } from 'mobx-react'
 import React from 'react'
 import EditorJs from 'react-editor-js'
 import { NoteStore } from 'stores/NoteStore'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import './editor.css'
-import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
+import { defaultData, EDITOR_TOOLS } from './Tools/EditorTools'
 
 export interface Note {
   id: number
@@ -15,52 +14,45 @@ export interface Note {
   data: string
 }
 
-export interface EditorProps {
-  editorInstance?: EditorJsType
-  setEditorInstance: React.Dispatch<
-    React.SetStateAction<EditorJsType | undefined>
-  >
-}
-
-export const Editor = ({ editorInstance, setEditorInstance }: EditorProps) => {
-  const note = NoteStore.note
-  console.log(note)
-  const [data, setData] = React.useState<OutputData>(defaultData(0))
-  const [status, setStatus] = React.useState('Loading')
-  const onEdit = async (api: EditorAPI) => {
-    if (editorInstance) {
-      const savedData = await editorInstance.save()
-      setData(savedData)
-      setStatus('Saved')
-      setTimeout(() => {
-        setStatus('')
-      }, 1000)
+@observer
+export class Editor extends React.Component {
+  note = NoteStore.note
+  data = this.note?.contents
+    ? (JSON.parse(this.note.contents) as OutputData)
+    : defaultData(0)
+  editorInstance = NoteViewStore.editorInstance
+  setEditorInstance = NoteViewStore.setEditorInstance
+  async onEdit(api: EditorAPI) {
+    if (this.editorInstance) {
+      const savedData = await this.editorInstance.save()
+      NoteStore.updateNoteById({
+        id: this.note?.id,
+        title: this.note?.title,
+        contents: JSON.stringify(savedData),
+      })
     }
   }
-
-  React.useEffect(() => {
-    if (editorInstance?.blocks) {
-      editorInstance?.blocks.clear()
-      editorInstance?.blocks.render(defaultData(0))
+  componentDidMount() {
+    if (this.editorInstance?.blocks) {
+      this.editorInstance?.blocks.clear()
+      this.editorInstance?.blocks.render(defaultData(0))
     }
-  })
-
-  console.log(status)
-  return (
-    <EditorJs
-      instanceRef={(instance) => {
-        setEditorInstance(instance)
-      }}
-      tools={EDITOR_TOOLS}
-      data={data}
-      autofocus={true}
-      onChange={onEdit}
-      onReady={() => {
-        setStatus('Ready')
-        setTimeout(() => {
-          setStatus('')
-        }, 1000)
-      }}
-    />
-  )
+  }
+  render() {
+    console.log(this.note?.contents)
+    return (
+      <EditorJs
+        instanceRef={async (instance) => {
+          await instance.isReady
+          this.setEditorInstance(instance)
+        }}
+        tools={EDITOR_TOOLS}
+        data={this.data}
+        autofocus={true}
+        onChange={(api) => {
+          this.onEdit(api)
+        }}
+      />
+    )
+  }
 }

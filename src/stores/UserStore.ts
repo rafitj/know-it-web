@@ -67,7 +67,7 @@ class UserStoreImpl {
         email: userCredentials.username,
       }
       this.authenticationHeaders = {
-        Authorization: '',
+        Authorization: response.headers.authorization,
         'Content-Type': 'application/json',
       }
       return true
