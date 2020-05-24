@@ -1,7 +1,7 @@
-import { ILoginUserRequest } from '../network/proto/ILoginUserRequest'
-import { ISignUpUserRequest } from '../network/proto/ISignUpUserRequest'
+import { ISignUpUserRequest } from '../network/proto/request/ISignUpUserRequest'
 import { action, observable } from 'mobx'
 import axios from 'axios'
+import { ILoginInUserRequest } from 'network/proto/request/ILoginInUserRequest'
 
 interface AuthenticationHeaders {
   Authorization: string
@@ -47,7 +47,7 @@ class UserStoreImpl {
   }
 
   @action
-  async login(userCredentials: ILoginUserRequest): Promise<boolean> {
+  async login(userCredentials: ILoginInUserRequest): Promise<boolean> {
     try {
       const response = await axios.post(
         'https://know-it-back-master-x3ikbzbziy.herokuapp.com/login',
