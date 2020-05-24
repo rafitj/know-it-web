@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { UserStore } from '../../stores/UserStore';
 import { ISignUpUserRequest } from 'network/proto/request/ISignUpUserRequest';
 import { ILoginInUserRequest } from 'network/proto/request/ILoginInUserRequest';

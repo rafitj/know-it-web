@@ -1,8 +1,7 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { LandingPage } from '../../composites/LandingPage'
 import { Nav } from '../../composites/Nav'
-import { UserStore } from '../../../stores/UserStore';
-import { observer } from 'mobx-react';
 
 @observer
 export class Home extends React.Component {
@@ -12,7 +11,6 @@ export class Home extends React.Component {
         <Nav />
         <LandingPage />
         {/* <Footer /> */}
-        {UserStore.isSignedIn ? 'SIGNED IN!' : "NOT SIGNED IN!"}
       </>
     )
   }
