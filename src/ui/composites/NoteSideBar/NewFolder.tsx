@@ -1,7 +1,10 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React, { useState } from 'react'
 import { Box, Flex } from 'reflexbox'
+import { FolderStore } from 'stores/FolderStore'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
@@ -15,25 +18,15 @@ const LineInput = styled(Input)`
   }
 `
 
-export interface INewFolder {
-  newFolder: (name: string) => number
-  setAddFolderMode: React.Dispatch<React.SetStateAction<boolean>>
-  setCurrFolder: React.Dispatch<React.SetStateAction<number>>
-}
-
-export const NewFolder = ({
-  newFolder,
-  setAddFolderMode,
-  setCurrFolder,
-}: INewFolder) => {
+export const NewFolder = observer(() => {
   const [newFolderName, setNewFolderName] = useState('')
-  const addFolder = () => {
-    if (newFolderName !== '') {
-      const folderId = newFolder(newFolderName)
+  const addFolder = async (e?: any) => {
+    if ((!e || e.key === 'Enter') && newFolderName !== '') {
+      const folder = await FolderStore.createFolder({ title: newFolderName })
       setNewFolderName('')
-      setCurrFolder(folderId)
+      NoteViewStore.setSelectedFolderId(folder.id)
     }
-    setAddFolderMode(false)
+    NoteViewStore.setAddFolderMode(false)
   }
   return (
     <Flex justifyContent="center" alignItems="center" px={3}>
@@ -46,12 +39,7 @@ export const NewFolder = ({
             setNewFolderName(e.target.value)
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && newFolderName !== '') {
-              const folderId = newFolder(newFolderName)
-              setNewFolderName('')
-              setCurrFolder(folderId)
-              setAddFolderMode(false)
-            }
+            addFolder(e)
           }}
           onBlur={addFolder}
         />
@@ -63,11 +51,11 @@ export const NewFolder = ({
         width={1 / 12}
         pl={2}
         onClick={() => {
-          setAddFolderMode(false)
+          NoteViewStore.setAddFolderMode(false)
         }}
       >
         <XSquare size={15} />
       </IconWrap>
     </Flex>
   )
-}
+})

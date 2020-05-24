@@ -1,7 +1,7 @@
-import { ISignUpUserRequest } from '../network/proto/request/ISignUpUserRequest'
-import { action, observable } from 'mobx'
 import axios from 'axios'
+import { action, observable } from 'mobx'
 import { ILoginInUserRequest } from 'network/proto/request/ILoginInUserRequest'
+import { ISignUpUserRequest } from '../network/proto/request/ISignUpUserRequest'
 
 interface AuthenticationHeaders {
   Authorization: string
@@ -66,9 +66,8 @@ class UserStoreImpl {
       this.user = {
         email: userCredentials.username,
       }
-
       this.authenticationHeaders = {
-        Authorization: response.headers.Authorization,
+        Authorization: '',
         'Content-Type': 'application/json',
       }
       return true

@@ -1,25 +1,19 @@
 import 'antd/dist/antd.css'
 import { SubMenuProps } from 'antd/lib/menu/SubMenu'
+import { observer } from 'mobx-react'
+import { IGetFolderWithNotesResponse } from 'network/proto/response/IGetFolderWithNotesResponse'
 import React from 'react'
 import { Zap } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
-import { Folder } from 'types/files'
 import { colors } from 'ui/base/theme'
 import { SubMenu } from '../../base/Menu'
 import { FileMenuItem } from './FileMenuItem'
 import { NewFile } from './NewFile'
 
 export interface IFolderSubMenu {
-  folder: Folder
-  setCurrFile: (fileId: number) => void
-  setCurrFolder: React.Dispatch<React.SetStateAction<number>>
-  addFileMode: boolean
-  newFile: (fileName: string, folderId: number) => void
-  setAddFileMode: React.Dispatch<React.SetStateAction<boolean>>
-  selected: boolean
-  currNoteId: number
-  currNoteFolderId: number
+  folder: IGetFolderWithNotesResponse
 }
 
 const SubMenuTitle = styled.span`
@@ -35,51 +29,35 @@ const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`
   }
 `
 
-export const FolderSubMenu = ({
-  folder,
-  setCurrFile,
-  setCurrFolder,
-  addFileMode,
-  newFile,
-  setAddFileMode,
-  selected,
-  currNoteId,
-  currNoteFolderId,
-  ...other
-}: IFolderSubMenu & SubMenuProps) => {
-  return (
-    <SubMenu
-      {...other}
-      selected={selected}
-      highlight={folder.color}
-      key={folder.id.toString()}
-      title={
-        <span>
-          <Flex alignItems="center">
-            <SubMenuTitle>{folder.name}</SubMenuTitle>
-            <ViewFolderSymbol selected={currNoteFolderId === folder.id} mx={2}>
-              <Zap color={colors.yellow} size={12} />
-            </ViewFolderSymbol>
-          </Flex>
-        </span>
-      }
-      onTitleClick={() => setCurrFolder(folder.id)}
-    >
-      {folder.notes.map((note) => (
-        <FileMenuItem
-          key={note.id}
-          note={note}
-          setCurrFile={setCurrFile}
-          selected={currNoteId === note.id}
-        />
-      ))}
-      {addFileMode && (
-        <NewFile
-          newFile={newFile}
-          setAddFileMode={setAddFileMode}
-          folderId={folder.id}
-        />
-      )}
-    </SubMenu>
-  )
-}
+export const FolderSubMenu = observer(
+  ({ folder, ...other }: IFolderSubMenu & SubMenuProps) => {
+    const selected = folder.id === NoteViewStore.selectedFolderId
+
+    return (
+      <SubMenu
+        {...other}
+        selected={selected}
+        highlight={folder.colour}
+        key={folder.id}
+        title={
+          <span>
+            <Flex alignItems="center">
+              <SubMenuTitle>{folder.title}</SubMenuTitle>
+              <ViewFolderSymbol selected={selected} mx={2}>
+                <Zap color={colors.yellow} size={12} />
+              </ViewFolderSymbol>
+            </Flex>
+          </span>
+        }
+        onTitleClick={() => NoteViewStore.setSelectedFolderId(folder.id)}
+      >
+        {folder &&
+          folder.notes &&
+          folder.notes.map((note) => (
+            <FileMenuItem key={note.id} note={note} />
+          ))}
+        {NoteViewStore.addFileMode && <NewFile />}
+      </SubMenu>
+    )
+  }
+)

@@ -1,7 +1,10 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React, { useState } from 'react'
 import { Box, Flex } from 'reflexbox'
+import { NoteStore } from 'stores/NoteStore'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
@@ -15,20 +18,15 @@ const LineInput = styled(Input)`
   }
 `
 
-export interface INewFile {
-  folderId: number
-  newFile: (name: string, folderId: number) => void
-  setAddFileMode: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export const NewFile = ({ newFile, setAddFileMode, folderId }: INewFile) => {
+export const NewFile = observer(() => {
   const [newFileName, setNewFileName] = useState('')
-  const AddFile = () => {
-    if (newFileName !== '') {
-      newFile(newFileName, folderId)
+  const folderId = NoteViewStore.selectedFolderId
+  const addFile = async (e?: any) => {
+    if ((!e || e.key === 'Enter') && newFileName !== '') {
+      await NoteStore.createNote({ title: newFileName, folderId })
       setNewFileName('')
     }
-    setAddFileMode(false)
+    NoteViewStore.setAddFileMode(false)
   }
   return (
     <Flex justifyContent="center" alignItems="center" px={4} mt={2}>
@@ -41,27 +39,23 @@ export const NewFile = ({ newFile, setAddFileMode, folderId }: INewFile) => {
             setNewFileName(e.target.value)
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && newFileName !== '') {
-              newFile(newFileName, folderId)
-              setNewFileName('')
-              setAddFileMode(false)
-            }
+            addFile(e)
           }}
-          onBlur={AddFile}
+          onBlur={addFile}
         />
       </Box>
-      <IconWrap width={1 / 12} pl={2} onClick={AddFile}>
+      <IconWrap width={1 / 12} pl={2} onClick={addFile}>
         <PlusIcon size={15} color="white" />
       </IconWrap>
       <IconWrap
         width={1 / 12}
         pl={2}
         onClick={() => {
-          setAddFileMode(false)
+          NoteViewStore.setAddFileMode(false)
         }}
       >
         <XSquare size={15} color="white" />
       </IconWrap>
     </Flex>
   )
-}
+})

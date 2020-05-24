@@ -3,16 +3,12 @@ import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
 
 const { Sider } = Layout
-
-export interface IProfileBar {
-  collapsed: boolean
-  onCollapse: (collapse: boolean) => void
-}
 
 const StyledSider = styled(Sider)`
   background-color: ${colors.white};
@@ -34,7 +30,11 @@ const StyledSider = styled(Sider)`
   }
 `
 
-export const ProfileBar = ({ collapsed, onCollapse }: IProfileBar) => {
+export const ProfileBar = () => {
+  const collapsed = NoteViewStore.rightCollapsed
+  const onCollapse = (collapse: boolean) => {
+    NoteViewStore.collapseRight(collapse)
+  }
   const history = useHistory()
   const navigateTo = (dest: string) => {
     history.push(dest)

@@ -6,8 +6,8 @@ import { Line } from 'ui/components/Line'
 import { Editor } from '.'
 
 interface NoteViewProps {
-  currNoteId: number
-  currNoteFolderId: number
+  currNoteId?: string
+  currNoteFolderId?: string
   editorInstance?: EditorJsType
   setEditorInstance: React.Dispatch<
     React.SetStateAction<EditorJsType | undefined>
@@ -47,7 +47,6 @@ export const NoteView = ({
       />
       <Line />
       <Editor
-        noteId={currNoteId}
         editorInstance={editorInstance}
         setEditorInstance={setEditorInstance}
       />

@@ -1,18 +1,18 @@
 import { Badge, Popover } from 'antd'
 import 'antd/dist/antd.css'
 import { MenuItemProps } from 'antd/lib/menu/MenuItem'
+import { observer } from 'mobx-react'
+import { IBriefNoteDescriptionResponse } from 'network/proto/response/IBriefNoteDescriptionResponse'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
+import { NoteStore } from 'stores/NoteStore'
 import styled from 'styled-components'
-import { Note } from 'types/files'
 import { Download, Edit, IconWrap, Settings, Trash } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
 
 export interface IFileMenuItem {
-  note: Note
-  setCurrFile: (id: number) => void
-  selected?: boolean
+  note: IBriefNoteDescriptionResponse
 }
 
 const FileMenuItemCommonStyles = `
@@ -58,34 +58,30 @@ const PopoverContent = (
   </Flex>
 )
 
-export const FileMenuItem = ({
-  note,
-  setCurrFile,
-  selected,
-  ...other
-}: IFileMenuItem & MenuItemProps) => {
-  const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
-
-  return (
-    <div
-      onClick={() => {
-        setCurrFile(note.id)
-      }}
-    >
-      <StyledMenuItem key={note.id} {...other}>
-        <Flex justifyContent="space-between" alignItems="center">
-          <Box
-            width={11 / 12}
-            style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
-          >
-            {note.name}
-          </Box>
-          {selected && <StyledBadge count={1} />}
-          <Popover placement="right" content={PopoverContent} trigger="click">
-            <Settings size={15} style={{ marginRight: 3 }} />
-          </Popover>
-        </Flex>
-      </StyledMenuItem>
-    </div>
-  )
-}
+export const FileMenuItem = observer(
+  ({ note, ...other }: IFileMenuItem & MenuItemProps) => {
+    const selected = NoteStore.note && NoteStore.note.id === note.id
+    const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
+    const setNoteViewById = () => {
+      note.id && NoteStore.fetchNote(note.id)
+    }
+    return (
+      <Box onClick={setNoteViewById}>
+        <StyledMenuItem key={note.id} {...other}>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Box
+              width={11 / 12}
+              style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+            >
+              {note.title}
+            </Box>
+            {selected && <StyledBadge count={1} />}
+            <Popover placement="right" content={PopoverContent} trigger="click">
+              <Settings size={15} style={{ marginRight: 3 }} />
+            </Popover>
+          </Flex>
+        </StyledMenuItem>
+      </Box>
+    )
+  }
+)
