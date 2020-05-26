@@ -5,11 +5,13 @@ import { LoginForm } from './LoginForm'
 
 const Container = styled.div``
 
-export const Login = () => {
-  return (
-    <Container>
-      <Nav />
-      <LoginForm />
-    </Container>
-  )
+export class Login extends React.Component {
+  render() {
+    return (
+      <Container>
+        <Nav />
+        <LoginForm />
+      </Container>
+    )
+  }
 }
