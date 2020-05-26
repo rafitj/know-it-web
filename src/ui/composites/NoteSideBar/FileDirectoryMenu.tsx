@@ -13,7 +13,6 @@ import { NewFolder } from './NewFolder'
 
 @observer
 export class FileDirectoryMenu extends React.Component {
-  folders = FolderStore.folders
   openFolders = NoteViewStore.openFolders
   selectedFolder = NoteViewStore.selectedFolderId
   onOpenChange = (openKeys: string[]) => {
@@ -62,7 +61,7 @@ export class FileDirectoryMenu extends React.Component {
             openKeys={this.openFolders}
             onOpenChange={this.onOpenChange}
           >
-            {this.folders.map((folder) => (
+            {FolderStore.folders.map((folder) => (
               <FolderSubMenu key={folder.id} folder={folder} />
             ))}
             {NoteViewStore.addFolderMode && <NewFolder />}
