@@ -19,8 +19,8 @@ const appLoadRoutine: AppLoadRoutineType[] = [
 ]
 
 class PersistenceStore {
-  constructor() {
-    appLoadRoutine.forEach((routine) => routine())
+  async fetchItems() {
+    await Promise.all(appLoadRoutine.map((routine) => routine()))
   }
 
   setItem<T>(key: PersistenceKey, data: any) {
