@@ -43,7 +43,7 @@ export class SignUpState {
       lastName: 'SMD',
       password: this.passwordValue,
     }
-    const registerSuccess = await UserStore.register(userRegisterInfo)
+    const registerSuccess = await UserStore.signUpUser(userRegisterInfo)
     if (registerSuccess) {
       const history = useHistory()
       history.push('/note-space')

@@ -1,30 +1,30 @@
-import { observable, action } from "mobx";
+import { action, observable } from 'mobx'
 import { useHistory } from 'react-router-dom'
-import { UserStore } from "stores/UserStore";
+import { UserStore } from 'stores/UserStore'
 
 export class LoginState {
   @observable
-  showError: boolean = false;
+  showError: boolean = false
 
   @observable
-  passwordValue: string = "";
+  passwordValue: string = ''
 
   @observable
-  emailValue: string = "";
+  emailValue: string = ''
 
   @action
   setPassword = (password: string) => {
-    this.passwordValue = password;
+    this.passwordValue = password
   }
 
   @action
   setEmail = (email: string) => {
-    this.emailValue = email;
+    this.emailValue = email
   }
 
   @action
   closeError = () => {
-    this.showError = false;
+    this.showError = false
   }
 
   @action
@@ -33,12 +33,12 @@ export class LoginState {
       username: this.emailValue,
       password: this.passwordValue,
     }
-    const loginSuccess = await UserStore.login(userRegisterInfo)
+    const loginSuccess = await UserStore.loginUser(userRegisterInfo)
     if (loginSuccess) {
       const history = useHistory()
       history.push('/note-space')
     } else {
-      this.showError = true;
+      this.showError = true
     }
   }
 }

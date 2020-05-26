@@ -1,3 +1,5 @@
+import { color } from 'ui/base/theme'
+
 export interface CreateFolderRequest {
   title: string
   colour: string
@@ -23,7 +25,7 @@ export interface SignUpUserRequest {
 export interface UpdateFolderRequest {
   id: string
   title: string
-  colour: string
+  colour: color
 }
 
 export interface UpdateNoteRequest {
@@ -42,7 +44,7 @@ export interface BriefNoteDescriptionResponse {
 export interface FolderResponse {
   id: string
   title: string
-  colour: string
+  colour: color
 }
 
 export interface GetFolderWithNotesResponse extends FolderResponse {
