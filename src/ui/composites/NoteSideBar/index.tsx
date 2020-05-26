@@ -25,23 +25,25 @@ const StyledSider = styled(Sider)`
   box-shadow: ${`5px 5px ${colors.grey}`};
   overflow: auto;
 `
-
-export const NoteSideBar = observer(() => {
-  const collapsed = NoteViewStore.leftCollapsed
-  const onCollapse = (collapse: boolean) => {
+@observer
+export class NoteSideBar extends React.Component {
+  collapsed = NoteViewStore.leftCollapsed
+  onCollapse = (collapse: boolean) => {
     NoteViewStore.collapseLeft(collapse)
   }
-  return (
-    <StyledSider
-      collapsible={true}
-      collapsed={collapsed}
-      onCollapse={onCollapse}
-      breakpoint="lg"
-      width={275}
-    >
-      <ViewMenu />
-      <Line color="white" />
-      {collapsed ? <MiniFolderMenu /> : <FileDirectoryMenu />}
-    </StyledSider>
-  )
-})
+  render() {
+    return (
+      <StyledSider
+        collapsible={true}
+        collapsed={this.collapsed}
+        onCollapse={this.onCollapse}
+        breakpoint="lg"
+        width={275}
+      >
+        <ViewMenu />
+        <Line color="white" />
+        {this.collapsed ? <MiniFolderMenu /> : <FileDirectoryMenu />}
+      </StyledSider>
+    )
+  }
+}

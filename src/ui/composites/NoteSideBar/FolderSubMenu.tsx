@@ -1,7 +1,5 @@
 import 'antd/dist/antd.css'
 import { SubMenuProps } from 'antd/lib/menu/SubMenu'
-import { observer } from 'mobx-react'
-import { IGetFolderWithNotesResponse } from 'network/proto/response/IGetFolderWithNotesResponse'
 import React from 'react'
 import { Zap } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
@@ -11,9 +9,10 @@ import { colors } from 'ui/base/theme'
 import { SubMenu } from '../../base/Menu'
 import { FileMenuItem } from './FileMenuItem'
 import { NewFile } from './NewFile'
+import GetFolderWithNotesResponse = INetwork.GetFolderWithNotesResponse
 
 export interface IFolderSubMenu {
-  folder: IGetFolderWithNotesResponse
+  folder: GetFolderWithNotesResponse
 }
 
 const SubMenuTitle = styled.span`
@@ -29,35 +28,38 @@ const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`
   }
 `
 
-export const FolderSubMenu = observer(
-  ({ folder, ...other }: IFolderSubMenu & SubMenuProps) => {
-    const selected = folder.id === NoteViewStore.selectedFolderId
-
+export class FolderSubMenu extends React.Component<
+  IFolderSubMenu & SubMenuProps
+> {
+  selected = this.props.folder.id === NoteViewStore.selectedFolderId
+  render() {
     return (
       <SubMenu
-        {...other}
-        selected={selected}
-        highlight={folder.colour}
-        key={folder.id}
+        {...this.props}
+        selected={this.selected}
+        highlight={this.props.folder.colour}
+        key={this.props.folder.id}
         title={
           <span>
             <Flex alignItems="center">
-              <SubMenuTitle>{folder.title}</SubMenuTitle>
-              <ViewFolderSymbol selected={selected} mx={2}>
+              <SubMenuTitle>{this.props.folder.title}</SubMenuTitle>
+              <ViewFolderSymbol selected={this.selected} mx={2}>
                 <Zap color={colors.yellow} size={12} />
               </ViewFolderSymbol>
             </Flex>
           </span>
         }
-        onTitleClick={() => NoteViewStore.setSelectedFolderId(folder.id)}
+        onTitleClick={() =>
+          NoteViewStore.setSelectedFolderId(this.props.folder.id)
+        }
       >
-        {folder &&
-          folder.notes &&
-          folder.notes.map((note) => (
+        {this.props.folder &&
+          this.props.folder.notes &&
+          this.props.folder.notes.map((note) => (
             <FileMenuItem key={note.id} note={note} />
           ))}
-        {selected && NoteViewStore.addFileMode && <NewFile />}
+        {this.selected && NoteViewStore.addFileMode && <NewFile />}
       </SubMenu>
     )
   }
-)
+}

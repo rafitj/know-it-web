@@ -3,6 +3,9 @@ import React from 'react'
 interface NoteFilterProps {
   selected: boolean
 }
-export const NoteFilter = ({ selected }: NoteFilterProps) => {
-  return <>{selected && <div>Filter</div>}</>
+
+export class NoteFilter extends React.Component<NoteFilterProps> {
+  render() {
+    return <>{this.props.selected && <div>Filter</div>}</>
+  }
 }

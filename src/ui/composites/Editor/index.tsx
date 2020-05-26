@@ -23,7 +23,7 @@ export class Editor extends React.Component {
   editorInstance = NoteViewStore.editorInstance
   setEditorInstance = NoteViewStore.setEditorInstance
   async onEdit(api: EditorAPI) {
-    if (this.editorInstance) {
+    if (this.editorInstance && this.note) {
       const savedData = await this.editorInstance.save()
       NoteStore.updateNoteById({
         id: this.note?.id,

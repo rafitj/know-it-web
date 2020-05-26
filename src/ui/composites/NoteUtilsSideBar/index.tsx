@@ -9,10 +9,10 @@ import { observer } from 'mobx-react'
 import React from 'react'
 import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
-import { NoteTools } from 'types/note'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
 import { NoteTool } from './NoteTool'
+import { NoteUtilsState } from './NoteUtilsState'
 
 const { Sider } = Layout
 
@@ -41,44 +41,43 @@ const StyledMenu = styled(Menu)`
   }
 `
 
-export const NoteUtilsSideBar = observer(() => {
-  const collapsed = NoteViewStore.rightCollapsed
-  const onCollapse = (collapse: boolean) => {
-    NoteViewStore.collapseRight(collapse)
+@observer
+export class NoteUtilsSideBar extends React.Component {
+  collapsed = NoteViewStore.rightCollapsed
+  state = new NoteUtilsState()
+  render() {
+    return (
+      <StyledSider
+        collapsible={true}
+        defaultCollapsed={true}
+        collapsed={this.collapsed}
+        onCollapse={this.state.onCollapse}
+        breakpoint="lg"
+        reverseArrow={true}
+        width={275}
+      >
+        <StyledMenu mode={this.collapsed ? 'vertical' : 'horizontal'}>
+          <MenuItem
+            icon={<BlockOutlined />}
+            onClick={() => this.state.selectTool('cards')}
+          >
+            Cards
+          </MenuItem>
+          <MenuItem
+            icon={<SearchOutlined />}
+            onClick={() => this.state.selectTool('search')}
+          >
+            Search
+          </MenuItem>
+          <MenuItem
+            icon={<FilterOutlined />}
+            onClick={() => this.state.selectTool('filter')}
+          >
+            Filter
+          </MenuItem>
+        </StyledMenu>
+        {!this.collapsed && <NoteTool selectedTool={this.state.selectedTool} />}
+      </StyledSider>
+    )
   }
-  const [selectedTool, setSelectedTool] = React.useState<NoteTools>('cards')
-  const selectTool = (tool: NoteTools) => {
-    onCollapse(false)
-    setSelectedTool(tool)
-  }
-  return (
-    <StyledSider
-      collapsible={true}
-      defaultCollapsed={true}
-      collapsed={collapsed}
-      onCollapse={onCollapse}
-      breakpoint="lg"
-      reverseArrow={true}
-      width={275}
-    >
-      <StyledMenu mode={collapsed ? 'vertical' : 'horizontal'}>
-        <MenuItem icon={<BlockOutlined />} onClick={() => selectTool('cards')}>
-          Cards
-        </MenuItem>
-        <MenuItem
-          icon={<SearchOutlined />}
-          onClick={() => selectTool('search')}
-        >
-          Search
-        </MenuItem>
-        <MenuItem
-          icon={<FilterOutlined />}
-          onClick={() => selectTool('filter')}
-        >
-          Filter
-        </MenuItem>
-      </StyledMenu>
-      {!collapsed && <NoteTool selectedTool={selectedTool} />}
-    </StyledSider>
-  )
-})
+}
