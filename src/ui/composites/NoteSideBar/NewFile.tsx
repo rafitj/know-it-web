@@ -12,7 +12,7 @@ const LineInput = styled(Input)`
   &.ant-input {
     background-color: transparent;
     border-radius: 5px;
-    color: white;
+    color: ${colors.white};
     border-color: ${colors.green};
   }
 `
