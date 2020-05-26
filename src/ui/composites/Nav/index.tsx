@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex } from 'reflexbox'
@@ -6,6 +7,7 @@ import { HighlightText } from 'ui/components/Typography/HighlightText'
 import { StrongText } from 'ui/components/Typography/StrongText'
 import { UserStore } from '../../../stores/UserStore'
 
+@observer
 export class Nav extends React.Component {
   render() {
     return (
