@@ -1,13 +1,14 @@
-import { Layout } from 'antd'
 import 'antd/dist/antd.css'
+
+import { Layout } from 'antd'
 import { observer } from 'mobx-react'
-import React from 'react'
-import { NoteViewStore } from 'stores/NoteViewStore'
+import React from 'react';
 import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { Line } from 'ui/components/Line'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { MiniFolderMenu } from './MiniFolderMenu'
+import { NoteSpaceContext } from './NoteSpaceContext';
 import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
 
@@ -25,25 +26,30 @@ const StyledSider = styled(Sider)`
   box-shadow: ${`5px 5px ${colors.grey}`};
   overflow: auto;
 `
+
 @observer
-export class NoteSideBar extends React.Component {
-  collapsed = NoteViewStore.leftCollapsed
-  onCollapse = (collapse: boolean) => {
-    NoteViewStore.collapseLeft(collapse)
-  }
+class NoteSideBar extends React.Component {
+  state = this.context
+
   render() {
+    const { leftCollapsed, collapseLeft } = this.state.noteViewState;
+
     return (
       <StyledSider
         collapsible={true}
-        collapsed={this.collapsed}
-        onCollapse={this.onCollapse}
+        collapsed={leftCollapsed}
+        onCollapse={collapseLeft}
         breakpoint="lg"
         width={275}
       >
         <ViewMenu />
         <Line color="white" />
-        {this.collapsed ? <MiniFolderMenu /> : <FileDirectoryMenu />}
+        {leftCollapsed ? <MiniFolderMenu /> : <FileDirectoryMenu />}
       </StyledSider>
-    )
+    );
   }
 }
+
+NoteSideBar.contextType = NoteSpaceContext
+
+export { NoteSideBar }

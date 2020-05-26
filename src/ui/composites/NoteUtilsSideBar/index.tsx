@@ -6,11 +6,11 @@ import {
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import React from 'react'
-import { NoteViewStore } from 'stores/NoteViewStore'
+import React from 'react';
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
 import { NoteTool } from './NoteTool'
 import { NoteUtilsState } from './NoteUtilsState'
 
@@ -42,42 +42,51 @@ const StyledMenu = styled(Menu)`
 `
 
 @observer
-export class NoteUtilsSideBar extends React.Component {
-  collapsed = NoteViewStore.rightCollapsed
-  state = new NoteUtilsState()
+class NoteUtilsSideBar extends React.Component {
+  state = {
+    utils: new NoteUtilsState(this.context.noteViewState),
+    context: this.context,
+  };
+
   render() {
+    const { rightCollapsed: collapsed } = this.state.context.noteViewState;
+
     return (
       <StyledSider
         collapsible={true}
         defaultCollapsed={true}
-        collapsed={this.collapsed}
-        onCollapse={this.state.onCollapse}
+        collapsed={collapsed}
+        onCollapse={this.state.utils.onCollapse}
         breakpoint="lg"
         reverseArrow={true}
         width={275}
       >
-        <StyledMenu mode={this.collapsed ? 'vertical' : 'horizontal'}>
+        <StyledMenu mode={collapsed ? 'vertical' : 'horizontal'}>
           <MenuItem
             icon={<BlockOutlined />}
-            onClick={() => this.state.selectTool('cards')}
+            onClick={() => this.state.utils.selectTool('cards')}
           >
             Cards
           </MenuItem>
           <MenuItem
             icon={<SearchOutlined />}
-            onClick={() => this.state.selectTool('search')}
+            onClick={() => this.state.utils.selectTool('search')}
           >
             Search
           </MenuItem>
           <MenuItem
             icon={<FilterOutlined />}
-            onClick={() => this.state.selectTool('filter')}
+            onClick={() => this.state.utils.selectTool('filter')}
           >
             Filter
           </MenuItem>
         </StyledMenu>
-        {!this.collapsed && <NoteTool selectedTool={this.state.selectedTool} />}
+        {!collapsed && <NoteTool selectedTool={this.state.utils.selectedTool} />}
       </StyledSider>
     )
   }
 }
+
+NoteUtilsSideBar.contextType = NoteSpaceContext
+
+export { NoteUtilsSideBar }

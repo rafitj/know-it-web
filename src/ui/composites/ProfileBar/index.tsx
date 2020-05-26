@@ -2,11 +2,11 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import React from 'react'
-import { NoteViewStore } from 'stores/NoteViewStore'
+import React from 'react';
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
 
 const { Sider } = Layout
 
@@ -31,18 +31,20 @@ const StyledSider = styled(Sider)`
 `
 
 @observer
-export class ProfileBar extends React.Component {
-  collapsed = NoteViewStore.rightCollapsed
+class ProfileBar extends React.Component {
+  state = this.context
+
   onCollapse = (collapse: boolean) => {
-    NoteViewStore.collapseRight(collapse)
+    this.state.noteViewState.collapseRight(collapse)
   }
+
   render() {
     return (
       <>
         <StyledSider
           defaultCollapsed={true}
           collapsible={true}
-          collapsed={this.collapsed}
+          collapsed={this.state.noteViewState.rightCollapsed}
           onCollapse={this.onCollapse}
           breakpoint="lg"
           reverseArrow={true}
@@ -63,3 +65,7 @@ export class ProfileBar extends React.Component {
     )
   }
 }
+
+ProfileBar.contextType = NoteSpaceContext
+
+export { ProfileBar }

@@ -1,13 +1,11 @@
 import { observer } from 'mobx-react'
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import { AuthForm } from 'ui/composites/AuthForm'
 import { SignUpState } from './SignUpState'
 
 @observer
 export class SignUpForm extends React.Component {
   state = new SignUpState()
-  history = useHistory()
   render() {
     return (
       <AuthForm

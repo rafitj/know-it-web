@@ -1,20 +1,22 @@
 import { Empty } from 'antd'
 import { observer } from 'mobx-react'
-import React from 'react'
+import React from 'react';
 import { Box, Flex } from 'reflexbox'
-import { FolderStore } from 'stores/FolderStore'
-import { NoteStore } from 'stores/NoteStore'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
 
 @observer
-export class UnselectedNoteView extends React.Component {
+class UnselectedNoteView extends React.Component {
+  state = this.context
+
   makeTemplate = async () => {
-    const folder = await FolderStore.createFolder({
+    const { folderState, noteState } = this.state;
+    const folder = await folderState.createFolder({
       title: 'Template Folder',
       colour: 'purple',
     })
     if (folder) {
-      NoteStore.createNote({ title: 'Template File', folderId: folder.id })
+      await noteState.createNote({ title: 'Template File', folderId: folder.id })
     }
   }
   render() {
@@ -42,3 +44,7 @@ export class UnselectedNoteView extends React.Component {
     )
   }
 }
+
+UnselectedNoteView.contextType = NoteSpaceContext
+
+export { UnselectedNoteView }

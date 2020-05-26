@@ -1,13 +1,12 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import React from 'react'
+import React from 'react';
 import { Box, Flex } from 'reflexbox'
-import { FolderStore } from 'stores/FolderStore'
-import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
+import { NoteSpaceContext } from './NoteSpaceContext';
 
 const LineInput = styled(Input)`
   &.ant-input {
@@ -19,28 +18,34 @@ const LineInput = styled(Input)`
 `
 
 @observer
-export class NewFolder extends React.Component {
+class NewFolder extends React.Component {
   state = {
     newFolderName: '',
+    context: this.context,
   }
+
   addFolder = async (e?: any) => {
+    const { folderState, noteViewState } = this.state.context;
+
     if (
       (!e || e.key === 'Enter') &&
       this.state.newFolderName !== '' &&
       this.state.newFolderName
     ) {
-      const folder = await FolderStore.createFolder({
+      const folder = await folderState.createFolder({
         title: this.state.newFolderName,
         colour: 'red',
       })
       this.setState({ newFolderName: '' })
       if (folder) {
-        NoteViewStore.setSelectedFolderId(folder.id)
-        NoteViewStore.setAddFolderMode(false)
+        noteViewState.setSelectedFolderId(folder.id)
+        noteViewState.setAddFolderMode(false)
       }
     }
   }
   render() {
+    const { noteViewState } = this.state.context;
+
     return (
       <Flex justifyContent="center" alignItems="center" px={3}>
         <Box justifyContent="center" alignItems="center" width={10 / 12}>
@@ -63,9 +68,7 @@ export class NewFolder extends React.Component {
         <IconWrap
           width={1 / 12}
           pl={2}
-          onClick={() => {
-            NoteViewStore.setAddFolderMode(false)
-          }}
+          onClick={() => noteViewState.setAddFolderMode(false)}
         >
           <XSquare size={15} />
         </IconWrap>
@@ -73,3 +76,7 @@ export class NewFolder extends React.Component {
     )
   }
 }
+
+NewFolder.contextType = NoteSpaceContext
+
+export { NewFolder }

@@ -5,9 +5,8 @@ import {
   NoteResponse,
   UpdateNoteRequest,
 } from 'network/proto/protos'
-import { FolderStore } from './FolderStore'
 
-class NoteStore {
+export class NoteState {
   @observable
   note?: NoteResponse
 
@@ -37,7 +36,7 @@ class NoteStore {
     this.isLoading = true
     try {
       this.note = await Api.createNote(payload)
-      await FolderStore.fetchFolders()
+      // await FolderStore.fetchFolders()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to create note.'
@@ -50,7 +49,7 @@ class NoteStore {
     this.isLoading = true
     try {
       this.note = await Api.updateNote(payload)
-      await FolderStore.fetchFolders()
+      // await FolderStore.fetchFolders()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to update note.'
@@ -63,7 +62,7 @@ class NoteStore {
     this.isLoading = true
     try {
       await Api.deleteNoteById(id)
-      await FolderStore.fetchFolders()
+      // await FolderStore.fetchFolders()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to delete note.'
@@ -77,7 +76,3 @@ class NoteStore {
     this.requestErrorDetail = undefined
   }
 }
-
-const noteStore = new NoteStore()
-
-export { noteStore as NoteStore }

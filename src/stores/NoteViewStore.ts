@@ -1,7 +1,7 @@
 import EditorJsType from '@editorjs/editorjs/types'
 import { action, observable } from 'mobx'
 
-class NoteViewStoreImpl {
+export class NoteViewState {
   @observable
   editorInstance?: EditorJsType
 
@@ -63,5 +63,3 @@ class NoteViewStoreImpl {
     this.initial = false
   }
 }
-
-export const NoteViewStore = new NoteViewStoreImpl()

@@ -1,13 +1,12 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import React from 'react'
+import React from 'react';
 import { Box, Flex } from 'reflexbox'
-import { NoteStore } from 'stores/NoteStore'
-import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
+import { NoteSpaceContext } from './NoteSpaceContext';
 
 const LineInput = styled(Input)`
   &.ant-input {
@@ -18,26 +17,32 @@ const LineInput = styled(Input)`
   }
 `
 @observer
-export class NewFile extends React.Component {
+class NewFile extends React.Component {
   state = {
     newFileName: '',
+    context: this.context,
   }
-  folderId = NoteViewStore.selectedFolderId
+
   addFile = async (e?: any) => {
+    const { noteState, noteViewState } = this.state.context
+    const folderId = noteViewState.selectedFolderId
+
     if (
       (!e || e.key === 'Enter') &&
       this.state.newFileName !== '' &&
-      this.folderId
+      folderId
     ) {
-      await NoteStore.createNote({
+      await noteState.createNote({
         title: this.state.newFileName,
-        folderId: this.folderId,
+        folderId,
       })
       this.setState({ newFileName: '' })
-      NoteViewStore.setAddFileMode(false)
+      noteViewState.setAddFileMode(false)
     }
   }
   render() {
+    const { noteViewState } = this.state.context;
+
     return (
       <Flex justifyContent="center" alignItems="center" px={4} mt={2}>
         <Box justifyContent="center" alignItems="center" width={10 / 12}>
@@ -61,7 +66,7 @@ export class NewFile extends React.Component {
           width={1 / 12}
           pl={2}
           onClick={() => {
-            NoteViewStore.setAddFileMode(false)
+            noteViewState.setAddFileMode(false)
           }}
         >
           <XSquare size={15} color="white" />
@@ -70,3 +75,7 @@ export class NewFile extends React.Component {
     )
   }
 }
+
+NewFile.contextType = NoteSpaceContext
+
+export { NewFile }
