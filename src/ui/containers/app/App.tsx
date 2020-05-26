@@ -5,23 +5,25 @@ import { Login } from '../Login'
 import { NoteSpace } from '../NoteSpace'
 import { SignUp } from '../SignUp'
 
-export const App = () => {
-  return (
-    <Router>
-      <Switch>
-        <Route exact={true} path="/note-space">
-          <NoteSpace />
-        </Route>
-        <Route exact={true} path="/signup">
-          <SignUp />
-        </Route>
-        <Route exact={true} path="/login">
-          <Login />
-        </Route>
-        <Route exact={true} path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
-  )
+export class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact={true} path="/note-space">
+            <NoteSpace />
+          </Route>
+          <Route exact={true} path="/signup">
+            <SignUp />
+          </Route>
+          <Route exact={true} path="/login">
+            <Login />
+          </Route>
+          <Route exact={true} path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    )
+  }
 }
