@@ -1,3 +1,4 @@
+import { action, observable } from 'mobx'
 import { GetUserDetailsResponse } from '../network/proto/protos'
 import { UserStore } from './UserStore'
 
@@ -19,8 +20,14 @@ const appLoadRoutine: AppLoadRoutineType[] = [
 ]
 
 class PersistenceStore {
+  @observable
+  isLoading: boolean = true
+
+  @action
   async fetchItems() {
+    this.isLoading = true
     await Promise.all(appLoadRoutine.map((routine) => routine()))
+    this.isLoading = false
   }
 
   setItem<T>(key: PersistenceKey, data: any) {
