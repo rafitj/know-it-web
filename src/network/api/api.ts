@@ -1,27 +1,18 @@
 import axios from 'axios'
-import { ICreateFolderRequest } from 'network/proto/request/ICreateFolderRequest'
-import { ICreateNoteRequest } from 'network/proto/request/ICreateNoteRequest'
-import { ILoginInUserRequest } from 'network/proto/request/ILoginInUserRequest'
-import { ISignUpUserRequest } from 'network/proto/request/ISignUpUserRequest'
-import { IUpdateFolderRequest } from 'network/proto/request/IUpdateFolderRequest'
-import { IUpdateNoteRequest } from 'network/proto/request/IUpdateNoteRequest'
-import { IFolderResponse } from 'network/proto/response/IFolderResponse'
-import { IGetFolderWithNotesResponse } from 'network/proto/response/IGetFolderWithNotesResponse'
-import { INoteResponse } from 'network/proto/response/INoteResponse'
 import { UserStore } from 'stores/UserStore'
 
 const baseUrl = 'https://know-it-back-master-x3ikbzbziy.herokuapp.com/'
 
 class ApiImpl {
   createRequest = (
-    endpointSuffix: string,
+    endpoint: string,
     requestType: string,
     payload?: any,
     extractDataOnly: boolean = true
   ): Promise<any> =>
     new Promise(async (resolve, reject) => {
       const response = await axios.request({
-        url: `${baseUrl}${endpointSuffix}`,
+        url: `${baseUrl}${endpoint}`,
         method: requestType as any,
         headers: {
           Authorization: UserStore.authenticationHeaders?.Authorization,
@@ -39,12 +30,12 @@ class ApiImpl {
       resolve(responseData)
     })
 
-  signUp = async (payload?: ISignUpUserRequest): Promise<void> => {
+  signUp = async (payload?: SignUpUserRequest): Promise<void> => {
     const data = await this.createRequest('users/sign-up', 'get', payload)
     return data
   }
 
-  signIn = async (payload: ILoginInUserRequest): Promise<void> => {
+  signIn = async (payload: LoginInUserRequest): Promise<void> => {
     const data = await this.createRequest('login', 'post', payload, false)
     return data
   }
@@ -58,7 +49,7 @@ class ApiImpl {
   }
 
   createNewNote = async (
-    payload: ICreateNoteRequest
+    payload: CreateNoteRequest
   ): Promise<INoteResponse> => {
     const data = (await this.createRequest(
       'notes',
@@ -92,7 +83,7 @@ class ApiImpl {
   }
 
   createNewFolder = async (
-    payload: ICreateFolderRequest
+    payload: CreateFolderRequest
   ): Promise<IFolderResponse> => {
     const data = (await this.createRequest(
       'folders',

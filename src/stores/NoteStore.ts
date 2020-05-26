@@ -1,13 +1,13 @@
 import { action, observable } from 'mobx'
 import { Api } from 'network/api/api'
-import { ICreateNoteRequest } from 'network/proto/request/ICreateNoteRequest'
-import { IUpdateNoteRequest } from 'network/proto/request/IUpdateNoteRequest'
-import { INoteResponse } from 'network/proto/response/INoteResponse'
 import { FolderStore } from './FolderStore'
+import NoteResponse = INetwork.NoteResponse;
+import CreateNoteRequest = INetwork.CreateNoteRequest;
+import UpdateNoteRequest = INetwork.UpdateNoteRequest;
 
 class NoteStoreImpl {
   @observable
-  note?: INoteResponse = undefined
+  note?: NoteResponse = undefined
 
   @observable
   isLoading: boolean = false
@@ -20,7 +20,7 @@ class NoteStoreImpl {
   }
 
   @action
-  async createNote(payload: ICreateNoteRequest) {
+  async createNote(payload: CreateNoteRequest) {
     this.isLoading = true
     this.note = await Api.createNewNote(payload)
     await FolderStore.fetchFolders()
@@ -28,7 +28,7 @@ class NoteStoreImpl {
   }
 
   @action
-  async updateNoteById(payload: IUpdateNoteRequest) {
+  async updateNoteById(payload: UpdateNoteRequest) {
     this.isLoading = true
     this.note = await Api.updateNoteById(payload)
     // await FolderStore.fetchFolders()
