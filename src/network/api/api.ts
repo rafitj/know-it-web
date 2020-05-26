@@ -1,120 +1,125 @@
-import axios from 'axios'
+import axios, { Method } from 'axios';
 import { UserStore } from 'stores/UserStore'
+import SignUpUserRequest = INetwork.SignUpUserRequest;
+import LogInUserRequest = INetwork.LogInUserRequest;
+import GetUserDetailsResponse = INetwork.GetUserDetailsResponse;
+import NoteResponse = INetwork.NoteResponse;
+import CreateNoteRequest = INetwork.CreateNoteRequest;
+import UpdateNoteRequest = INetwork.UpdateNoteRequest;
+import FolderResponse = INetwork.FolderResponse;
+import CreateFolderRequest = INetwork.CreateFolderRequest;
+import UpdateFolderRequest = INetwork.UpdateFolderRequest;
+import GetFolderWithNotesResponse = INetwork.GetFolderWithNotesResponse;
 
-const baseUrl = 'https://know-it-back-master-x3ikbzbziy.herokuapp.com/'
+const baseUrl = 'https://know-it-back-master-x3ikbzbziy.herokuapp.com/api/v1/'
 
-class ApiImpl {
-  createRequest = (
+export class Api {
+  static createRequest = <T, S>(
     endpoint: string,
-    requestType: string,
-    payload?: any,
-    extractDataOnly: boolean = true
-  ): Promise<any> =>
+    requestType: Method,
+    payload?: T,
+  ): Promise<S> =>
     new Promise(async (resolve, reject) => {
       const response = await axios.request({
         url: `${baseUrl}${endpoint}`,
-        method: requestType as any,
+        method: requestType,
         headers: {
-          Authorization: UserStore.authenticationHeaders?.Authorization,
+          Authorization: (UserStore.user && UserStore.user.authToken) || '',
           'Content-Type': 'application/json',
         },
         data: payload || {},
-      })
-
-      const responseData = extractDataOnly ? response.data : response
+      });
 
       if (response.status !== 200) {
-        reject(responseData)
+        reject(response.data.error);
       }
 
-      resolve(responseData)
-    })
+      resolve(response.data as S);
+    });
 
-  signUp = async (payload?: SignUpUserRequest): Promise<void> => {
-    const data = await this.createRequest('users/sign-up', 'get', payload)
-    return data
+  static signUpUser = async (payload: SignUpUserRequest): Promise<void> => {
+    await Api.createRequest('users/sign-up', 'GET', payload);
   }
 
-  signIn = async (payload: LoginInUserRequest): Promise<void> => {
-    const data = await this.createRequest('login', 'post', payload, false)
-    return data
+  static signInUser = async (payload: LogInUserRequest): Promise<GetUserDetailsResponse> => {
+    const data = await Api.createRequest<LogInUserRequest, GetUserDetailsResponse>(
+      'users/login', 'POST', payload);
+    return data;
   }
 
-  getNoteById = async (id: string): Promise<INoteResponse> => {
-    const data = (await this.createRequest(
+  static fetchNote = async (id: string): Promise<NoteResponse> => {
+    const data = await Api.createRequest<null, NoteResponse>(
       `notes?id=${id}`,
-      'get'
-    )) as INoteResponse
-    return data
+      'GET'
+    );
+    return data;
   }
 
-  createNewNote = async (
+  static createNote = async (
     payload: CreateNoteRequest
-  ): Promise<INoteResponse> => {
-    const data = (await this.createRequest(
+  ): Promise<NoteResponse> => {
+    const data = await Api.createRequest<CreateNoteRequest, NoteResponse>(
       'notes',
-      'post',
+      'POST',
       payload
-    )) as INoteResponse
-    return data
+    );
+    return data;
   }
 
-  updateNoteById = async (
-    payload: IUpdateNoteRequest
-  ): Promise<INoteResponse> => {
-    const data = (await this.createRequest(
+  static updateNote = async (
+    payload: UpdateNoteRequest
+  ): Promise<NoteResponse> => {
+    const data = await Api.createRequest<UpdateNoteRequest, NoteResponse>(
       'notes',
-      'put',
+      'PUT',
       payload
-    )) as INoteResponse
-    return data
+    );
+    return data;
   }
 
-  deleteNoteById = async (id: string): Promise<void> => {
-    await this.createRequest(`notes/${id}`, 'delete')
+  static deleteNoteById = async (id: string): Promise<void> => {
+    await Api.createRequest<null, void>(`notes/${id}`, 'delete')
   }
 
-  getAllFolders = async (): Promise<IFolderResponse[]> => {
-    const data = (await this.createRequest(
+  static fetchFolders = async (): Promise<FolderResponse[]> => {
+    const data = await Api.createRequest<null, FolderResponse[]>(
       'folders',
-      'get'
-    )) as IFolderResponse[]
+      'GET'
+    );
     return data
   }
 
-  createNewFolder = async (
+  static createFolder = async (
     payload: CreateFolderRequest
-  ): Promise<IFolderResponse> => {
-    const data = (await this.createRequest(
+  ): Promise<FolderResponse> => {
+    const data = await Api.createRequest<CreateFolderRequest, FolderResponse>(
       'folders',
-      'post',
+      'POST',
       payload
-    )) as IFolderResponse
+    )
     return data
   }
 
-  updateFolder = async (
-    payload: IUpdateFolderRequest
-  ): Promise<IFolderResponse> => {
-    const data = (await this.createRequest(
+  static updateFolder = async (
+    payload: UpdateFolderRequest
+  ): Promise<FolderResponse> => {
+    const data = await Api.createRequest<UpdateFolderRequest, FolderResponse>(
       'folders',
-      'put',
+      'PUT',
       payload
-    )) as IFolderResponse
+    )
     return data
   }
 
-  deleteFolder = async (id: string): Promise<void> => {
-    await this.createRequest(`folders/${id}`, 'delete')
+  static deleteFolder = async (id: string): Promise<void> => {
+    await Api.createRequest<null, void>(`folders/${id}`, 'DELETE')
   }
 
-  getFoldersWithNotes = async (): Promise<IGetFolderWithNotesResponse[]> => {
-    const data = (await this.createRequest(
+  static fetchFoldersWithNotes = async (): Promise<GetFolderWithNotesResponse[]> => {
+    const data = await Api.createRequest<null, GetFolderWithNotesResponse[]>(
       'folders/with-notes',
-      'get'
-    )) as IGetFolderWithNotesResponse[]
+      'GET'
+    )
     return data
   }
 }
-
-export const Api = new ApiImpl()

@@ -5,11 +5,4 @@
 - Created protected routes
 - Fix linting & pass tests
 - extract styled components
-- return email, firstname, lastname upon successful login [BE]
-
-
-
-
-
-
-- Look at auth flow
+- Figure out how to send GOOD errors from the backend.

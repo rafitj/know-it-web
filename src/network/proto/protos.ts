@@ -2,6 +2,7 @@
 /* eslint-disable */
 // Generated using typescript-generator version 2.23.603 on 2020-05-26 02:23:10.
 
+// @ts-ignore
 declare namespace INetwork {
   interface CreateFolderRequest {
     title: string
@@ -59,6 +60,7 @@ declare namespace INetwork {
     username: string
     firstName: string
     lastName: string
+    authToken: string
   }
 
   interface NoteResponse {

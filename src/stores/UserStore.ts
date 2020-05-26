@@ -1,86 +1,68 @@
-import axios from 'axios'
 import { action, observable } from 'mobx'
+import { Api } from '../network/api/api';
 import SignUpUserRequest = INetwork.SignUpUserRequest;
 import LoginInUserRequest = INetwork.LogInUserRequest;
+import GetUserDetailsResponse = INetwork.GetUserDetailsResponse;
 
-interface AuthenticationHeaders {
-  Authorization: string
-  'Content-Type': string
-}
-
-interface User {
-  email?: string
-  firstName?: string
-  lastName?: string
-}
-
-class UserStoreImpl {
+class UserStore {
   @observable
-  authenticationHeaders?: AuthenticationHeaders
+  user?: GetUserDetailsResponse
 
   @observable
-  user?: User
+  isLoading: boolean = false
+
+  @observable
+  requestError: boolean = false
+
+  @observable
+  requestErrorDetail?: string
 
   get isSignedIn(): boolean {
-    return this.user !== undefined
+    return this.user !== undefined && this.user !== null
   }
 
   @action
-  async register(userCredentials: SignUpUserRequest): Promise<boolean> {
+  async signUpUser(userCredentials: SignUpUserRequest): Promise<boolean> {
+    this.isLoading = true;
     try {
-      const response = await axios.post(
-        'https://know-it-back-master-x3ikbzbziy.herokuapp.com/users/sign-up',
-        userCredentials,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-      if (response.status !== 200) {
-        throw new Error(response.data)
-      }
-      return true
+      await Api.signUpUser(userCredentials);
     } catch (err) {
-      return false
+      this.requestError = true;
+      this.requestErrorDetail = 'Failed to sign up user.';
+      return false;
     }
+    this.isLoading = false;
+    return true;
   }
 
   @action
-  async login(userCredentials: LoginInUserRequest): Promise<boolean> {
+  async loginUser(userCredentials: LoginInUserRequest): Promise<boolean> {
+    this.isLoading = true;
     try {
-      const response = await axios.post(
-        'https://know-it-back-master-x3ikbzbziy.herokuapp.com/login',
-        userCredentials,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-
-      if (response.status !== 200) {
-        throw new Error(response.data)
-      }
-
-      this.user = {
-        email: userCredentials.username,
-      }
-      this.authenticationHeaders = {
-        Authorization: response.headers.authorization,
-        'Content-Type': 'application/json',
-      }
-      return true
+      this.user = await Api.signInUser(userCredentials);
     } catch (err) {
-      return false
+      this.requestError = true;
+      this.requestErrorDetail = 'Failed to sign in user.';
+      return false;
     }
+    this.isLoading = false;
+    return true;
+  }
+
+  @action
+  resetErrors(): void {
+    this.requestError = false;
+    this.requestErrorDetail = undefined;
   }
 
   @action
   logout(): void {
-    this.authenticationHeaders = undefined
-    this.user = undefined
+    this.user = undefined;
   }
 }
 
-export const UserStore = new UserStoreImpl()
+const userStore = new UserStore();
+
+export {
+  userStore as UserStore
+}
