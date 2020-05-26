@@ -2,6 +2,11 @@
   "name": "know-it-web",
   "version": "0.1.0",
   "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "dependencies": {
     "@editorjs/checklist": "^1.1.0",
     "@editorjs/code": "^2.4.1",
@@ -32,8 +37,10 @@
     "axios": "^0.19.2",
     "feather-icons": "^4.28.0",
     "grommet-icons": "^4.4.0",
+    "husky": "^4.2.5",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
+    "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-editor-js": "^1.5.0",

@@ -2,7 +2,7 @@ import 'antd/dist/antd.css'
 import { SubMenuProps } from 'antd/lib/menu/SubMenu'
 import { observer } from 'mobx-react'
 import { GetFolderWithNotesResponse } from 'network/proto/protos'
-import React from 'react';
+import React from 'react'
 import { Zap } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ import { colors } from 'ui/base/theme'
 import { SubMenu } from '../../base/Menu'
 import { FileMenuItem } from './FileMenuItem'
 import { NewFile } from './NewFile'
-import { NoteSpaceContext } from './NoteSpaceContext';
+import { NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFolderSubMenu {
   folder: GetFolderWithNotesResponse
@@ -29,14 +29,12 @@ const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`
   }
 `
 @observer
-class FolderSubMenu extends React.Component<
-  IFolderSubMenu & SubMenuProps
-> {
-  state = this.context;
+class FolderSubMenu extends React.Component<IFolderSubMenu & SubMenuProps> {
+  state = this.context
 
   render() {
-    const { noteViewState } = this.state;
-    const selected = this.props.folder.id === noteViewState.selectedFolderId;
+    const { noteViewState } = this.state
+    const selected = this.props.folder.id === noteViewState.selectedFolderId
 
     return (
       <SubMenu
@@ -72,4 +70,3 @@ class FolderSubMenu extends React.Component<
 FolderSubMenu.contextType = NoteSpaceContext
 
 export { FolderSubMenu }
-

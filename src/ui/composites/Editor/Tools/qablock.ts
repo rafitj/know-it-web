@@ -2,8 +2,10 @@ import './qablock.css'
 import { QAIcon } from './QAIcon'
 
 export class Qablock {
+  // tslint:disable-next-line:no-any
   css: any
 
+  // tslint:disable-next-line:no-any
   constructor({ api }: any) {
     this.css = {
       block: api.styles.block,
@@ -71,6 +73,7 @@ export class Qablock {
     return block
   }
 
+  // tslint:disable-next-line:no-any
   save(blockContent: any) {
     return {
       title: document.getElementById('qa-title')?.innerHTML,

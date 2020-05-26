@@ -1,15 +1,15 @@
 import { action, observable } from 'mobx'
 import { NoteTools } from 'types/note'
-import { NoteViewState } from '../../../stores/NoteViewStore';
+import { NoteViewState } from '../../../stores/NoteViewStore'
 
 export class NoteUtilsState {
   @observable
   selectedTool: NoteTools = 'cards'
 
-  private noteViewState: NoteViewState;
+  private noteViewState: NoteViewState
 
   constructor(noteViewState: NoteViewState) {
-    this.noteViewState = noteViewState;
+    this.noteViewState = noteViewState
   }
 
   @action

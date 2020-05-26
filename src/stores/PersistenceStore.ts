@@ -30,7 +30,7 @@ class PersistenceStore {
     this.isLoading = false
   }
 
-  setItem<T>(key: PersistenceKey, data: any) {
+  setItem<T>(key: PersistenceKey, data: object) {
     localStorage.setItem(key.valueOf(), JSON.stringify(data))
   }
 }

@@ -1,11 +1,11 @@
 import { Layout } from 'antd'
 import { observer } from 'mobx-react'
-import React from 'react';
+import React from 'react'
 import { colors } from 'ui/base/theme'
 import { NoteUtilsSideBar } from 'ui/composites/NoteUtilsSideBar'
 import { ProfileBar } from 'ui/composites/ProfileBar'
 import { NoteSideBar } from '../../composites/NoteSideBar'
-import { NoteSpaceContext } from '../../composites/NoteSideBar/NoteSpaceContext';
+import { NoteSpaceContext } from '../../composites/NoteSideBar/NoteSpaceContext'
 import { NoteEditor } from './NoteEditor'
 const { Content } = Layout
 
@@ -14,7 +14,7 @@ export class NoteSpace extends React.Component {
   state = this.context
 
   fetchFolders = async () => {
-    await this.state.folderState.fetchFolders();
+    await this.state.folderState.fetchFolders()
   }
 
   componentDidMount() {
@@ -22,7 +22,7 @@ export class NoteSpace extends React.Component {
   }
 
   render() {
-    const { leftCollapsed, rightCollapsed } = this.state.noteViewState;
+    const { leftCollapsed, rightCollapsed } = this.state.noteViewState
 
     return (
       <Layout style={{ minHeight: '100vh' }}>
