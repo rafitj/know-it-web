@@ -26,7 +26,6 @@ export class FileDirectoryMenu extends React.Component {
   }
 
   render() {
-    console.log(this.folders)
     return (
       <>
         <Flex

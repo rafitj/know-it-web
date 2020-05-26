@@ -1,5 +1,6 @@
 import 'antd/dist/antd.css'
 import { SubMenuProps } from 'antd/lib/menu/SubMenu'
+import { observer } from 'mobx-react'
 import { GetFolderWithNotesResponse } from 'network/proto/protos'
 import React from 'react'
 import { Zap } from 'react-feather'
@@ -27,7 +28,7 @@ const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`
     fill: ${colors.yellow};
   }
 `
-
+@observer
 export class FolderSubMenu extends React.Component<
   IFolderSubMenu & SubMenuProps
 > {
