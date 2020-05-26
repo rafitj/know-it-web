@@ -1,5 +1,4 @@
 import { action, observable } from 'mobx'
-import { useHistory } from 'react-router-dom'
 import { UserStore } from 'stores/UserStore'
 
 export class LoginState {
@@ -34,10 +33,7 @@ export class LoginState {
       password: this.passwordValue,
     }
     const loginSuccess = await UserStore.loginUser(userRegisterInfo)
-    if (loginSuccess) {
-      const history = useHistory()
-      history.push('/note-space')
-    } else {
+    if (!loginSuccess) {
       this.showError = true
     }
   }

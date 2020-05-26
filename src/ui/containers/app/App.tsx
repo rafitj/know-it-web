@@ -1,24 +1,34 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { PersistenceStore } from 'stores/PersistenceStore'
+import { UserStore } from 'stores/UserStore'
 import { Home } from '../Home'
 import { Login } from '../Login'
 import { NoteSpace } from '../NoteSpace'
+import { AuthRoute } from '../RouteTypes/AuthRoute'
+import { PrivateRoute } from '../RouteTypes/PrivateRoute'
 import { SignUp } from '../SignUp'
 
+@observer
 export class App extends React.Component {
+  componentDidMount() {
+    PersistenceStore
+    UserStore
+  }
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact={true} path="/note-space">
+          <PrivateRoute exact={true} path="/note-space">
             <NoteSpace />
-          </Route>
-          <Route exact={true} path="/signup">
+          </PrivateRoute>
+          <AuthRoute exact={true} path="/signup">
             <SignUp />
-          </Route>
-          <Route exact={true} path="/login">
+          </AuthRoute>
+          <AuthRoute exact={true} path="/login">
             <Login />
-          </Route>
+          </AuthRoute>
           <Route exact={true} path="/">
             <Home />
           </Route>
