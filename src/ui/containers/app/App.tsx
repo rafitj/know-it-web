@@ -2,7 +2,6 @@ import { observer } from 'mobx-react'
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { PersistenceStore } from 'stores/PersistenceStore'
-import { UserStore } from 'stores/UserStore'
 import { Home } from '../Home'
 import { Login } from '../Login'
 import { NoteSpace } from '../NoteSpace'
@@ -12,28 +11,32 @@ import { SignUp } from '../SignUp'
 
 @observer
 export class App extends React.Component {
+  fetchUser = async () => {
+    await PersistenceStore.fetchItems()
+  }
   componentDidMount() {
-    PersistenceStore
-    UserStore
+    this.fetchUser()
   }
   render() {
     return (
-      <Router>
-        <Switch>
-          <PrivateRoute exact={true} path="/note-space">
-            <NoteSpace />
-          </PrivateRoute>
-          <AuthRoute exact={true} path="/signup">
-            <SignUp />
-          </AuthRoute>
-          <AuthRoute exact={true} path="/login">
-            <Login />
-          </AuthRoute>
-          <Route exact={true} path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+      !PersistenceStore.isLoading && (
+        <Router>
+          <Switch>
+            <PrivateRoute exact={true} path="/note-space">
+              <NoteSpace />
+            </PrivateRoute>
+            <AuthRoute exact={true} path="/signup">
+              <SignUp />
+            </AuthRoute>
+            <AuthRoute exact={true} path="/login">
+              <Login />
+            </AuthRoute>
+            <Route exact={true} path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      )
     )
   }
 }

@@ -1,5 +1,6 @@
 import { FileAddOutlined, FolderAddOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { FolderStore } from 'stores/FolderStore'
@@ -10,6 +11,7 @@ import { Menu } from '../../base/Menu'
 import { FolderSubMenu } from './FolderSubMenu'
 import { NewFolder } from './NewFolder'
 
+@observer
 export class FileDirectoryMenu extends React.Component {
   folders = FolderStore.folders
   openFolders = NoteViewStore.openFolders
@@ -22,7 +24,9 @@ export class FileDirectoryMenu extends React.Component {
       NoteViewStore.setOpenFolders([...this.openFolders, folderId.toString()])
     }
   }
+
   render() {
+    console.log(this.folders)
     return (
       <>
         <Flex
