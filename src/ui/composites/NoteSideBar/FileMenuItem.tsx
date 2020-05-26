@@ -1,6 +1,7 @@
 import { Badge, Popover } from 'antd'
 import 'antd/dist/antd.css'
 import { MenuItemProps } from 'antd/lib/menu/MenuItem'
+import { BriefNoteDescriptionResponse } from 'network/proto/protos'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { NoteStore } from 'stores/NoteStore'
@@ -8,10 +9,9 @@ import styled from 'styled-components'
 import { Download, Edit, IconWrap, Settings, Trash } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
-import IBriefNoteDescriptionResponse = INetwork.BriefNoteDescriptionResponse
 
 export interface IFileMenuItem {
-  note: IBriefNoteDescriptionResponse
+  note: BriefNoteDescriptionResponse
 }
 
 const FileMenuItemCommonStyles = `

@@ -1,8 +1,10 @@
 import { action, observable } from 'mobx'
-import { Api } from '../network/api/api';
-import SignUpUserRequest = INetwork.SignUpUserRequest;
-import LoginInUserRequest = INetwork.LogInUserRequest;
-import GetUserDetailsResponse = INetwork.GetUserDetailsResponse;
+import {
+  GetUserDetailsResponse,
+  LogInUserRequest,
+  SignUpUserRequest,
+} from 'network/proto/protos'
+import { Api } from '../network/api/api'
 
 class UserStore {
   @observable
@@ -23,46 +25,44 @@ class UserStore {
 
   @action
   async signUpUser(userCredentials: SignUpUserRequest): Promise<boolean> {
-    this.isLoading = true;
+    this.isLoading = true
     try {
-      await Api.signUpUser(userCredentials);
+      await Api.signUpUser(userCredentials)
     } catch (err) {
-      this.requestError = true;
-      this.requestErrorDetail = 'Failed to sign up user.';
-      return false;
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to sign up user.'
+      return false
     }
-    this.isLoading = false;
-    return true;
+    this.isLoading = false
+    return true
   }
 
   @action
-  async loginUser(userCredentials: LoginInUserRequest): Promise<boolean> {
-    this.isLoading = true;
+  async loginUser(userCredentials: LogInUserRequest): Promise<boolean> {
+    this.isLoading = true
     try {
-      this.user = await Api.signInUser(userCredentials);
+      this.user = await Api.signInUser(userCredentials)
     } catch (err) {
-      this.requestError = true;
-      this.requestErrorDetail = 'Failed to sign in user.';
-      return false;
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to sign in user.'
+      return false
     }
-    this.isLoading = false;
-    return true;
+    this.isLoading = false
+    return true
   }
 
   @action
   resetErrors(): void {
-    this.requestError = false;
-    this.requestErrorDetail = undefined;
+    this.requestError = false
+    this.requestErrorDetail = undefined
   }
 
   @action
   logout(): void {
-    this.user = undefined;
+    this.user = undefined
   }
 }
 
-const userStore = new UserStore();
+const userStore = new UserStore()
 
-export {
-  userStore as UserStore
-}
+export { userStore as UserStore }

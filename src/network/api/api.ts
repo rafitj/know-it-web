@@ -1,15 +1,17 @@
-import axios, { Method } from 'axios';
+import axios, { Method } from 'axios'
+import {
+  CreateFolderRequest,
+  CreateNoteRequest,
+  FolderResponse,
+  GetFolderWithNotesResponse,
+  GetUserDetailsResponse,
+  LogInUserRequest,
+  NoteResponse,
+  SignUpUserRequest,
+  UpdateFolderRequest,
+  UpdateNoteRequest,
+} from 'network/proto/protos'
 import { UserStore } from 'stores/UserStore'
-import SignUpUserRequest = INetwork.SignUpUserRequest;
-import LogInUserRequest = INetwork.LogInUserRequest;
-import GetUserDetailsResponse = INetwork.GetUserDetailsResponse;
-import NoteResponse = INetwork.NoteResponse;
-import CreateNoteRequest = INetwork.CreateNoteRequest;
-import UpdateNoteRequest = INetwork.UpdateNoteRequest;
-import FolderResponse = INetwork.FolderResponse;
-import CreateFolderRequest = INetwork.CreateFolderRequest;
-import UpdateFolderRequest = INetwork.UpdateFolderRequest;
-import GetFolderWithNotesResponse = INetwork.GetFolderWithNotesResponse;
 
 const baseUrl = 'https://know-it-back-master-x3ikbzbziy.herokuapp.com/api/v1/'
 
@@ -17,7 +19,7 @@ export class Api {
   static createRequest = <T, S>(
     endpoint: string,
     requestType: Method,
-    payload?: T,
+    payload?: T
   ): Promise<S> =>
     new Promise(async (resolve, reject) => {
       const response = await axios.request({
@@ -28,31 +30,35 @@ export class Api {
           'Content-Type': 'application/json',
         },
         data: payload || {},
-      });
+      })
 
       if (response.status !== 200) {
-        reject(response.data.error);
+        reject(response.data.error)
       }
 
-      resolve(response.data as S);
-    });
+      resolve(response.data as S)
+    })
 
   static signUpUser = async (payload: SignUpUserRequest): Promise<void> => {
-    await Api.createRequest('users/sign-up', 'GET', payload);
+    await Api.createRequest('users/sign-up', 'GET', payload)
   }
 
-  static signInUser = async (payload: LogInUserRequest): Promise<GetUserDetailsResponse> => {
-    const data = await Api.createRequest<LogInUserRequest, GetUserDetailsResponse>(
-      'users/login', 'POST', payload);
-    return data;
+  static signInUser = async (
+    payload: LogInUserRequest
+  ): Promise<GetUserDetailsResponse> => {
+    const data = await Api.createRequest<
+      LogInUserRequest,
+      GetUserDetailsResponse
+    >('users/login', 'POST', payload)
+    return data
   }
 
   static fetchNote = async (id: string): Promise<NoteResponse> => {
     const data = await Api.createRequest<null, NoteResponse>(
       `notes?id=${id}`,
       'GET'
-    );
-    return data;
+    )
+    return data
   }
 
   static createNote = async (
@@ -62,8 +68,8 @@ export class Api {
       'notes',
       'POST',
       payload
-    );
-    return data;
+    )
+    return data
   }
 
   static updateNote = async (
@@ -73,8 +79,8 @@ export class Api {
       'notes',
       'PUT',
       payload
-    );
-    return data;
+    )
+    return data
   }
 
   static deleteNoteById = async (id: string): Promise<void> => {
@@ -85,7 +91,7 @@ export class Api {
     const data = await Api.createRequest<null, FolderResponse[]>(
       'folders',
       'GET'
-    );
+    )
     return data
   }
 
@@ -115,7 +121,9 @@ export class Api {
     await Api.createRequest<null, void>(`folders/${id}`, 'DELETE')
   }
 
-  static fetchFoldersWithNotes = async (): Promise<GetFolderWithNotesResponse[]> => {
+  static fetchFoldersWithNotes = async (): Promise<
+    GetFolderWithNotesResponse[]
+  > => {
     const data = await Api.createRequest<null, GetFolderWithNotesResponse[]>(
       'folders/with-notes',
       'GET'

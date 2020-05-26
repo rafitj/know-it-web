@@ -1,8 +1,11 @@
 import { action, observable } from 'mobx'
-import { Api } from '../network/api/api';
-import CreateFolderRequest = INetwork.CreateFolderRequest;
-import GetFolderWithNotesResponse = INetwork.GetFolderWithNotesResponse;
-import UpdateFolderRequest = INetwork.UpdateFolderRequest;
+import {
+  CreateFolderRequest,
+  FolderResponse,
+  GetFolderWithNotesResponse,
+  UpdateFolderRequest,
+} from 'network/proto/protos'
+import { Api } from '../network/api/api'
 
 class FolderStore {
   @observable
@@ -21,10 +24,10 @@ class FolderStore {
   async fetchFolders() {
     this.isLoading = true
     try {
-      this.folders = await Api.fetchFoldersWithNotes();
+      this.folders = await Api.fetchFoldersWithNotes()
     } catch (e) {
-      this.requestError = true;
-      this.requestErrorDetail = 'Failed to fetch folders.';
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to fetch folders.'
     }
     this.isLoading = false
   }
@@ -32,13 +35,13 @@ class FolderStore {
   @action
   async createFolder(
     newFolder: CreateFolderRequest
-  ): Promise<void> {
+  ): Promise<FolderResponse | void> {
     this.isLoading = true
     try {
-      await Api.createFolder(newFolder);
+      return await Api.createFolder(newFolder)
     } catch (e) {
-      this.requestError = true;
-      this.requestErrorDetail = 'Failed to create folder.';
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to create folder.'
     }
     this.isLoading = false
   }
@@ -50,8 +53,8 @@ class FolderStore {
       await Api.updateFolder(folder)
       await this.fetchFolders()
     } catch (e) {
-      this.requestError = true;
-      this.requestErrorDetail = 'Failed to update folder.';
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to update folder.'
     }
     this.isLoading = false
   }
@@ -63,20 +66,18 @@ class FolderStore {
       await Api.deleteFolder(folderId)
       await this.fetchFolders()
     } catch (e) {
-      this.requestError = true;
-      this.requestErrorDetail = 'Failed to delete folder.';
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to delete folder.'
     }
     this.isLoading = false
   }
 
   @action
   resetErrors(): void {
-    this.requestError = false;
-    this.requestErrorDetail = undefined;
+    this.requestError = false
+    this.requestErrorDetail = undefined
   }
 }
 
-const folderStore = new FolderStore();
-export {
-  folderStore as FolderStore
-}
+const folderStore = new FolderStore()
+export { folderStore as FolderStore }
