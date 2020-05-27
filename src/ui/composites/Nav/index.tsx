@@ -43,7 +43,9 @@ export class Nav extends React.Component {
                 </Box>
                 <Box mx={3}>
                   <Link to="/" onClick={() => UserStore.logout()}>
-                    <HighlightedText highlight="black">Sign Out</HighlightedText>
+                    <HighlightedText highlight="black">
+                      Sign Out
+                    </HighlightedText>
                   </Link>
                 </Box>
               </>

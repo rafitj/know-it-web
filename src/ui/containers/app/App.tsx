@@ -1,16 +1,21 @@
+import { createBrowserHistory } from 'history'
 import { observer } from 'mobx-react'
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Router, Switch } from 'react-router-dom'
 import { PersistenceStore } from 'stores/PersistenceStore'
 import { Home } from '../Home'
 import { Login } from '../Login'
 import { NoteSpace } from '../NoteSpace'
+import { RouterStore } from '../RouterStore'
 import { AuthRoute } from '../RouteTypes/AuthRoute'
 import { PrivateRoute } from '../RouteTypes/PrivateRoute'
 import { SignUp } from '../SignUp'
 
 @observer
 export class App extends React.Component {
+  constructor(props: {}) {
+    super(props)
+  }
   fetchUser = async () => {
     await PersistenceStore.fetchItems()
   }
@@ -20,7 +25,7 @@ export class App extends React.Component {
   render() {
     return (
       !PersistenceStore.isLoading && (
-        <Router>
+        <Router history={RouterStore.history}>
           <Switch>
             <PrivateRoute exact={true} path="/note-space">
               <NoteSpace />
