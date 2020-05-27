@@ -5,7 +5,10 @@ import styled from 'styled-components'
 import { Line } from 'ui/components/Line'
 import { Editor } from '.'
 import { GetFolderWithNotesResponse } from '../../../network/proto/protos'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
+import {
+  INoteSpaceState,
+  NoteSpaceContext,
+} from '../NoteSideBar/NoteSpaceContext'
 
 const StyledPageHeader = styled(PageHeader)`
   background-color: transparent;
@@ -20,7 +23,7 @@ const StyledPageHeader = styled(PageHeader)`
 
 @observer
 class NoteView extends React.Component {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   render() {
     const { note } = this.state.noteState

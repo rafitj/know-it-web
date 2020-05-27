@@ -91,7 +91,7 @@ export class Api {
   }
 
   static deleteNoteById = async (id: string): Promise<void> => {
-    await Api.createRequest<null, void>(`notes/${id}`, 'DELETE')
+    await Api.createRequest<null, void>(`notes?id=${id}`, 'DELETE')
   }
 
   static fetchFolders = async (): Promise<FolderResponse[]> => {
