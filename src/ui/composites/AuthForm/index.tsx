@@ -13,8 +13,6 @@ import { Line } from 'ui/components/Line'
 import { BigText } from 'ui/components/Typography/BigText'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 import { colors } from '../../base/theme'
-import { NewFile } from '../NoteSideBar/NewFile'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
 
 export interface IAuthForm {
   title: string
@@ -31,7 +29,7 @@ export interface IAuthForm {
   emailClick: () => void
   showError?: boolean
   closeError: () => void
-  errorMessage?: string;
+  errorMessage?: string
 }
 
 const StyledAlert = styled(Alert)`

@@ -1,12 +1,11 @@
 import { observer } from 'mobx-react'
 import React from 'react'
 import { AuthForm } from 'ui/composites/AuthForm'
-import { HistoryContext } from '../HistoryContext'
 import { SignUpState } from './SignUpState'
 
 @observer
-class SignUpForm extends React.Component {
-  state = new SignUpState({ history: this.context })
+export class SignUpForm extends React.Component {
+  state = new SignUpState()
   render() {
     return (
       <AuthForm
@@ -29,7 +28,3 @@ class SignUpForm extends React.Component {
     )
   }
 }
-
-SignUpForm.contextType = HistoryContext
-
-export { SignUpForm }

@@ -1,12 +1,13 @@
 import { action, observable } from 'mobx'
 import { UserStore } from 'stores/UserStore'
+import { RouterStore } from '../RouterStore'
 
 export class SignUpState {
   @observable
   showError: boolean = false
 
   @observable
-  errorMessage?: string;
+  errorMessage?: string
 
   @observable
   passwordValue: string = ''
@@ -46,8 +47,11 @@ export class SignUpState {
       password: this.passwordValue,
     }
     await UserStore.signUpUser(userRegisterInfo)
-    this.errorMessage = UserStore.requestErrorDetail;
+    this.errorMessage = UserStore.requestErrorDetail
     this.showError = UserStore.requestError
+    if (!this.showError) {
+      RouterStore.push('/note-space')
+    }
     UserStore.resetErrors()
   }
 }
