@@ -28,6 +28,11 @@ export class NoteState {
   }
 
   @action
+  deselectNote = () => {
+    this.note = undefined
+  }
+
+  @action
   fetchNote = async (id: string) => {
     this.isLoading = true
     try {

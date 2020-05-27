@@ -16,6 +16,9 @@ class FileMenuItemSettings extends React.Component<IFileMenuSettingsItem> {
   state = this.context
   deleteNote = () => {
     this.state.noteState.deleteNoteById(this.props.note.id)
+    if (this.props.note.id === this.state.noteState.note.id) {
+      this.state.noteState.deselectNote()
+    }
   }
   render() {
     return (
