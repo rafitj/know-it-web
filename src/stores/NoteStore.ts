@@ -5,6 +5,7 @@ import {
   NoteResponse,
   UpdateNoteRequest,
 } from 'network/proto/protos'
+import { FolderState } from './FolderStore'
 
 export class NoteState {
   @observable
@@ -18,6 +19,13 @@ export class NoteState {
 
   @observable
   requestErrorDetail?: string
+
+  @observable
+  folderState: FolderState
+
+  constructor(folderState: FolderState) {
+    this.folderState = folderState
+  }
 
   @action
   fetchNote = async (id: string) => {
@@ -36,7 +44,7 @@ export class NoteState {
     this.isLoading = true
     try {
       this.note = await Api.createNote(payload)
-      // await FolderStore.fetchFolders()
+      await this.folderState.fetchFolders()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to create note.'
@@ -49,7 +57,7 @@ export class NoteState {
     this.isLoading = true
     try {
       this.note = await Api.updateNote(payload)
-      // await FolderStore.fetchFolders()
+      await this.folderState.fetchFolders()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to update note.'
@@ -62,7 +70,7 @@ export class NoteState {
     this.isLoading = true
     try {
       await Api.deleteNoteById(id)
-      // await FolderStore.fetchFolders()
+      await this.folderState.fetchFolders()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to delete note.'

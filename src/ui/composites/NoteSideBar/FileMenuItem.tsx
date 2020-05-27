@@ -64,7 +64,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
     this.setState({ editTitleMode: true })
   }
 
-  setNewNoteTitle = (e: any) => {
+  setNewNoteTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ newNoteTitle: e.target.value })
   }
 
@@ -80,26 +80,33 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
       }
     }
 
-    const updateNoteTitle = () => {
-      noteState.updateNoteById({
+    const updateNoteTitle = async () => {
+      await noteState.updateNoteById({
         id: this.props.note.id,
         title: this.state.newNoteTitle,
       })
+      this.setState({ editTitleMode: false })
     }
 
     return (
-      <Box onClick={setNoteViewById}>
+      <Box>
         <StyledMenuItem key={this.props.note.id} {...this.props}>
           <Flex justifyContent="space-between" alignItems="center">
             <Box
               width={11 / 12}
               style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+              onClick={setNoteViewById}
             >
               {this.state.editTitleMode ? (
                 <StyledInput
                   autoFocus={true}
                   value={this.state.newNoteTitle}
                   onChange={this.setNewNoteTitle}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      updateNoteTitle()
+                    }
+                  }}
                   onBlur={updateNoteTitle}
                 />
               ) : (
