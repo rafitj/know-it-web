@@ -80,6 +80,13 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
       }
     }
 
+    const updateNoteTitle = () => {
+      noteState.updateNoteById({
+        id: this.props.note.id,
+        title: this.state.newNoteTitle,
+      })
+    }
+
     return (
       <Box onClick={setNoteViewById}>
         <StyledMenuItem key={this.props.note.id} {...this.props}>
@@ -90,8 +97,10 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
             >
               {this.state.editTitleMode ? (
                 <StyledInput
+                  autoFocus={true}
                   value={this.state.newNoteTitle}
                   onChange={this.setNewNoteTitle}
+                  onBlur={updateNoteTitle}
                 />
               ) : (
                 this.props.note.title
