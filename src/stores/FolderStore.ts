@@ -21,7 +21,7 @@ export class FolderState {
   requestErrorDetail?: string
 
   @action
-  async fetchFolders() {
+  fetchFolders = async () => {
     this.isLoading = true
     try {
       this.folders = await Api.fetchFoldersWithNotes()
@@ -33,9 +33,9 @@ export class FolderState {
   }
 
   @action
-  async createFolder(
+  createFolder = async (
     newFolder: CreateFolderRequest
-  ): Promise<FolderResponse | void> {
+  ): Promise<FolderResponse | void> => {
     this.isLoading = true
     try {
       return await Api.createFolder(newFolder)
@@ -47,7 +47,7 @@ export class FolderState {
   }
 
   @action
-  async updateFolder(folder: UpdateFolderRequest) {
+  updateFolder = async (folder: UpdateFolderRequest) => {
     this.isLoading = true
     try {
       await Api.updateFolder(folder)
@@ -60,7 +60,7 @@ export class FolderState {
   }
 
   @action
-  async deleteFolder(folderId: string) {
+  deleteFolder = async (folderId: string) => {
     this.isLoading = true
     try {
       await Api.deleteFolder(folderId)
@@ -73,7 +73,7 @@ export class FolderState {
   }
 
   @action
-  resetErrors(): void {
+  resetErrors = async (): Promise<void> => {
     this.requestError = false
     this.requestErrorDetail = undefined
   }
