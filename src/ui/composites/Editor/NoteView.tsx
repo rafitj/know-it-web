@@ -1,11 +1,11 @@
 import { PageHeader, Tag } from 'antd'
 import { observer } from 'mobx-react'
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 import { Line } from 'ui/components/Line'
 import { Editor } from '.'
-import { GetFolderWithNotesResponse } from '../../../network/proto/protos';
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
+import { GetFolderWithNotesResponse } from '../../../network/proto/protos'
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
 
 const StyledPageHeader = styled(PageHeader)`
   background-color: transparent;
@@ -23,8 +23,8 @@ class NoteView extends React.Component {
   state = this.context
 
   render() {
-    const { note } = this.state.noteState;
-    const { folders } = this.state.folderState;
+    const { note } = this.state.noteState
+    const { folders } = this.state.folderState
 
     return (
       <>
@@ -41,7 +41,8 @@ class NoteView extends React.Component {
           title={note?.title}
           subTitle={
             folders.find(
-              (folder: GetFolderWithNotesResponse) => folder.id === note?.folderId
+              (folder: GetFolderWithNotesResponse) =>
+                folder.id === note?.folderId
             )?.title
           }
         />

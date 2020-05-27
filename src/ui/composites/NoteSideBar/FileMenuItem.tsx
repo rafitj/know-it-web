@@ -3,13 +3,13 @@ import 'antd/dist/antd.css'
 import { MenuItemProps } from 'antd/lib/menu/MenuItem'
 import { observer } from 'mobx-react'
 import { BriefNoteDescriptionResponse } from 'network/proto/protos'
-import React from 'react';
+import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { Download, Edit, IconWrap, Settings, Trash } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
-import { NoteSpaceContext } from './NoteSpaceContext';
+import { NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFileMenuItem {
   note: BriefNoteDescriptionResponse
@@ -59,13 +59,11 @@ const PopoverContent = (
 )
 
 @observer
-class FileMenuItem extends React.Component<
-  IFileMenuItem & MenuItemProps
-> {
+class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
   state = this.context
 
   render() {
-    const { noteState } = this.state;
+    const { noteState } = this.state
 
     const selected = noteState.note && noteState.note.id === this.props.note.id
     const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
@@ -100,4 +98,3 @@ class FileMenuItem extends React.Component<
 FileMenuItem.contextType = NoteSpaceContext
 
 export { FileMenuItem }
-

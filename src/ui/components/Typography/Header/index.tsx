@@ -14,8 +14,8 @@ const StyledHeader = styled(Text)<HeaderProps>`
   margin: 16px;
 `
 
-export const Header = ({ children: text, color }: HeaderProps) => (
+export const Header = ({ children: text, color: textColor }: HeaderProps) => (
   <Typography>
-    <StyledHeader color={color}>{text}</StyledHeader>
+    <StyledHeader color={textColor}>{text}</StyledHeader>
   </Typography>
 )

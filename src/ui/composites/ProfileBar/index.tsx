@@ -2,11 +2,11 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
 
 const { Sider } = Layout
 

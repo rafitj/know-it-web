@@ -1,7 +1,11 @@
-import { action, observable } from 'mobx';
-import { GetUserDetailsResponse, LogInUserRequest, SignUpUserRequest } from 'network/proto/protos';
-import { Api } from '../network/api/api';
-import { PersistenceKey, PersistenceStore } from './PersistenceStore';
+import { action, observable } from 'mobx'
+import {
+  GetUserDetailsResponse,
+  LogInUserRequest,
+  SignUpUserRequest,
+} from 'network/proto/protos'
+import { Api } from '../network/api/api'
+import { PersistenceKey, PersistenceStore } from './PersistenceStore'
 
 class UserStore {
   @observable

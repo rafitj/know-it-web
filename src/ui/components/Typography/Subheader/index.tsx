@@ -14,8 +14,11 @@ const StyledSubHeader = styled(Text)<SubHeaderProps>`
   font-weight: bold;
 `
 
-export const SubHeader = ({ children: text, color }: SubHeaderProps) => (
+export const SubHeader = ({
+  children: text,
+  color: textColor,
+}: SubHeaderProps) => (
   <Typography>
-    <StyledSubHeader color={color}>{text}</StyledSubHeader>
+    <StyledSubHeader color={textColor}>{text}</StyledSubHeader>
   </Typography>
 )

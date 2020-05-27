@@ -1,86 +1,87 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint-eslint-rules",
-        "tslint:latest",
-        "tslint-react",
-        "tslint-config-prettier"
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint-eslint-rules",
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+    "arrow-parens": false,
+    "arrow-return-shorthand": [false],
+    "comment-format": [true, "check-space"],
+    "import-blacklist": [true],
+    "interface-over-type-literal": false,
+    "interface-name": false,
+    "max-line-length": [true, 120],
+    "member-access": false,
+    "member-ordering": [true, { "order": "fields-first" }],
+    "newline-before-return": false,
+    "no-any": true,
+    "no-empty-interface": false,
+    "no-import-side-effect": [false],
+    "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
+    "no-invalid-this": [true, "check-function-in-method"],
+    "no-namespace": false,
+    "no-null-keyword": false,
+    "no-require-imports": false,
+    "no-submodule-imports": [false],
+    "no-implicit-dependencies": [false],
+    "no-this-assignment": [true, { "allow-destructuring": true }],
+    "no-trailing-whitespace": true,
+    "object-literal-sort-keys": false,
+    "object-literal-shorthand": false,
+    "one-variable-per-declaration": [false],
+    "only-arrow-functions": [true, "allow-declarations"],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "case-insensitive",
+        "named-imports-order": "lowercase-last"
+      }
     ],
-    "jsRules": {},
-    "rules": {
-        "arrow-parens": false,
-        "arrow-return-shorthand": [false],
-        "comment-format": [true, "check-space"],
-        "import-blacklist": [true],
-        "interface-over-type-literal": false,
-        "interface-name": false,
-        "max-line-length": [true, 120],
-        "member-access": false,
-        "member-ordering": [true, { "order": "fields-first" }],
-        "newline-before-return": false,
-        "no-any": true,
-        "no-empty-interface": false,
-        "no-import-side-effect": [true],
-        "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
-        "no-invalid-this": [true, "check-function-in-method"],
-        "no-namespace": false,
-        "no-null-keyword": false,
-        "no-require-imports": false,
-        "no-submodule-imports": [false],
-        "no-implicit-dependencies": [false],
-        "no-this-assignment": [true, { "allow-destructuring": true }],
-        "no-trailing-whitespace": true,
-        "object-literal-sort-keys": false,
-        "object-literal-shorthand": false,
-        "one-variable-per-declaration": [false],
-        "only-arrow-functions": [true, "allow-declarations"],
-        "ordered-imports": [
-            true,
-            {
-                "import-sources-order": "case-insensitive",
-                "named-imports-order": "lowercase-last"
-            }
-        ],
-        "prefer-method-signature": false,
-        "prefer-template": [true, "allow-single-concat"],
-        "quotemark": [true, "single", "jsx-double", "avoid-escape"],
-        "sort-imports": [2, {
-            "ignoreCase": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-        }],
-        "trailing-comma": [
-            true,
-            {
-                "singleline": "never",
-                "multiline": {
-                    "objects": "always",
-                    "arrays": "always",
-                    "functions": "ignore",
-                    "typeLiterals": "ignore"
-                },
-                "esSpecCompliant": true
-            }
-        ],
-        "triple-equals": [true, "allow-null-check"],
-        "type-literal-delimiter": false,
-        "typedef": [true, "parameter", "property-declaration"],
-        "variable-name": [
-            true,
-            "ban-keywords",
-            "check-format",
-            "allow-pascal-case",
-            "allow-leading-underscore"
-        ],
-        "no-console": [true, "log"],
-        "object-curly-spacing": true,
-        "array-bracket-spacing": [true, "never"],
-        "no-unexpected-multiline": true,
-        "jsx-no-multiline-js": false,
-        "jsx-no-lambda": false
-    },
-    "rulesDirectory": [],
-    "exclude": [
-        "**/*.stories.mdx"
-    ]
+    "prefer-method-signature": false,
+    "prefer-template": [true, "allow-single-concat"],
+    "quotemark": [true, "single", "jsx-double", "avoid-escape"],
+    "sort-imports": [
+      2,
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "singleline": "never",
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "ignore",
+          "typeLiterals": "ignore"
+        },
+        "esSpecCompliant": true
+      }
+    ],
+    "triple-equals": [true, "allow-null-check"],
+    "type-literal-delimiter": false,
+    "typedef": [true, "parameter", "property-declaration"],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ],
+    "no-console": [true, "log"],
+    "object-curly-spacing": true,
+    "array-bracket-spacing": [true, "never"],
+    "no-unexpected-multiline": true,
+    "jsx-no-multiline-js": false,
+    "jsx-no-lambda": false
+  },
+  "rulesDirectory": [],
+  "exclude": ["**/*.stories.mdx"]
 }

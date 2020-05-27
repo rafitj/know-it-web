@@ -1,11 +1,11 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { AuthForm } from 'ui/composites/AuthForm'
-import { LoginState } from './LoginState';
-import { observer } from 'mobx-react';
+import { LoginState } from './LoginState'
 
 @observer
 export class LoginForm extends React.Component {
-  state = new LoginState();
+  state = new LoginState()
 
   render() {
     return (
@@ -24,6 +24,6 @@ export class LoginForm extends React.Component {
         closeError={this.state.closeError}
         errorMessage={this.state.errorMessage}
       />
-    );
+    )
   }
 }
