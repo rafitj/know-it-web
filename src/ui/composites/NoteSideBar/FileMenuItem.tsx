@@ -4,11 +4,12 @@ import { MenuItemProps } from 'antd/lib/menu/MenuItem'
 import { observer } from 'mobx-react'
 import { BriefNoteDescriptionResponse } from 'network/proto/protos'
 import React from 'react'
+import { Settings } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
-import { Download, Edit, IconWrap, Settings, Trash } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
+import { FileMenuItemSettings } from './FileSettings'
 import { NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFileMenuItem {
@@ -43,27 +44,32 @@ const StyledBadge = styled(Badge)`
     box-shadow: 0 0 0 1px #d9d9d9 inset;
   }
 `
-
-const PopoverContent = (
-  <Flex flexDirection="row">
-    <IconWrap mx={1} height={25} bgcolor="blue">
-      <Edit size={15} />
-    </IconWrap>
-    <IconWrap mx={1} height={25} bgcolor="purple">
-      <Download size={15} />
-    </IconWrap>
-    <IconWrap mx={1} height={25} bgcolor="red">
-      <Trash size={15} />
-    </IconWrap>
-  </Flex>
-)
+const StyledInput = styled.input`
+  background-color: transparent;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+`
 
 @observer
 class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
-  state = this.context
+  state = {
+    context: this.context,
+    newNoteTitle: this.props.note.title,
+    editTitleMode: false,
+  }
+
+  editTitle = () => {
+    this.setState({ editTitleMode: true })
+  }
+
+  setNewNoteTitle = (e: any) => {
+    this.setState({ newNoteTitle: e.target.value })
+  }
 
   render() {
-    const { noteState } = this.state
+    const { noteState } = this.state.context
 
     const selected = noteState.note && noteState.note.id === this.props.note.id
     const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
@@ -82,10 +88,26 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
               width={11 / 12}
               style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
             >
-              {this.props.note.title}
+              {this.state.editTitleMode ? (
+                <StyledInput
+                  value={this.state.newNoteTitle}
+                  onChange={this.setNewNoteTitle}
+                />
+              ) : (
+                this.props.note.title
+              )}
             </Box>
             {selected && <StyledBadge count={1} />}
-            <Popover placement="right" content={PopoverContent} trigger="click">
+            <Popover
+              placement="right"
+              content={() => (
+                <FileMenuItemSettings
+                  note={this.props.note}
+                  editTitle={this.editTitle}
+                />
+              )}
+              trigger="hover"
+            >
               <Settings size={15} style={{ marginRight: 3 }} />
             </Popover>
           </Flex>
