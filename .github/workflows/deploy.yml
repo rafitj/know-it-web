@@ -1,11 +1,12 @@
-name: PR Check
+name: Deploy
+
 on:
   push:
     branches:
-      - '*'
-      - '!master'
+      - master
+
 jobs:
-  pr-checks:
+  check-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +20,14 @@ jobs:
         run: npm run format-check
       - name: Typecheck
         run: npm run typecheck
-      - name: Lint check
+      - name: Lint Check
         run: npm run lint
       - name: Test Build
         run: npm run build --if-present
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.0.4 
+      - name: Deploy to Heroku
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: know-it-web
+          heroku_email: rafit.jamil@gmail.com
