@@ -1,24 +1,21 @@
-import { API as EditorAPI, OutputData } from '@editorjs/editorjs'
-import { observer } from 'mobx-react'
-import React from 'react'
-import EditorJs from 'react-editor-js'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
-import './editor.css'
-import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
+import { API as EditorAPI, OutputData } from '@editorjs/editorjs';
+import { observer } from 'mobx-react';
+import React from 'react';
+import EditorJs from 'react-editor-js';
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
+import './editor.css';
+import { defaultData, EDITOR_TOOLS } from './Tools/EditorTools';
 
 @observer
 class Editor extends React.Component {
   state = this.context
 
-  async onEdit(api: EditorAPI) {
-    const { note, updateNoteById } = this.state.noteState
-    const { editorInstance } = this.state.noteViewState
-
-    if (editorInstance && note) {
-      const savedData = await editorInstance.save()
-      updateNoteById({
-        id: note?.id!,
-        title: note?.title!,
+  onEdit = async (api: EditorAPI) => {
+    if (this.state.noteViewState.editorInstance && this.state.noteState.note) {
+      const savedData = await this.state.noteViewState.editorInstance.save()
+      this.state.noteState.updateNoteById({
+        id: this.state.noteState.note?.id!,
+        title: this.state.noteState.note?.title!,
         contents: JSON.stringify(savedData),
       })
     }
@@ -38,20 +35,17 @@ class Editor extends React.Component {
     const data = note?.contents
       ? (JSON.parse(note.contents) as OutputData)
       : defaultData(0)
-    const { setEditorInstance } = this.state.noteViewState
 
     return (
       <EditorJs
         instanceRef={async (instance) => {
           await instance.isReady
-          setEditorInstance(instance)
+          this.state.noteViewState.setEditorInstance(instance)
         }}
         tools={EDITOR_TOOLS}
         data={data}
         autofocus={true}
-        onChange={(api) => {
-          this.onEdit(api)
-        }}
+        onChange={(api) => this.onEdit(api)}
       />
     )
   }
