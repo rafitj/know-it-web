@@ -22,6 +22,7 @@ export class LoginForm extends React.Component {
         emailClick={this.state.attemptLogin}
         showError={this.state.showError}
         closeError={this.state.closeError}
+        errorMessage={this.state.errorMessage}
       />
     );
   }

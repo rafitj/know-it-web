@@ -29,6 +29,7 @@ export interface IAuthForm {
   emailClick: () => void
   showError?: boolean
   closeError: () => void
+  errorMessage?: string;
 }
 
 const StyledAlert = styled(Alert)`
@@ -95,8 +96,7 @@ export class AuthForm extends React.Component<IAuthForm> {
                     <Box mt={3}>
                       <StyledAlert
                         message=""
-                        description="Bro wtf are you doing?"
-                        type="error"
+                        description={this.props.errorMessage}
                         closable={true}
                         onClose={this.props.closeError}
                       />

@@ -33,13 +33,20 @@ export class Nav extends React.Component {
               <HighlightText highlight="green">Pricing</HighlightText>
             </Box>
             {UserStore.isSignedIn ? (
-              <Box mx={3}>
-                <Link to="/note-space">
-                  <HighlightedText highlight="black">
-                    Note Space
-                  </HighlightedText>
-                </Link>
-              </Box>
+              <>
+                <Box mx={3}>
+                  <Link to="/note-space">
+                    <HighlightedText highlight="black">
+                      Note Space
+                    </HighlightedText>
+                  </Link>
+                </Box>
+                <Box mx={3}>
+                  <Link to="/" onClick={() => UserStore.logout()}>
+                    <HighlightedText highlight="black">Sign Out</HighlightedText>
+                  </Link>
+                </Box>
+              </>
             ) : (
               <>
                 <Box mx={3}>
