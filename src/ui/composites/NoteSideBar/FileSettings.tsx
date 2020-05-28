@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { BriefNoteDescriptionResponse } from 'network/proto/protos'
 import React from 'react'
 import { Flex } from 'reflexbox'
-import { Download, Edit, IconWrap, Trash } from 'ui/base/Icons'
+import { Edit, IconWrap, Trash } from 'ui/base/Icons'
 import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFileMenuSettingsItem {
@@ -27,14 +27,22 @@ class FileMenuItemSettings extends React.Component<IFileMenuSettingsItem> {
           mx={1}
           height={25}
           bgcolor="blue"
-          onClick={this.props.editTitle}
+          onClick={(e) => {
+            e.stopPropagation()
+            this.props.editTitle()
+          }}
         >
           <Edit size={15} />
         </IconWrap>
-        <IconWrap mx={1} height={25} bgcolor="purple">
-          <Download size={15} />
-        </IconWrap>
-        <IconWrap mx={1} height={25} bgcolor="red" onClick={this.deleteNote}>
+        <IconWrap
+          mx={1}
+          height={25}
+          bgcolor="red"
+          onClick={(e) => {
+            e.stopPropagation()
+            this.deleteNote()
+          }}
+        >
           <Trash size={15} />
         </IconWrap>
       </Flex>

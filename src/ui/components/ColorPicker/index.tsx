@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Droplet, IconWrap } from 'ui/base/Icons'
 import { Menu, MenuItem } from 'ui/base/Menu'
-import { colors } from 'ui/base/theme'
+import { color, colors } from 'ui/base/theme'
 
 const ColorItem = styled(MenuItem)`
   width: 15px;
@@ -13,21 +13,41 @@ const ColorItem = styled(MenuItem)`
   border-radius: 3px;
 `
 
-const ColorMenu = (
-  <Menu>
-    <ColorItem key="0" style={{ background: colors.red }} />
-    <ColorItem key="1" style={{ background: colors.blue }} />
-    <ColorItem key="2" style={{ background: colors.green }} />
-    <ColorItem key="3" style={{ background: colors.yellow }} />
-    <ColorItem key="4" style={{ background: colors.purple }} />
-  </Menu>
-)
-export const ColorPicker = () => {
-  return (
-    <Dropdown overlay={ColorMenu} trigger={['click']}>
-      <IconWrap bgcolor="green" size={25}>
-        <Droplet size={15} />
-      </IconWrap>
-    </Dropdown>
-  )
+interface IColorPicker {
+  color: color
+  setColor: (color: color) => void
+}
+
+export class ColorPicker extends React.Component<IColorPicker> {
+  render() {
+    const createColorItems = (c: color) => (
+      <ColorItem
+        style={{ background: colors[c] }}
+        onClick={(e) => {
+          e.domEvent.stopPropagation()
+          this.props.setColor(c)
+        }}
+      />
+    )
+    const ColorMenu = (
+      <Menu>
+        {['red', 'green', 'blue', 'purple', 'yellow'].map((c) =>
+          createColorItems(c as color)
+        )}
+      </Menu>
+    )
+    return (
+      <Dropdown overlay={ColorMenu} trigger={['click']}>
+        <IconWrap
+          bgcolor={this.props.color}
+          size={25}
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+        >
+          <Droplet size={15} />
+        </IconWrap>
+      </Dropdown>
+    )
+  }
 }
