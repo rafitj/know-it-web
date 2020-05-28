@@ -50,7 +50,7 @@ class NoteView extends React.Component {
           }
         />
         <Line />
-        <Editor />
+        <Editor note={note} />
       </>
     )
   }

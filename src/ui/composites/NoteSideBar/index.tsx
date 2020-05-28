@@ -8,7 +8,7 @@ import { colors } from 'ui/base/theme'
 import { Line } from 'ui/components/Line'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { MiniFolderMenu } from './MiniFolderMenu'
-import { NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
 
@@ -29,7 +29,7 @@ const StyledSider = styled(Sider)`
 
 @observer
 class NoteSideBar extends React.Component {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   render() {
     const { leftCollapsed, collapseLeft } = this.state.noteViewState

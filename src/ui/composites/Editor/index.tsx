@@ -2,22 +2,26 @@ import { API as EditorAPI, OutputData } from '@editorjs/editorjs'
 import { observer } from 'mobx-react'
 import React from 'react'
 import EditorJs from 'react-editor-js'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
+import { NoteResponse } from '../../../network/proto/protos'
+import {
+  INoteSpaceState,
+  NoteSpaceContext,
+} from '../NoteSideBar/NoteSpaceContext'
 import './editor.css'
 import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
 
 @observer
-class Editor extends React.Component {
-  state = this.context
+class Editor extends React.Component<{ note?: NoteResponse }> {
+  state = this.context as INoteSpaceState
 
   onEdit = async (api: EditorAPI) => {
     const {
-      noteState,
+      noteState: { updateNoteById },
       noteViewState: { editorInstance },
     } = this.state
-    if (editorInstance && noteState.note) {
+    if (editorInstance && this.props.note) {
       const savedData = await editorInstance.save()
-      await noteState.updateNoteById({
+      await updateNoteById({
         id: this.state.noteState.note?.id!,
         title: this.state.noteState.note?.title!,
         contents: JSON.stringify(savedData),
@@ -25,12 +29,15 @@ class Editor extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const { editorInstance } = this.state.noteViewState
-
-    if (editorInstance?.blocks) {
-      editorInstance?.blocks.clear()
-      editorInstance?.blocks.render(defaultData(0))
+  componentDidUpdate(prevProps: { note?: NoteResponse }) {
+    if (prevProps.note?.id !== this.props.note?.id) {
+      const { editorInstance } = this.state.noteViewState
+      const noteContents = this.state.noteState.note?.contents
+      const contents = noteContents ? JSON.parse(noteContents) : defaultData(0)
+      if (editorInstance?.blocks) {
+        editorInstance?.blocks.clear()
+        editorInstance?.blocks.render(contents)
+      }
     }
   }
 
@@ -42,7 +49,6 @@ class Editor extends React.Component {
     const data = note?.contents
       ? (JSON.parse(note.contents) as OutputData)
       : defaultData(0)
-
     return (
       <EditorJs
         instanceRef={async (instance) => {
