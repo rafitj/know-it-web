@@ -10,7 +10,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
+import {
+  INoteSpaceState,
+  NoteSpaceContext,
+} from '../NoteSideBar/NoteSpaceContext'
 import { NoteTool } from './NoteTool'
 import { NoteUtilsState } from './NoteUtilsState'
 
@@ -45,7 +48,7 @@ const StyledMenu = styled(Menu)`
 class NoteUtilsSideBar extends React.Component {
   state = {
     utils: new NoteUtilsState(this.context.noteViewState),
-    context: this.context,
+    context: this.context as INoteSpaceState,
   }
 
   render() {

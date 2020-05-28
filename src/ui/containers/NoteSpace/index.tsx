@@ -5,13 +5,16 @@ import { colors } from 'ui/base/theme'
 import { NoteUtilsSideBar } from 'ui/composites/NoteUtilsSideBar'
 import { ProfileBar } from 'ui/composites/ProfileBar'
 import { NoteSideBar } from '../../composites/NoteSideBar'
-import { NoteSpaceContext } from '../../composites/NoteSideBar/NoteSpaceContext'
+import {
+  INoteSpaceState,
+  NoteSpaceContext,
+} from '../../composites/NoteSideBar/NoteSpaceContext'
 import { NoteEditor } from './NoteEditor'
 const { Content } = Layout
 
 @observer
 export class NoteSpace extends React.Component {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   fetchFolders = async () => {
     await this.state.folderState.fetchFolders()

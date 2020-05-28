@@ -8,11 +8,11 @@ import {
   GetFolderWithNotesResponse,
 } from '../../../network/proto/protos'
 import { Menu, MenuItem } from '../../base/Menu'
-import { NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 @observer
 class MiniFolderMenu extends React.Component {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   render() {
     const folderId = this.state.noteState.note?.folderId

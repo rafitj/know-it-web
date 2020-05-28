@@ -9,11 +9,11 @@ import { colors } from 'ui/base/theme'
 import { Menu } from '../../base/Menu'
 import { FolderSubMenu } from './FolderSubMenu'
 import { NewFolder } from './NewFolder'
-import { NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 @observer
 class FileDirectoryMenu extends React.Component {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   render() {
     const { noteViewState, folderState } = this.state

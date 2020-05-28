@@ -6,7 +6,7 @@ import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
-import { NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 const LineInput = styled(Input)`
   &.ant-input {
@@ -21,7 +21,7 @@ const LineInput = styled(Input)`
 class NewFolder extends React.Component {
   state = {
     newFolderName: '',
-    context: this.context,
+    context: this.context as INoteSpaceState,
   }
 
   // tslint:disable-next-line:no-any
