@@ -24,13 +24,8 @@ export class Qablock {
     const qatitle = document.createElement('div')
     qatitle.classList.add('qa-title')
 
-    const qatitlelabel = document.createElement('span')
-    qatitlelabel.classList.add('qa-title-label')
-    qatitlelabel.textContent = 'Q/A'
-    qatitle.append(qatitlelabel)
-
     const qatitleinput = document.createElement('div')
-    qatitleinput.contentEditable = 'true'
+    qatitleinput.textContent = 'Question + Answer'
     qatitleinput.classList.add('qa-title-input')
     qatitle.append(qatitleinput)
     qatitleinput.id = 'qa-title'

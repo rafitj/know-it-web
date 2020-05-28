@@ -1,15 +1,15 @@
 * {
-    font-family: Arial;
+  font-family: Arial;
 }
 
 .codex-editor__redactor {
-    padding: 0 !important;
-    padding-bottom: 2rem !important;
+  padding: 0 !important;
+  padding-bottom: 2rem !important;
 }
 
 .ce-block__content {
-    margin: 0 2rem;
-    max-width: none;
+  margin: 0 2rem;
+  max-width: none;
 }
 
 ::-webkit-scrollbar {
@@ -18,33 +18,32 @@
 }
 
 .codex-editor {
-    margin-top: 0;
-    text-align: left;
-    max-height: 80vh;
-    overflow-y: scroll;
-}
-
-.ce-toolbar__actions {
-    background-color: red;
+  margin-top: 0;
+  text-align: left;
+  overflow-y: scroll;
 }
 
 .ce-settings {
-    min-width: 0;
+  min-width: 0;
 }
 
 .ce-toolbar__plus {
-    left: -25px;
+  left: -25px;
 }
 
 .ce-toolbar {
-    right: auto;
-    left: 25px;
+  right: auto;
+  left: 25px;
 }
 
 .ce-toolbox {
-    background-color: white;
+  background-color: white;
 }
 
 .ant-layout-has-sider {
-    background-color: transparent !important;
+  background-color: transparent !important;
+}
+
+.ce-toolbar__actions {
+  display: none;
 }

@@ -27,14 +27,9 @@ const StyledSubMenu = styled(AntDSubMenu)<ISubMenuProps>`
   .ant-menu-submenu-title {
     transition: all 0.2s ease;
     ${(props) =>
-      props.highlight
-        ? 'border-left: 4px solid' + colors[props.highlight]
-        : ''};
-    ${(props) =>
       props.selected
         ? `background-color: ${colors.darkBlack} !important;`
         : ''};
-    ${(props) => (props.selected ? `border-left-width: 8px;` : '')};
   }
 
   &.ant-menu-submenu-active {
@@ -45,6 +40,9 @@ const StyledSubMenu = styled(AntDSubMenu)<ISubMenuProps>`
   .ant-submenu-pop {
     background-color: red;
   }
+  ${(props) =>
+    props.highlight ? 'border-left: 4px solid' + colors[props.highlight] : ''};
+  ${(props) => (props.selected ? `border-left-width: 8px;` : '')};
 `
 
 export const SubMenu = ({

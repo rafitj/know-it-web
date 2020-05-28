@@ -1,0 +1,12 @@
+.ant-popover-inner {
+  border-radius: 5px;
+  border: 2px solid #1c1c1c;
+  box-shadow: 4px 4px rgb(0, 0, 0, 0.2);
+}
+.ant-popover-placement-right {
+  padding: 20px;
+}
+
+.ant-popover-arrow {
+  display: none;
+}

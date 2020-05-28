@@ -14,6 +14,7 @@ import { FileMenuItem } from './FileMenuItem'
 import { FolderMenuSettings } from './FolderSettings'
 import { NewFile } from './NewFile'
 import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import './popover.css'
 
 export interface IFolderSubMenu {
   folder: GetFolderWithNotesResponse
@@ -22,6 +23,7 @@ export interface IFolderSubMenu {
 const SubMenuTitle = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: normal;
 `
 
 const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`
@@ -39,7 +41,6 @@ const StyledInput = styled.input`
   }
   padding: 0;
   margin: 0;
-  font-weight: bold;
 `
 
 @observer

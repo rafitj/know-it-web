@@ -13,17 +13,19 @@ import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
 
 const StyledSider = styled(Sider)`
+  .ant-layout-sider-children {
+    overflow: hidden;
+  }
   background-color: ${colors.black};
   .ant-layout-sider-trigger {
     background-color: ${colors.black};
-    margin-bottom: 30px;
+    bottom: 5%;
   }
   border-radius: 10px;
-  margin: 25px 35px;
-  height: 96vh;
+  margin: 20px;
+  height: 95%;
   position: fixed;
   left: 0;
-  box-shadow: ${`5px 5px ${colors.grey}`};
   overflow: auto;
 `
 

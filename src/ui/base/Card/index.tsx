@@ -11,6 +11,7 @@ export interface ICardProps extends AntDCardProps {
   width?: string
   height?: string
   block?: boolean
+  noShadow?: boolean
 }
 
 const CardContainer = styled.div<ICardProps>`
@@ -19,7 +20,7 @@ const CardContainer = styled.div<ICardProps>`
     font-family: Arial;
     border-radius: 8px;
     border: ${`2px solid ${colors.black}`};
-    box-shadow: ${`5px 5px ${colors.grey}`};
+    ${(props) => !props.noShadow && `box-shadow: ${`5px 5px ${colors.grey}`};`}
     text-align: ${(props) => props.textAlign};
     background-color: ${(props) =>
       props.invert ? colors.black : colors.white};
@@ -36,6 +37,7 @@ export const Card = ({
   textAlign,
   invert,
   block,
+  noShadow,
   ...antdprops
 }: ICardProps) => (
   <CardContainer
@@ -44,6 +46,7 @@ export const Card = ({
     height={height}
     textAlign={textAlign}
     block={block}
+    noShadow={noShadow}
   >
     <AntDCard {...antdprops}>{children}</AntDCard>
   </CardContainer>
