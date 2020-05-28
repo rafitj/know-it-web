@@ -58,7 +58,10 @@ class NewFile extends React.Component {
             onKeyDown={(e) => {
               this.addFile(e)
             }}
-            onBlur={this.addFile}
+            onBlur={() => {
+              this.addFile()
+              noteViewState.setAddFileMode(false)
+            }}
           />
         </Box>
         <IconWrap width={1 / 12} pl={2} onClick={this.addFile}>

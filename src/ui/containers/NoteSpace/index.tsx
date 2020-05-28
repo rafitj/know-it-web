@@ -34,14 +34,14 @@ export class NoteSpace extends React.Component {
           style={{
             transition: 'all 0.25s ease',
             backgroundColor: colors.white,
-            marginLeft: leftCollapsed ? '110px' : '310px',
-            marginRight: rightCollapsed ? '110px' : '310px',
+            marginLeft: leftCollapsed ? '100px' : '300px',
+            marginRight: rightCollapsed ? '100px' : '300px',
           }}
         >
           <Content
             style={{
               backgroundColor: colors.white,
-              margin: '25px 50px 0',
+              margin: '20px',
             }}
           >
             <NoteEditor />
