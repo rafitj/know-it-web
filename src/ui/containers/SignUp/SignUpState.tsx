@@ -42,8 +42,7 @@ export class SignUpState {
   attemptRegister = async () => {
     const userRegisterInfo = {
       email: this.emailValue,
-      firstName: this.nameValue,
-      lastName: 'SMD',
+      name: this.nameValue,
       password: this.passwordValue,
     }
     await UserStore.signUpUser(userRegisterInfo)

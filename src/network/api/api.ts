@@ -10,10 +10,13 @@ import {
   SignUpUserRequest,
   UpdateFolderRequest,
   UpdateNoteRequest,
+  UserLoginResponse,
 } from 'network/proto/protos'
 import { UserStore } from 'stores/UserStore'
 
-const baseUrl = 'https://know-it-back-master-x3ikbzbziy.herokuapp.com/api/v1/'
+export const baseUrl =
+  'https://know-it-back-master-x3ikbzbziy.herokuapp.com/api/v1/'
+// export const baseUrl = 'http://localhost:8081/api/v1/'
 
 export class Api {
   static createRequest = <T, S>(
@@ -27,16 +30,12 @@ export class Api {
           url: `${baseUrl}${endpoint}`,
           method: requestType,
           headers: {
-            Authorization: (UserStore.user && UserStore.user.authToken) || '',
+            Authorization:
+              (UserStore.authToken && `Bearer ${UserStore.authToken}`) || '',
             'Content-Type': 'application/json',
           },
           data: payload || {},
         })
-
-        if (response.status !== 200) {
-          reject()
-        }
-
         resolve(response.data as S)
       } catch (e) {
         const {
@@ -47,7 +46,7 @@ export class Api {
     })
 
   static signUpUser = async (payload: SignUpUserRequest): Promise<void> => {
-    await Api.createRequest('users/sign-up', 'POST', payload)
+    await Api.createRequest('auth/signup', 'POST', payload)
   }
 
   static signInUser = async (
@@ -56,7 +55,15 @@ export class Api {
     const data = await Api.createRequest<
       LogInUserRequest,
       GetUserDetailsResponse
-    >('users/login', 'POST', payload)
+    >('auth/login', 'POST', payload)
+    return data
+  }
+
+  static fetchUser = async (): Promise<UserLoginResponse> => {
+    const data = await Api.createRequest<null, UserLoginResponse>(
+      'users/me',
+      'GET'
+    )
     return data
   }
 

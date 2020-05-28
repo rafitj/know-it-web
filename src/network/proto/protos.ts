@@ -6,7 +6,7 @@ export interface CreateFolderRequest {
 }
 
 export interface LogInUserRequest {
-  username: string
+  email: string
   password: string
 }
 
@@ -17,8 +17,7 @@ export interface CreateNoteRequest {
 
 export interface SignUpUserRequest {
   email: string
-  firstName: string
-  lastName: string
+  name: string
   password: string
 }
 
@@ -52,10 +51,6 @@ export interface GetFolderWithNotesResponse extends FolderResponse {
 }
 
 export interface GetUserDetailsResponse {
-  id: string
-  username: string
-  firstName: string
-  lastName: string
   authToken: string
 }
 
@@ -65,4 +60,13 @@ export interface NoteResponse {
   contents: string
   timeUpdated: Date
   folderId: string
+}
+
+export interface UserLoginResponse {
+  id: string
+  email: string
+  name: string
+  imageUrl: string
+  emailVerified: boolean
+  password: string
 }
