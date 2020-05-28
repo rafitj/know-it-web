@@ -33,7 +33,7 @@ export class LoginState {
   @action
   attemptLogin = async () => {
     const userRegisterInfo = {
-      username: this.emailValue,
+      email: this.emailValue,
       password: this.passwordValue,
     }
     await UserStore.loginUser(userRegisterInfo)
