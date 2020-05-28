@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
 import { FileMenuItemSettings } from './FileSettings'
-import { NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFileMenuItem {
   note: BriefNoteDescriptionResponse
@@ -55,7 +55,7 @@ const StyledInput = styled.input`
 @observer
 class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
   state = {
-    context: this.context,
+    context: this.context as INoteSpaceState,
     newNoteTitle: this.props.note.title,
     editTitleMode: false,
   }
@@ -74,9 +74,9 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
     const selected = noteState.note && noteState.note.id === this.props.note.id
     const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
 
-    const setNoteViewById = () => {
+    const setNoteViewById = async () => {
       if (this.props.note.id) {
-        noteState.fetchNote(this.props.note.id)
+        await noteState.fetchNote(this.props.note.id)
       }
     }
 
@@ -84,6 +84,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
       await noteState.updateNoteById({
         id: this.props.note.id,
         title: this.state.newNoteTitle,
+        contents: '',
       })
       this.setState({ editTitleMode: false })
     }

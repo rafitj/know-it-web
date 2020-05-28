@@ -3,11 +3,14 @@ import { observer } from 'mobx-react'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
+import {
+  INoteSpaceState,
+  NoteSpaceContext,
+} from '../NoteSideBar/NoteSpaceContext'
 
 @observer
 class UnselectedNoteView extends React.Component {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   makeTemplate = async () => {
     const { folderState, noteState } = this.state
