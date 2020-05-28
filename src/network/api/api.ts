@@ -4,16 +4,18 @@ import {
   CreateNoteRequest,
   FolderResponse,
   GetFolderWithNotesResponse,
-  GetUserDetailsResponse, LogInUserRequest,
+  GetUserDetailsResponse,
+  LogInUserRequest,
   NoteResponse,
   SignUpUserRequest,
   UpdateFolderRequest,
   UpdateNoteRequest,
   UserLoginResponse,
-} from 'network/proto/protos';
+} from 'network/proto/protos'
 import { UserStore } from 'stores/UserStore'
 
-export const baseUrl = 'https://know-it-back-master-x3ikbzbziy.herokuapp.com/api/v1/'
+export const baseUrl =
+  'https://know-it-back-master-x3ikbzbziy.herokuapp.com/api/v1/'
 // export const baseUrl = 'http://localhost:8081/api/v1/'
 
 export class Api {
@@ -28,7 +30,8 @@ export class Api {
           url: `${baseUrl}${endpoint}`,
           method: requestType,
           headers: {
-            Authorization: (UserStore.authToken && `Bearer ${UserStore.authToken}`) || '',
+            Authorization:
+              (UserStore.authToken && `Bearer ${UserStore.authToken}`) || '',
             'Content-Type': 'application/json',
           },
           data: payload || {},
@@ -57,10 +60,12 @@ export class Api {
   }
 
   static fetchUser = async (): Promise<UserLoginResponse> => {
-    const data = await Api.createRequest<null, UserLoginResponse>('users/me', 'GET')
+    const data = await Api.createRequest<null, UserLoginResponse>(
+      'users/me',
+      'GET'
+    )
     return data
   }
-
 
   static fetchNote = async (id: string): Promise<NoteResponse> => {
     const data = await Api.createRequest<null, NoteResponse>(

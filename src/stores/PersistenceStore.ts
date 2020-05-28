@@ -30,7 +30,7 @@ class PersistenceStore {
   }
 
   setItem<T>(key: PersistenceKey, data: string) {
-    localStorage.setItem(key.valueOf(), data )
+    localStorage.setItem(key.valueOf(), data)
   }
 
   clearItem(key: PersistenceKey) {

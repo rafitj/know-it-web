@@ -5,7 +5,7 @@ import { PersistenceStore } from 'stores/PersistenceStore'
 import { Home } from '../Home'
 import { Login } from '../Login'
 import { NoteSpace } from '../NoteSpace'
-import { OAuthRedirect } from '../OAuth/OAuthRedirect';
+import { OAuthRedirect } from '../OAuth/OAuthRedirect'
 import { RouterStore } from '../RouterStore'
 import { AuthRoute } from '../RouteTypes/AuthRoute'
 import { PrivateRoute } from '../RouteTypes/PrivateRoute'

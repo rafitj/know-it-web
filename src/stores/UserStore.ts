@@ -1,10 +1,11 @@
 import { action, observable } from 'mobx'
 import {
   LogInUserRequest,
-  SignUpUserRequest, UserLoginResponse,
-} from 'network/proto/protos';
+  SignUpUserRequest,
+  UserLoginResponse,
+} from 'network/proto/protos'
 import { Api } from '../network/api/api'
-import { RouterStore } from '../ui/containers/RouterStore';
+import { RouterStore } from '../ui/containers/RouterStore'
 import { PersistenceKey, PersistenceStore } from './PersistenceStore'
 
 class UserStore {
@@ -12,7 +13,7 @@ class UserStore {
   user?: UserLoginResponse
 
   @observable
-  authToken?: string;
+  authToken?: string
 
   @observable
   isLoading: boolean = false

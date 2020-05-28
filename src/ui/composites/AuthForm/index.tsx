@@ -12,7 +12,7 @@ import { SimpleInput } from 'ui/components/Input/SimpleInput'
 import { Line } from 'ui/components/Line'
 import { BigText } from 'ui/components/Typography/BigText'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
-import { baseUrl } from '../../../network/api/api';
+import { baseUrl } from '../../../network/api/api'
 import { colors } from '../../base/theme'
 
 export interface IAuthForm {

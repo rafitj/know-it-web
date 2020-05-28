@@ -63,10 +63,10 @@ export interface NoteResponse {
 }
 
 export interface UserLoginResponse {
-  id: string;
-  email: string;
-  name: string;
-  imageUrl: string;
-  emailVerified: boolean;
-  password: string;
+  id: string
+  email: string
+  name: string
+  imageUrl: string
+  emailVerified: boolean
+  password: string
 }
