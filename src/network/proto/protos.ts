@@ -61,3 +61,12 @@ export interface NoteResponse {
   timeUpdated: Date
   folderId: string
 }
+
+export interface UserLoginResponse {
+  id: string;
+  email: string;
+  name: string;
+  imageUrl: string;
+  emailVerified: boolean;
+  password: string;
+}

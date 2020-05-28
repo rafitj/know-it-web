@@ -12,6 +12,7 @@ import { SimpleInput } from 'ui/components/Input/SimpleInput'
 import { Line } from 'ui/components/Line'
 import { BigText } from 'ui/components/Typography/BigText'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
+import { baseUrl } from '../../../network/api/api';
 import { colors } from '../../base/theme'
 
 export interface IAuthForm {
@@ -109,6 +110,7 @@ export class AuthForm extends React.Component<IAuthForm> {
               <RedButton
                 icon={<Google />}
                 text={this.props.googleText}
+                href={`${baseUrl}oauth2/authorize/google?redirect_uri=http://localhost:3000/oauth2/authorize`}
                 block={true}
               />
             </Box>
