@@ -5,12 +5,12 @@ import {
   FolderResponse,
   GetFolderWithNotesResponse,
   GetUserDetailsResponse,
+  GetUserLoginResponse,
   LogInUserRequest,
   NoteResponse,
   SignUpUserRequest,
   UpdateFolderRequest,
   UpdateNoteRequest,
-  UserLoginResponse,
 } from 'network/proto/protos'
 import { UserStore } from 'stores/UserStore'
 
@@ -59,8 +59,8 @@ export class Api {
     return data
   }
 
-  static fetchUser = async (): Promise<UserLoginResponse> => {
-    const data = await Api.createRequest<null, UserLoginResponse>(
+  static fetchUser = async (): Promise<GetUserLoginResponse> => {
+    const data = await Api.createRequest<null, GetUserLoginResponse>(
       'users/me',
       'GET'
     )

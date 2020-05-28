@@ -11,7 +11,7 @@ import { RouterStore } from '../RouterStore'
 @observer
 export class OAuthRedirect extends React.Component {
   getUrlParameter(name: string) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
+    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
     const regex = new RegExp(`[\\?&]${name}=([^&#]*)`)
     const results = regex.exec(RouterStore.history.location.search)
     return results === null

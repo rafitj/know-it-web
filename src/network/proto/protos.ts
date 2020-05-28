@@ -62,11 +62,10 @@ export interface NoteResponse {
   folderId: string
 }
 
-export interface UserLoginResponse {
+export interface GetUserLoginResponse {
   id: string
   email: string
   name: string
   imageUrl: string
   emailVerified: boolean
-  password: string
 }

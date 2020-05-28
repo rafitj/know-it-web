@@ -13,8 +13,8 @@
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+  width: 0px;
+  background: transparent;
 }
 
 .codex-editor {
@@ -41,6 +41,9 @@
 
 .ce-toolbar__actions {
   display: none;
+}
+.ant-layout {
+  background-color: transparent;
 }
 
 @media (min-width: 651px) {
