@@ -25,7 +25,7 @@ const ColorMenu = (
 export const ColorPicker = () => {
   return (
     <Dropdown overlay={ColorMenu} trigger={['click']}>
-      <IconWrap bgcolor="purple" size={25}>
+      <IconWrap bgcolor="green" size={25}>
         <Droplet size={15} />
       </IconWrap>
     </Dropdown>

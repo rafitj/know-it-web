@@ -50,6 +50,8 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
+  padding: 0;
+  margin: 0;
 `
 
 @observer
@@ -97,6 +99,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
               width={11 / 12}
               style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
               onClick={setNoteViewById}
+              onDoubleClick={this.editTitle}
             >
               {this.state.editTitleMode ? (
                 <StyledInput

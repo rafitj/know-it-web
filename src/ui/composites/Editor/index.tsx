@@ -8,7 +8,7 @@ import {
   NoteSpaceContext,
 } from '../NoteSideBar/NoteSpaceContext'
 import './editor.css'
-import { defaultData, EDITOR_TOOLS } from './Tools/EditorTools'
+import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
 
 @observer
 class Editor extends React.Component<{ note?: NoteResponse }> {

@@ -23,3 +23,4 @@ export type color =
   | 'whiteHover'
   | 'transparent'
   | 'darkBlack'
+  | 'grey'

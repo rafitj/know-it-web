@@ -6,12 +6,13 @@ export * from 'react-feather'
 
 export interface IIconWrap extends BoxProps {
   bgcolor?: color
+  disabled?: boolean
   children?: React.ReactNode
 }
 export const IconWrap = styled(Box)<IIconWrap>`
   transition: all 0.25s ease;
   &:hover {
-    cursor: pointer;
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     background-color: ${(props) =>
       props.bgcolor ? colors[props.bgcolor] : 'transparent'};
   }
