@@ -62,24 +62,22 @@ class UnselectedNoteView extends React.Component {
             alignItems="center"
           >
             <Flex>
-              {NoteState.recentNotes?.map(
-                (rNote: { id: string; title: string }) => (
-                  <Box
-                    onClick={() => {
-                      this.state.noteState.fetchNote(rNote.id)
-                    }}
+              {NoteState.recentNotes?.map((rNote) => (
+                <Box
+                  key={rNote.id}
+                  onClick={() => {
+                    this.state.noteState.fetchNote(rNote.id)
+                  }}
+                >
+                  <HighlightedText
+                    bordered={true}
+                    textColor="black"
+                    highlight={'red'}
                   >
-                    <HighlightedText
-                      key={rNote.id}
-                      bordered={true}
-                      textColor="black"
-                      highlight={'red'}
-                    >
-                      {rNote.title}
-                    </HighlightedText>
-                  </Box>
-                )
-              )}
+                    {rNote.title}
+                  </HighlightedText>
+                </Box>
+              ))}
             </Flex>
           </Flex>
         )}

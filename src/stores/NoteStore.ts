@@ -3,6 +3,7 @@ import { Api } from 'network/api/api'
 import {
   CreateNoteRequest,
   NoteResponse,
+  RecentNote,
   UpdateNoteRequest,
 } from 'network/proto/protos'
 import { FolderState } from './FolderStore'
@@ -10,10 +11,9 @@ import { PersistenceStore } from './PersistenceStore'
 
 export class NoteState {
   @observable
-  note?: NoteResponse
-
+  static recentNotes?: RecentNote[]
   @observable
-  static recentNotes?: { id: string; title: string }[]
+  note?: NoteResponse
 
   @observable
   isLoading: boolean = false
@@ -29,6 +29,11 @@ export class NoteState {
 
   constructor(folderState: FolderState) {
     this.folderState = folderState
+  }
+
+  @action
+  static setRecentNoteIds = async (notes: RecentNote[]) => {
+    NoteState.recentNotes = notes
   }
 
   @action
@@ -50,11 +55,6 @@ export class NoteState {
       this.requestErrorDetail = 'Failed to fetch note.'
     }
     this.isLoading = false
-  }
-
-  @action
-  static setRecentNoteIds = async (notes: { id: string; title: string }[]) => {
-    NoteState.recentNotes = notes
   }
 
   @action

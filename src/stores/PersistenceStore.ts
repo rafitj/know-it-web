@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx'
+import { RecentNote } from '../network/proto/protos'
 import { NoteState } from './NoteStore'
 import { UserStore } from './UserStore'
 
@@ -22,9 +23,7 @@ const appLoadRoutine: AppLoadRoutineType[] = [
   async () => {
     const storageValue = await localStorage.getItem(PersistenceKey.RecentNotes)
     const recentFiles =
-      storageValue === null
-        ? []
-        : (JSON.parse(storageValue) as { id: string; title: string }[])
+      storageValue === null ? [] : (JSON.parse(storageValue) as RecentNote[])
     await NoteState.setRecentNoteIds(recentFiles)
   },
 ]
@@ -41,12 +40,10 @@ class PersistenceStore {
   }
 
   @action
-  storeRecentNotes = async (note: { id: string; title: string }) => {
+  storeRecentNotes = async (note: RecentNote) => {
     const storageValue = await localStorage.getItem(PersistenceKey.RecentNotes)
     const recentFiles =
-      storageValue === null
-        ? []
-        : (JSON.parse(storageValue) as { id: string; title: string }[])
+      storageValue === null ? [] : (JSON.parse(storageValue) as RecentNote[])
     if (!recentFiles.find((file) => file.id === note.id)) {
       recentFiles.push(note)
       if (recentFiles.length > 3) {
@@ -63,10 +60,7 @@ class PersistenceStore {
   deleteRecentNotesStorage = async (noteId: string) => {
     const storageValue = localStorage.getItem(PersistenceKey.RecentNotes)
     if (storageValue !== null) {
-      const recentFiles = JSON.parse(storageValue) as {
-        id: string
-        title: string
-      }[]
+      const recentFiles = JSON.parse(storageValue) as RecentNote[]
       const updatedFiles = recentFiles.filter(({ id }) => id !== noteId)
       localStorage.setItem(
         PersistenceKey.RecentNotes,
@@ -76,13 +70,10 @@ class PersistenceStore {
   }
 
   @action
-  updateRecentNotesStorage = async (note: { id: string; title: string }) => {
+  updateRecentNotesStorage = async (note: RecentNote) => {
     const storageValue = localStorage.getItem(PersistenceKey.RecentNotes)
     if (storageValue !== null) {
-      const recentFiles = JSON.parse(storageValue) as {
-        id: string
-        title: string
-      }[]
+      const recentFiles = JSON.parse(storageValue) as RecentNote[]
       const updatedFiles = recentFiles.map((storageNote) =>
         storageNote.id === note.id
           ? { id: note.id, title: note.title }
