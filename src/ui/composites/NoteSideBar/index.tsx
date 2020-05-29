@@ -48,7 +48,7 @@ class NoteSideBar extends React.Component {
         <ViewMenu />
         <Line color="white" />
         {leftCollapsed ? <MiniFolderMenu /> : <FileDirectoryMenu />}
-        <FileTrash />
+        {!leftCollapsed && <FileTrash />}
       </StyledSider>
     )
   }
