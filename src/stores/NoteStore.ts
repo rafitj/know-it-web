@@ -12,6 +12,7 @@ import { PersistenceStore } from './PersistenceStore'
 export class NoteState {
   @observable
   static recentNotes?: RecentNote[]
+
   @observable
   note?: NoteResponse
 
@@ -71,6 +72,20 @@ export class NoteState {
   }
 
   @action
+  recoverNote = async (id: string) => {
+    this.isLoading = true
+
+    try {
+      await Api.recoverNote(id)
+    } catch (e) {
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to recover note.'
+    }
+
+    this.isLoading = false
+  }
+
+  @action
   updateNoteById = async (payload: UpdateNoteRequest) => {
     this.isLoading = true
     try {
@@ -83,6 +98,23 @@ export class NoteState {
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to update note.'
+    }
+    this.isLoading = false
+  }
+
+  @action
+  updateNoteTitle = async (payload: UpdateNoteRequest) => {
+    this.isLoading = true
+    try {
+      this.note = await Api.updateNoteTitle(payload)
+      await this.folderState.fetchFolders()
+      PersistenceStore.updateRecentNotesStorage({
+        id: payload.id,
+        title: payload.title,
+      })
+    } catch (e) {
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to update note title.'
     }
     this.isLoading = false
   }
