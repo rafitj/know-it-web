@@ -5,7 +5,7 @@ import {
   FolderResponse,
   GetFolderWithNotesResponse,
   UpdateFolderRequest,
-} from 'network/proto/protos';
+} from 'network/proto/protos'
 import { Api } from '../network/api/api'
 
 export class FolderState {
@@ -38,16 +38,31 @@ export class FolderState {
 
   @action
   fetchNotesInTrash = async () => {
-    this.isLoading = true;
+    this.isLoading = true
 
     try {
-      this.notesInTrash = await Api.fetchNotesInTrash();
+      this.notesInTrash = await Api.fetchNotesInTrash()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to fetch notes in trash.'
     }
 
-    this.isLoading = false;
+    this.isLoading = false
+  }
+
+  @action
+  emptyTrash = async () => {
+    this.isLoading = true
+
+    try {
+      await Api.emptyTrash()
+      this.notesInTrash = []
+    } catch (e) {
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to fetch notes in trash.'
+    }
+
+    this.isLoading = false
   }
 
   @action
