@@ -1,4 +1,6 @@
+import { Tooltip } from 'antd'
 import { observer } from 'mobx-react'
+import { BriefNoteDescriptionResponse } from 'network/proto/protos'
 import React from 'react'
 import { Plus } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
@@ -9,8 +11,6 @@ import {
   INoteSpaceState,
   NoteSpaceContext,
 } from '../NoteSideBar/NoteSpaceContext'
-import { BriefNoteDescriptionResponse } from 'network/proto/protos'
-import { Tooltip } from 'antd'
 
 const StyledItem = styled(Flex)`
   border-radius: 8px;

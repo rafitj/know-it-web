@@ -1,4 +1,4 @@
-import { Empty, Modal, Popover } from 'antd'
+import { Empty, Modal } from 'antd'
 import { observer } from 'mobx-react'
 import React from 'react'
 import { Trash as TrashIcon } from 'react-feather'
@@ -11,8 +11,8 @@ import {
   INoteSpaceState,
   NoteSpaceContext,
 } from '../NoteSideBar/NoteSpaceContext'
-import { TrashItem } from './TrashItem'
 import { EmptyTrash } from './EmptyTrash'
+import { TrashItem } from './TrashItem'
 
 const StyledModal = styled(Modal)`
   .ant-modal-content {
@@ -78,14 +78,18 @@ class FileTrash extends React.Component {
             )}
             <Box overflowY="scroll" maxHeight={500} px={4} width={'100%'}>
               {notesInTrash.map((note) => (
-                <TrashItem note={note} />
+                <TrashItem key={note.id} note={note} />
               ))}
             </Box>
             {notesInTrash.length !== 0 && (
-              <Box mt={3}>
-                All files in trash will be deleted after 30 days.
-                <EmptyTrash />
-              </Box>
+              <>
+                <Box mt={3}>
+                  All files in trash will be deleted after 30 days.
+                </Box>
+                <Box>
+                  <EmptyTrash />
+                </Box>
+              </>
             )}
           </Flex>
         </StyledModal>
