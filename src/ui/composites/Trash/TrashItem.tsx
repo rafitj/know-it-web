@@ -16,7 +16,6 @@ const StyledItem = styled(Flex)`
   border-radius: 8px;
   background-color: ${colors.black};
   color: white;
-  width: 85%;
   padding: 3px 15px;
   margin: 3px;
   &:hover {
@@ -29,9 +28,8 @@ class TrashItem extends React.Component<{
 }> {
   state = { context: this.context as INoteSpaceState }
   restoreNote = () => {
-    const { noteState, folderState } = this.state.context
+    const { noteState } = this.state.context
     noteState.recoverNote(this.props.note.id)
-    folderState.fetchNotesInTrash()
   }
   render() {
     const { title, folderTitle } = this.props.note

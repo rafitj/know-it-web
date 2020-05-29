@@ -44,7 +44,7 @@ class EmptyTrash extends React.Component {
           </Flex>
         }
       >
-        <Box>
+        <Box mt={2}>
           <HighlightText highlight="red">Delete all now.</HighlightText>
         </Box>
       </Popover>
