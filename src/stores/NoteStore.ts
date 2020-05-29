@@ -77,6 +77,7 @@ export class NoteState {
 
     try {
       await Api.recoverNote(id)
+      await this.folderState.fetchFolders()
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to recover note.'

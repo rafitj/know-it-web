@@ -6,6 +6,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { Line } from 'ui/components/Line'
+import { FileTrash } from '../Trash'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { MiniFolderMenu } from './MiniFolderMenu'
 import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
@@ -47,6 +48,7 @@ class NoteSideBar extends React.Component {
         <ViewMenu />
         <Line color="white" />
         {leftCollapsed ? <MiniFolderMenu /> : <FileDirectoryMenu />}
+        {!leftCollapsed && <FileTrash />}
       </StyledSider>
     )
   }
