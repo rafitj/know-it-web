@@ -6,10 +6,14 @@ import {
   UpdateNoteRequest,
 } from 'network/proto/protos'
 import { FolderState } from './FolderStore'
+import { PersistenceStore } from './PersistenceStore'
 
 export class NoteState {
   @observable
   note?: NoteResponse
+
+  @observable
+  static recentNotes?: { id: string; title: string }[]
 
   @observable
   isLoading: boolean = false
@@ -37,11 +41,20 @@ export class NoteState {
     this.isLoading = true
     try {
       this.note = await Api.fetchNote(id)
+      PersistenceStore.storeRecentNotes({
+        id: this.note.id,
+        title: this.note.title,
+      })
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to fetch note.'
     }
     this.isLoading = false
+  }
+
+  @action
+  static setRecentNoteIds = async (notes: { id: string; title: string }[]) => {
+    NoteState.recentNotes = notes
   }
 
   @action
@@ -63,6 +76,10 @@ export class NoteState {
     try {
       this.note = await Api.updateNote(payload)
       await this.folderState.fetchFolders()
+      PersistenceStore.updateRecentNotesStorage({
+        id: payload.id,
+        title: payload.title,
+      })
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to update note.'
@@ -76,6 +93,7 @@ export class NoteState {
     try {
       await Api.deleteNoteById(id)
       await this.folderState.fetchFolders()
+      PersistenceStore.deleteRecentNotesStorage(id)
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to delete note.'
