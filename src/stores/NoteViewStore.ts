@@ -1,7 +1,12 @@
 import EditorJsType from '@editorjs/editorjs/types'
 import { action, observable } from 'mobx'
 
+type ViewModes = 'Cards' | 'Notes'
+
 export class NoteViewState {
+  @observable
+  viewMode: ViewModes = 'Notes'
+
   @observable
   editorInstance?: EditorJsType
 
@@ -25,6 +30,11 @@ export class NoteViewState {
 
   @observable
   addFileMode: boolean = false
+
+  @action
+  setViewMode = (viewMode: ViewModes) => {
+    this.viewMode = viewMode
+  }
 
   @action
   setEditorInstance = (instance?: EditorJsType) => {

@@ -41,7 +41,7 @@ class FileDirectoryMenu extends React.Component {
           color={colors.white}
           px={4}
         >
-          My Notes
+          My {noteViewState.viewMode}
           <Flex flexDirection="row" alignItems="center">
             {folderState.folders.length > 5 ? (
               <IconWrap disabled={true} size={25}>
