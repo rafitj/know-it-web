@@ -46,6 +46,13 @@ export interface FolderResponse {
   colour: color
 }
 
+export interface FlashcardResponse {
+  id: string
+  question: string
+  answer: string
+  noteId: string
+}
+
 export interface GetFolderWithNotesResponse extends FolderResponse {
   notes: BriefNoteDescriptionResponse[]
 }
