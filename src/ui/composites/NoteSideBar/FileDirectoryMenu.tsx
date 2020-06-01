@@ -39,7 +39,7 @@ class FileDirectoryMenu extends React.Component {
           alignItems="center"
           height={40}
           color={colors.white}
-          px={3}
+          px={4}
         >
           My Notes
           <Flex flexDirection="row" alignItems="center">
@@ -84,7 +84,7 @@ class FileDirectoryMenu extends React.Component {
             </IconWrap>
           </Flex>
         </Flex>
-        <Box overflowY="scroll" height={'70vh'}>
+        <Box overflowY="scroll" height={'65vh'}>
           <Menu
             mode="inline"
             theme="dark"
