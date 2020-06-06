@@ -1,6 +1,9 @@
+import { Empty } from 'antd'
 import { observer } from 'mobx-react'
 import React from 'react'
 import { Flex } from 'reflexbox'
+import { GetFolderWithNotesResponse } from '../../../network/proto/protos'
+import { NoteCardHeader } from '../Common/NoteCardHeader'
 import {
   INoteSpaceState,
   NoteSpaceContext,
@@ -13,18 +16,31 @@ class CardEditorView extends React.Component {
   state = this.context as INoteSpaceState
   render() {
     const { note } = this.state.noteState
+    const { folders } = this.state.folderState
     return (
       <Flex flexDirection="column">
         {note ? (
           <>
-            {this.state.cardState.cardMode === 'view' ? (
-              <CardsViewMode />
-            ) : (
+            <NoteCardHeader
+              title={note?.title}
+              subTitle={
+                folders.find(
+                  (folder: GetFolderWithNotesResponse) =>
+                    folder.id === note?.folderId
+                )?.title
+              }
+            />
+            {this.state.cardState.cardInFocusIndex ? (
               <CardsCreateMode />
+            ) : (
+              <CardsViewMode />
             )}
           </>
         ) : (
-          <div>Empty</div>
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description={<span>Select a Card Deck</span>}
+          ></Empty>
         )}
       </Flex>
     )

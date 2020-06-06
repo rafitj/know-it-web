@@ -21,6 +21,7 @@ class MiniFolderMenu extends React.Component {
     )
     const setNoteViewById = async (noteId: string) => {
       await this.state.noteState.fetchNote(noteId)
+      await this.state.cardState.fetchCards(noteId)
     }
 
     return (

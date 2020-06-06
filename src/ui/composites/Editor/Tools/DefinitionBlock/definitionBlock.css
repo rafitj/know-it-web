@@ -66,3 +66,16 @@
   min-width: 96%;
   display: inline;
 }
+.answer-input:empty:before,
+.question-input:empty:before {
+  position: absolute;
+  color: gray;
+  background-color: transparent;
+  opacity: 0.4;
+}
+.answer-input:empty:before {
+  content: "Well, to be honest I'm not sure dude...";
+}
+.question-input:empty:before {
+  content: 'What is the meaning of life?';
+}

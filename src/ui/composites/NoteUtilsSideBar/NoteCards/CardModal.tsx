@@ -1,10 +1,16 @@
 import { Modal, Tooltip } from 'antd'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { ArrowLeft, ArrowRight, Eye } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
+import { FlashcardResponse } from '../../../../network/proto/protos'
 import { IconWrap } from '../../../base/Icons'
 import { colors } from '../../../base/theme'
+import {
+  INoteSpaceState,
+  NoteSpaceContext,
+} from '../../NoteSideBar/NoteSpaceContext'
 const FlashcardModal = styled(Modal)`
   .ant-modal-content {
     border: 4px solid ${colors.black};
@@ -20,22 +26,49 @@ const FlashcardModal = styled(Modal)`
   width: 800px !important;
 `
 const FlashcardModalContent = styled(Flex)`
-  font-size: 350%;
   line-height: 1.1;
   .header {
     font-size: 25px;
     opacity: 0.6;
   }
 `
+const FlashCardQA = styled(Box)`
+  word-break: break-all;
+  font-size: 20px;
+  text-align: center;
+`
+const StyledIconWrap = styled(IconWrap)<{ disabled: boolean }>`
+  ${(props) => props.disabled && 'cursor: not-allowed'};
+  ${(props) => props.disabled && 'opacity: 0.5'};
+`
 interface ICardModal {
   closeModal: () => void
   isVisible: boolean
-  question: string
-  answer: string
+  card: FlashcardResponse
 }
 
-export class CardModal extends React.Component<ICardModal> {
+@observer
+class CardModal extends React.Component<ICardModal> {
+  state = this.context as INoteSpaceState
+  enterEditCardMode = () => {
+    this.state.cardState.setCardInFocusIndexById(this.props.card.id)
+    this.props.closeModal()
+    this.state.noteViewState.setViewMode('Cards')
+  }
+
   render() {
+    const {
+      cards,
+      cardInFocusIndex,
+      setCardInFocusIndex,
+    } = this.state.cardState
+    const goPrevCard = () => {
+      setCardInFocusIndex(cardInFocusIndex || 0 - 1)
+    }
+    const goNextCard = () => {
+      setCardInFocusIndex(cardInFocusIndex || 0 + 1)
+    }
+
     return (
       <FlashcardModal
         centered={true}
@@ -55,11 +88,11 @@ export class CardModal extends React.Component<ICardModal> {
           <Box className="header" mb={3}>
             Question
           </Box>
-          <Box>{this.props.question}</Box>
+          <FlashCardQA>{this.props.card.question}</FlashCardQA>
           <Box mt={4} className="header" mb={2}>
             Answer
           </Box>
-          <Box>{this.props.answer}</Box>
+          <FlashCardQA>{this.props.card.answer}</FlashCardQA>
         </FlashcardModalContent>
         <Box
           textAlign="center"
@@ -71,22 +104,32 @@ export class CardModal extends React.Component<ICardModal> {
           }}
         >
           <Tooltip title="Previous Card" placement="left">
-            <IconWrap mx={1}>
+            <StyledIconWrap
+              disabled={cardInFocusIndex === 0}
+              mx={1}
+              onClick={goPrevCard}
+            >
               <ArrowLeft />
-            </IconWrap>
+            </StyledIconWrap>
           </Tooltip>
           <Tooltip title="View/Edit Card">
-            <IconWrap mx={2}>
+            <IconWrap mx={2} onClick={this.enterEditCardMode}>
               <Eye />
             </IconWrap>
           </Tooltip>
           <Tooltip title="Next Card" placement="right">
-            <IconWrap mx={1}>
+            <StyledIconWrap
+              mx={1}
+              onClick={goNextCard}
+              disabled={cardInFocusIndex === cards.length - 1}
+            >
               <ArrowRight />
-            </IconWrap>
+            </StyledIconWrap>
           </Tooltip>
         </Box>
       </FlashcardModal>
     )
   }
 }
+CardModal.contextType = NoteSpaceContext
+export { CardModal }

@@ -26,6 +26,7 @@ const StyledInputContainer = styled.div<SimpleInputProps>`
   }
   .ant-input: focus {
     outline: none;
+    border-right-width: 2px !important;
   }
   .ant-input-password-icon svg {
     fill: ${colors.black};

@@ -28,6 +28,7 @@ const CardContainer = styled.div<ICardProps>`
     height: ${(props) => (props.height ? props.height : 'auto')};
     display: ${(props) => (props.block ? 'block' : 'inline-block')};
   }
+
 `
 
 export const Card = ({

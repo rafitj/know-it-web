@@ -84,7 +84,7 @@ class FileDirectoryMenu extends React.Component {
             </IconWrap>
           </Flex>
         </Flex>
-        <Box overflowY="scroll" height={'65vh'}>
+        <Box overflowY="scroll" height={'70vh'}>
           <Menu
             mode="inline"
             theme="dark"

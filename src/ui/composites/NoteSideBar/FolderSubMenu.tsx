@@ -21,9 +21,14 @@ export interface IFolderSubMenu {
 }
 
 const SubMenuTitle = styled.span`
+  transition: all 0.2s ease;
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: normal;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+  }
 `
 
 const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`

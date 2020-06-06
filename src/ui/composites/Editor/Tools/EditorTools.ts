@@ -9,7 +9,8 @@ import Marker from '@editorjs/marker'
 import Paragraph from '@editorjs/paragraph'
 import SimpleImage from '@editorjs/simple-image'
 import Table from '@editorjs/table'
-import { Qablock } from './qablock'
+import { Qablock } from './QABlock/qablock'
+import { MathBlock } from './MathBlock/mathBlock'
 
 export const EDITOR_TOOLS = {
   embed: { class: Embed, inlineToolbar: true },
@@ -24,6 +25,7 @@ export const EDITOR_TOOLS = {
   inlineCode: { class: InlineCode, inlineToolbar: true },
   simpleImage: { class: SimpleImage, inlineToolbar: true },
   qa: { class: Qablock, inlineToolbar: true },
+  math: { class: MathBlock, inlineToolbar: true },
 }
 
 export const defaultData = (noteId?: number) => ({

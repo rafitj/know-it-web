@@ -71,7 +71,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
   }
 
   render() {
-    const { noteState } = this.state.context
+    const { noteState, cardState } = this.state.context
 
     const selected = noteState.note && noteState.note.id === this.props.note.id
     const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
@@ -79,6 +79,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
     const setNoteViewById = async () => {
       if (this.props.note.id) {
         await noteState.fetchNote(this.props.note.id)
+        await cardState.fetchCards(this.props.note.id)
       }
     }
 

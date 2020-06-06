@@ -5,7 +5,6 @@ import { CheckSquare, Maximize } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
-import { CardType } from '../../../../stores/CardStore'
 import { colors } from '../../../base/theme'
 import {
   INoteSpaceState,
@@ -20,9 +19,10 @@ interface NoteCardsProps {
 const SmallFlashcard = styled(Box)`
   border: 2px solid ${colors.black};
   border-radius: 8px;
-  padding: 60px 50px;
+  padding: 10px;
   width: 100%;
-  height: 100px;
+  height: 125px;
+  min-height: 125px;
   display: flex;
   transition: all 0.2s ease;
   opacity: 0.5;
@@ -32,6 +32,8 @@ const SmallFlashcard = styled(Box)`
     opacity: 1;
   }
   font-weight: bold;
+  overflow-y: hidden;
+  word-break: break-all;
 `
 
 const StyledCardFlex = styled(Flex)`
@@ -47,17 +49,25 @@ class NoteCards extends React.Component<NoteCardsProps> {
     visibleModal: null,
     context: this.context as INoteSpaceState,
   }
-  openModal = (id: number) => {
+  openModal = (id: string) => {
     this.setState({ visibleModal: id })
   }
   closeModal = () => {
     this.setState({ visibleModal: null })
   }
   generateFlashcards = () => {
-    return this.context.cardState.setCards()
+    return this.state.context.cardState.generateCards(
+      this.state.context.noteState.note!.id
+    )
   }
   enterCardViewMode = () => {
     this.state.context.noteViewState.setViewMode('Cards')
+  }
+  formatQuestionText = (question: string) => {
+    if (question.length > 128) {
+      return question.substr(0, 128) + '...'
+    }
+    return question
   }
   render() {
     const { cardState } = this.state.context
@@ -90,23 +100,22 @@ class NoteCards extends React.Component<NoteCardsProps> {
               </Box>
             </Flex>
             <StyledCardFlex my={3} p={3} width={1}>
-              {cardState.cards.map(({ q, a, id }: CardType) => (
+              {cardState.cards.map((card) => (
                 <>
                   <SmallFlashcard
                     mb={3}
                     onClick={() => {
-                      this.openModal(id)
+                      this.openModal(card.id)
                     }}
                     justifyContent="center"
                     alignItems="center"
                   >
-                    <span>{q}</span>
+                    <span>{this.formatQuestionText(card.question)}</span>
                   </SmallFlashcard>
                   <CardModal
                     closeModal={this.closeModal}
-                    isVisible={this.state.visibleModal === id}
-                    question={q}
-                    answer={a}
+                    isVisible={this.state.visibleModal === card.id}
+                    card={card}
                   />
                 </>
               ))}

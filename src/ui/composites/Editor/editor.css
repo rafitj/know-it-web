@@ -1,5 +1,13 @@
 * {
-  font-family: 'Arial';
+  font-family: 'Lucida Grande';
+}
+
+.ce-paragraph[data-placeholder]:empty:focus:before {
+  content: " Type 'tab' for commands";
+  position: absolute;
+  color: gray;
+  background-color: transparent;
+  opacity: 0.4;
 }
 
 .codex-editor__redactor {
@@ -8,7 +16,7 @@
 }
 
 .ce-block__content {
-  margin: 0 2rem;
+  margin: 0 3rem;
   max-width: none;
 }
 
@@ -27,7 +35,7 @@
 }
 
 .ce-toolbar__plus {
-  left: -25px;
+  left: -25px !important;
 }
 
 .ce-toolbar {
@@ -40,8 +48,14 @@
 }
 
 .ce-toolbar__actions {
-  display: none;
+  top: 8px;
+  left: 0;
+  opacity: 1;
 }
+.ce-toolbar__actions span {
+  background: white;
+}
+
 .ant-layout {
   background-color: transparent;
 }
