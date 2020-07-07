@@ -8,9 +8,9 @@ import { Box, Flex } from 'reflexbox'
 import { IconWrap } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
 import { Menu } from '../../base/Menu'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { FolderSubMenu } from './FolderSubMenu'
 import { NewFolder } from './NewFolder'
-import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 @observer
 class FileDirectoryMenu extends React.Component {
