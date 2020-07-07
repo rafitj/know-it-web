@@ -4,7 +4,7 @@ import { BriefNoteDescriptionResponse } from 'network/proto/protos'
 import React from 'react'
 import { Flex } from 'reflexbox'
 import { Edit, IconWrap, Trash } from 'ui/base/Icons'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 export interface IFileMenuSettingsItem {
   note: BriefNoteDescriptionResponse

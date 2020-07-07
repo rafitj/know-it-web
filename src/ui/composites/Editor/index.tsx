@@ -1,13 +1,12 @@
 import { API as EditorAPI, OutputData } from '@editorjs/editorjs'
 import { observer } from 'mobx-react'
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import EditorJs from 'react-editor-js'
 import { NoteResponse } from '../../../network/proto/protos'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import './editor.css'
+import './listblock.css'
 import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
 
 @observer
@@ -27,6 +26,32 @@ class Editor extends React.Component<{ note?: NoteResponse }> {
         contents: JSON.stringify(savedData),
       })
     }
+  }
+
+  addList = () => {
+    const { editorInstance } = this.state.noteViewState
+    if (editorInstance) {
+      editorInstance.blocks.delete()
+      editorInstance.blocks.insert('list', { style: 'unordered', items: [] })
+      editorInstance.focus(true)
+    }
+  }
+
+  smartkeyListener = (e: Event) => {
+    if (e instanceof KeyboardEvent) {
+      if (e.key === '-') {
+        this.addList()
+      }
+    }
+  }
+
+  componentDidMount() {
+    findDOMNode(this)?.addEventListener('keyup', this.smartkeyListener)
+  }
+
+  componentWillUnmount() {
+    // Make sure to remove the DOM listener when the component is unmounted.
+    findDOMNode(this)?.removeEventListener('keyup', this.smartkeyListener)
   }
 
   componentDidUpdate(prevProps: { note?: NoteResponse }) {

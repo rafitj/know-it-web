@@ -6,7 +6,7 @@ import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 const LineInput = styled(Input)`
   &.ant-input {

@@ -23,7 +23,6 @@ export interface ISubMenuProps extends SubMenuProps {
 }
 
 const StyledSubMenu = styled(AntDSubMenu)<ISubMenuProps>`
-  opacity: ${(props) => (props.selected ? 1 : 0.85)};
   .ant-menu-submenu-title {
     transition: all 0.2s ease;
     ${(props) =>
@@ -31,7 +30,6 @@ const StyledSubMenu = styled(AntDSubMenu)<ISubMenuProps>`
         ? `background-color: ${colors.darkBlack} !important;`
         : ''};
   }
-
   &.ant-menu-submenu-active {
     opacity: 1;
   }

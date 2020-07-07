@@ -7,10 +7,7 @@ import styled from 'styled-components'
 import { IconWrap } from '../../base/Icons'
 import { colors } from '../../base/theme'
 import { SubHeader } from '../../components/Typography/Subheader'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { EmptyTrash } from './EmptyTrash'
 import { TrashItem } from './TrashItem'
 

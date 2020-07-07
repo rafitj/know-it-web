@@ -18,14 +18,6 @@ export class NoteCardHeader extends React.Component<{
   render() {
     return (
       <StyledPageHeader
-        // tags={[
-        //   <Tag key="0" color="blue">
-        //     Midterm
-        //   </Tag>,
-        //   <Tag key="1" color="blue">
-        //     Quiz 5
-        //   </Tag>,
-        // ]}
         title={this.props.title}
         subTitle={this.props.subTitle}
       />

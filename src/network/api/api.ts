@@ -17,7 +17,7 @@ import {
 import { UserStore } from 'stores/UserStore'
 
 export const baseUrl =
-  'https://know-it-back-master-x3ikbzbziy.herokuapp.com/api/v1/'
+  'https://know-it-back-master-uawaixtnp7.herokuapp.com/api/v1/'
 // export const baseUrl = 'http://localhost:8081/api/v1/'
 
 export class Api {

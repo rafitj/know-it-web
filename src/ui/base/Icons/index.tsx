@@ -10,7 +10,7 @@ export interface IIconWrap extends BoxProps {
   children?: React.ReactNode
 }
 export const IconWrap = styled(Box)<IIconWrap>`
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   &:hover {
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     background-color: ${(props) =>

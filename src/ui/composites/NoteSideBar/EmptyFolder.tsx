@@ -5,7 +5,7 @@ import { Frown, Plus } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
 import { IconWrap } from '../../base/Icons'
 import { colors } from '../../base/theme'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 @observer
 class EmptyFolder extends React.Component<{ folderId: string }> {

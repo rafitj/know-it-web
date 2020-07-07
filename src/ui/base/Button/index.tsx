@@ -31,7 +31,7 @@ const ButtonContainer = styled.div<IButtonProps>`
     background-color: ${(props) => colors[props.backgroundColor]};
     border-color: ${(props) => colors[props.borderColor]};
     color: ${(props) => colors[props.fontColor]};
-    box-shadow: ${`5px 5px ${colors.grey}`};
+    box-shadow: ${`5px 5px ${colors.black}`};
     font-size: 1.1rem;
   }
   .ant-btn:disabled {
@@ -50,7 +50,6 @@ const ButtonContainer = styled.div<IButtonProps>`
   .ant-btn-loading:hover {
     transform: none;
     cursor: default;
-    box-shadow: none;
   }
   .ant-btn-block {
     width: 100%;

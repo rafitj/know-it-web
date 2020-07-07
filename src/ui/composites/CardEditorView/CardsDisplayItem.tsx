@@ -1,17 +1,15 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Box } from 'reflexbox'
 import styled from 'styled-components'
-import { CardType } from '../../../stores/CardStore'
+import { FlashcardResponse } from '../../../network/proto/protos'
 import { colors } from '../../base/theme'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 const CardItem = styled(Box)`
   border-radius: 10px;
   border: 2px solid black;
-  padding: 30px;
+  padding: 0 20px;
   width: 30%;
   height: 200px;
   display: inline-flex;
@@ -25,11 +23,24 @@ const CardItem = styled(Box)`
     cursor: pointer;
     box-shadow: none;
   }
+  word-break: break-all;
+  overflow-y: scroll;
 `
-class CardsDisplayItem extends React.Component<{ card: CardType }> {
+@observer
+class CardsDisplayItem extends React.Component<{ card: FlashcardResponse }> {
   state = this.context as INoteSpaceState
+  enterEditCardMode = () => {
+    const { setCardInFocusIndexById } = this.state.cardState
+    setCardInFocusIndexById(this.props.card.id)
+    this.state.noteViewState.setViewMode('Cards')
+  }
+
   render() {
-    return <CardItem m={3}>{this.props.card.q}</CardItem>
+    return (
+      <CardItem onClick={this.enterEditCardMode} m={3}>
+        {this.props.card.question}
+      </CardItem>
+    )
   }
 }
 
