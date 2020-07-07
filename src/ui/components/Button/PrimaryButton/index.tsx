@@ -9,9 +9,9 @@ export type PrimaryButtonProps = Omit<
 export const PrimaryButton = ({ text, ...rest }: PrimaryButtonProps) => (
   <Button
     text={text}
-    fontColor="white"
-    borderColor="transparent"
-    backgroundColor="black"
+    fontColor="black"
+    borderColor="black"
+    backgroundColor="white"
     {...rest}
   />
 )

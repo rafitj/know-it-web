@@ -8,10 +8,7 @@ import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
 import { UserStore } from '../../../stores/UserStore'
 import { RouterStore } from '../../containers/RouterStore'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 const { Sider } = Layout
 

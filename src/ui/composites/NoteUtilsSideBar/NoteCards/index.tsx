@@ -6,10 +6,7 @@ import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 import { colors } from '../../../base/theme'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../../NoteSpaceContext'
 import { CardModal } from './CardModal'
 
 interface NoteCardsProps {

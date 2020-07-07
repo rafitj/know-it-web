@@ -2,10 +2,7 @@ import { Popover } from 'antd'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { HighlightText } from '../../components/Typography/HighlightText'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 class EmptyTrash extends React.Component {
   state = { context: this.context as INoteSpaceState, showPopover: false }

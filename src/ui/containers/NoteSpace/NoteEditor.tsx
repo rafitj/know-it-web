@@ -10,7 +10,7 @@ import { colors } from '../../base/theme'
 import {
   INoteSpaceState,
   NoteSpaceContext,
-} from '../../composites/NoteSideBar/NoteSpaceContext'
+} from '../../composites/NoteSpaceContext'
 
 const { Content } = Layout
 const StyledCard = styled(Card)`

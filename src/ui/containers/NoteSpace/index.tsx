@@ -8,7 +8,7 @@ import { NoteSideBar } from '../../composites/NoteSideBar'
 import {
   INoteSpaceState,
   NoteSpaceContext,
-} from '../../composites/NoteSideBar/NoteSpaceContext'
+} from '../../composites/NoteSpaceContext'
 import { CardEditor } from './CardEditor'
 import { NoteEditor } from './NoteEditor'
 

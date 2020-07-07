@@ -5,10 +5,7 @@ import { Box, Flex } from 'reflexbox'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 import { NoteState } from '../../../stores/NoteStore'
 
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 @observer
 class UnselectedNoteView extends React.Component {

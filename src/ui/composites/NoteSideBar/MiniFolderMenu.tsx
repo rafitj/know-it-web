@@ -8,7 +8,7 @@ import {
   GetFolderWithNotesResponse,
 } from '../../../network/proto/protos'
 import { Menu, MenuItem } from '../../base/Menu'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 @observer
 class MiniFolderMenu extends React.Component {

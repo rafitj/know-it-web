@@ -4,10 +4,7 @@ import React from 'react'
 import { Flex } from 'reflexbox'
 import { GetFolderWithNotesResponse } from '../../../network/proto/protos'
 import { NoteCardHeader } from '../Common/NoteCardHeader'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { CardsCreateMode } from './CardsCreateMode'
 import { CardsViewMode } from './CardsViewMode'
 
@@ -40,7 +37,7 @@ class CardEditorView extends React.Component {
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             description={<span>Select a Card Deck</span>}
-          ></Empty>
+          />
         )}
       </Flex>
     )

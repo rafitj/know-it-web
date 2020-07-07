@@ -7,10 +7,7 @@ import styled from 'styled-components'
 import { FlashcardResponse } from '../../../../network/proto/protos'
 import { IconWrap } from '../../../base/Icons'
 import { colors } from '../../../base/theme'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../../NoteSpaceContext'
 const FlashcardModal = styled(Modal)`
   .ant-modal-content {
     border: 4px solid ${colors.black};

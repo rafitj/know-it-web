@@ -1,9 +1,6 @@
 import { observer } from 'mobx-react'
 import React from 'react'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { CardsDisplay } from './CardsDisplay'
 
 @observer

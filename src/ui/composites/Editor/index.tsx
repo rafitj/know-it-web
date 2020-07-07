@@ -4,10 +4,7 @@ import React from 'react'
 import { findDOMNode } from 'react-dom'
 import EditorJs from 'react-editor-js'
 import { NoteResponse } from '../../../network/proto/protos'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import './editor.css'
 import './listblock.css'
 import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'

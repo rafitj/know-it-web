@@ -2,10 +2,7 @@ import { observer } from 'mobx-react'
 import React from 'react'
 import { Box } from 'reflexbox'
 import { FlashcardResponse } from '../../../network/proto/protos'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { CardDisplayButtons } from './CardDisplayButtons'
 import { CardsDisplayItem } from './CardsDisplayItem'
 

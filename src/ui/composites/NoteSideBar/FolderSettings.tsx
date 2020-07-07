@@ -6,7 +6,7 @@ import { Flex } from 'reflexbox'
 import { Edit, IconWrap, Trash } from 'ui/base/Icons'
 import { color } from '../../base/theme'
 import { ColorPicker } from '../../components/ColorPicker'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 export interface IFolderMenuSettingsItem {
   folder: GetFolderWithNotesResponse

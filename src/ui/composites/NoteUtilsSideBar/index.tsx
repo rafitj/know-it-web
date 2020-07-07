@@ -11,10 +11,7 @@ import { Box } from 'reflexbox'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { NoteTool } from './NoteTool'
 import { NoteUtilsState } from './NoteUtilsState'
 

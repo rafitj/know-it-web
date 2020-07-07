@@ -4,10 +4,7 @@ import { Box } from 'reflexbox'
 import styled from 'styled-components'
 import { FlashcardResponse } from '../../../network/proto/protos'
 import { colors } from '../../base/theme'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 const CardItem = styled(Box)`
   border-radius: 10px;

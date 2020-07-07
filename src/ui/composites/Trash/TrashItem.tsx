@@ -7,10 +7,7 @@ import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { IconWrap } from '../../base/Icons'
 import { colors } from '../../base/theme'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 const StyledItem = styled(Flex)`
   border-radius: 8px;

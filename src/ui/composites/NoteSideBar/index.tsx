@@ -9,7 +9,7 @@ import { Line } from 'ui/components/Line'
 import { FileTrash } from '../Trash'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { MiniFolderMenu } from './MiniFolderMenu'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
 

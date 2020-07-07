@@ -4,10 +4,7 @@ import { Line } from 'ui/components/Line'
 import { Editor } from '.'
 import { GetFolderWithNotesResponse } from '../../../network/proto/protos'
 import { NoteCardHeader } from '../Common/NoteCardHeader'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 @observer
 class NoteView extends React.Component {

@@ -1,7 +1,3 @@
-* {
-  font-family: 'Lucida Grande';
-}
-
 .ce-paragraph[data-placeholder]:empty:focus:before {
   content: " Type 'tab' for commands";
   position: absolute;
