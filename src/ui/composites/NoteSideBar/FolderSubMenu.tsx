@@ -9,11 +9,11 @@ import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { SubMenu } from '../../base/Menu'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { EmptyFolder } from './EmptyFolder'
 import { FileMenuItem } from './FileMenuItem'
 import { FolderMenuSettings } from './FolderSettings'
 import { NewFile } from './NewFile'
-import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import './popover.css'
 
 export interface IFolderSubMenu {

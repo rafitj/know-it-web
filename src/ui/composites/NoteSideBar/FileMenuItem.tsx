@@ -9,8 +9,8 @@ import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
-import { FileMenuItemSettings } from './FileSettings'
 import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
+import { FileMenuItemSettings } from './FileSettings'
 
 export interface IFileMenuItem {
   note: BriefNoteDescriptionResponse

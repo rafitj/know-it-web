@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex } from 'reflexbox'
+import DesktopDownloadImage from 'ui/assets/DesktopDownload.svg'
+import { ReactComponent as MobileDownloadImage } from 'ui/assets/MobileDownload.svg'
+import WebDownloadImage from 'ui/assets/WebDownload.svg'
 import { PrimaryButton } from '../../components/Button/PrimaryButton'
 import { Card } from '../../components/Card'
 import { BigText } from '../../components/Typography/BigText'
 import { StrongText } from '../../components/Typography/StrongText'
 import { Text } from '../../components/Typography/Text'
 import { Nav } from '../../composites/Nav'
-import { ReactComponent as MobileDownloadImage } from 'ui/assets/MobileDownload.svg'
-import DesktopDownloadImage from 'ui/assets/DesktopDownload.svg'
-import WebDownloadImage from 'ui/assets/WebDownload.svg'
 
 export class Downloads extends React.Component {
   render() {

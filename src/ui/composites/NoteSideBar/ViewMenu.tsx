@@ -2,11 +2,11 @@ import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
 import React from 'react'
 import styled from 'styled-components'
+import { ReactComponent as CardIcon } from 'ui/assets/icons/card.svg'
+import { ReactComponent as NoteIcon } from 'ui/assets/icons/note.svg'
 import { Menu, MenuItem as AntDMenuItem } from '../../base/Menu'
 import { colors } from '../../base/theme'
 import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
-import { ReactComponent as CardIcon } from 'ui/assets/icons/card.svg'
-import { ReactComponent as NoteIcon } from 'ui/assets/icons/note.svg'
 
 interface IViewMenuItemBox {
   active: boolean
