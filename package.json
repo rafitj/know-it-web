@@ -26,6 +26,7 @@
     "lint": "tslint -p tsconfig.json",
     "lint-fix": "tslint --fix -p tsconfig.json",
     "format": "prettier --write 'src/**/*.ts?(x)' && npm run lint-fix",
+    "format-check": "prettier --check 'src/**/*.ts?(x)'",
     "typecheck": "tsc --noEmit",
     "pr-check": "npm run lint && npm run typecheck && npm run build"
   },
