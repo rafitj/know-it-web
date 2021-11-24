@@ -1,0 +1,40 @@
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import Card from './'
+import PrimaryButton from '../Button/PrimaryButton'
+import SecondaryButton from '../Button/SecondaryButton'
+
+<Meta title="Cards" component={Card} />
+
+# Cards
+## Standard container to wrap content
+
+Children must be provided to a Card component.
+<Preview withToolbar>
+  <Story name="standard">
+    <Card>
+        Registration Complete!
+        <PrimaryButton text="Take a tour" />
+        <SecondaryButton text="Chill I got this" />
+    </Card>
+  </Story>
+</Preview>
+
+
+### Width and Height
+Cards assume auto width and height so it is suggested to provide explicit values.
+<Preview withToolbar>
+  <Story name="sizes">
+    <div>
+        <Card width={500}>
+            Width = 500
+        </Card>
+        <Card>
+            Auto width
+        </Card>
+    </div>
+  </Story>
+</Preview>
+
+
+### Props
+<Props of={Card} />
