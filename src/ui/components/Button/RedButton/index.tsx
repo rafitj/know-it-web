@@ -1,15 +1,17 @@
 import React from 'react'
-import Button from '../../../base/Button'
+import Button, { IButtonProps } from '../../../base/Button'
 
-export interface RedButtonProps {
-  text: string
-}
+export type ReDButtonProps = Omit<
+  IButtonProps,
+  'fontColor' | 'borderColor' | 'backgroundColor'
+>
 
-export default ({ text }: RedButtonProps) => (
+export default ({ text, ...rest }: ReDButtonProps) => (
   <Button
     text={text}
     fontColor="black"
     borderColor="black"
     backgroundColor="red"
+    {...rest}
   />
 )

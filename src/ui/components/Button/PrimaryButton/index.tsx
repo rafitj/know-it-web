@@ -1,15 +1,17 @@
 import React from 'react'
-import Button from '../../../base/Button'
+import Button, { IButtonProps } from '../../../base/Button'
 
-export interface PrimaryButtonProps {
-  text: string
-}
+export type PrimaryButtonProps = Omit<
+  IButtonProps,
+  'fontColor' | 'borderColor' | 'backgroundColor'
+>
 
-export default ({ text }: PrimaryButtonProps) => (
+export default ({ text, ...rest }: PrimaryButtonProps) => (
   <Button
     text={text}
     fontColor="white"
     borderColor="transparent"
     backgroundColor="black"
+    {...rest}
   />
 )
