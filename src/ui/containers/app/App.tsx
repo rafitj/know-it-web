@@ -1,7 +1,12 @@
 import React from 'react'
+import Storybook from '../test/Storybook'
 
 function App() {
-  return <div>Home Page</div>
+  return (
+    <div>
+      <Storybook />
+    </div>
+  )
 }
 
 export default App
