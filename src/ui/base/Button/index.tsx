@@ -21,7 +21,7 @@ const ButtonContainer = styled.div<IButtonProps>`
     transition: all 0.2s ease;
     border-radius: 8px;
     border: 2px solid;
-    padding: 8px 25px;
+    padding: 10px 25px;
     margin: 8px;
     background-color: ${(props) => colors[props.backgroundColor]};
     border-color: ${(props) => colors[props.borderColor]};

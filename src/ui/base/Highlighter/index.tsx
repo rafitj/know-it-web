@@ -8,9 +8,9 @@ export interface IHighlighterProps {
 }
 
 const Highlighter = styled.span<IHighlighterProps>`
-  border-radius: 8px;
-  padding: 4px 10px;
-  background-color: ${(props) => colors[props.highlight]};
+  border-radius: 5px;
+  padding: 4px 8px;
+  background-color: ${(props) => colors[props.highlight]}80;
 `
 
 export default ({ children, highlight }: IHighlighterProps) => (
