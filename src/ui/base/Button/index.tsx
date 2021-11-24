@@ -18,7 +18,7 @@ export interface IButtonProps extends AntDButtonProps {
 const ButtonContainer = styled.div<IButtonProps>`
   .ant-btn {
     font-weight: bold;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     border-radius: 8px;
     border: 2px solid;
     padding: 8px 25px;
@@ -34,7 +34,7 @@ const ButtonContainer = styled.div<IButtonProps>`
     box-shadow: none;
   }
   .ant-btn:focus {
-    outline: 0;
+    outline: none;
   }
 `
 
