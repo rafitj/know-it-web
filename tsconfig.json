@@ -23,5 +23,10 @@
     "noUnusedParameters": false,
     "jsx": "react"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "**/*.stories.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

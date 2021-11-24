@@ -12,6 +12,6 @@ export default () => (
     <RedButton text="Join with Google" />
     <BlueButton text="Join with Facebook" />
     <Card>Hi</Card>
-    <Highlighter color="red">hey</Highlighter>
+    <Highlighter highlight="red">hey</Highlighter>
   </div>
 )

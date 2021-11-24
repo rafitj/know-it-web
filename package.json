@@ -30,7 +30,9 @@
     "format": "prettier --write 'src/**/*.ts?(x)' && npm run lint-fix",
     "format-check": "prettier --check 'src/**/*.ts?(x)'",
     "typecheck": "tsc --noEmit",
-    "pr-check": "npm run lint && npm run typecheck && npm run build"
+    "pr-check": "npm run lint && npm run typecheck && npm run build",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +50,11 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.18",
     "prettier": "^2.0.5",
     "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0",
