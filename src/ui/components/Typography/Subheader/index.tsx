@@ -1,20 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import { colors } from '../../../base/theme'
-import Typography, { Title } from '../../../base/Typography'
+import { color, colors } from '../../../base/theme'
+import Typography, { Text } from '../../../base/Typography'
 
 export interface SubHeaderProps {
+  color?: color
   children?: React.ReactNode
 }
 
-const SubHeader = styled(Title)`
-  color: ${colors.black};
+const SubHeader = styled(Text)<SubHeaderProps>`
+  color: ${(props) => (props.color ? colors[props.color] : colors.black)};
   font-size: 1.5rem;
   margin: 16px;
 `
 
-export default ({ children: text }: SubHeaderProps) => (
+export default ({ children: text, color }: SubHeaderProps) => (
   <Typography>
-    <SubHeader>{text}</SubHeader>
+    <SubHeader color={color}>{text}</SubHeader>
   </Typography>
 )

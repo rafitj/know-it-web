@@ -15,6 +15,9 @@ export const IconWrap = styled(Box)<IIconWrap>`
     stroke: ${(props) =>
       props.iconColor ? colors[props.iconColor] : colors.black};
   }
+  &:hover {
+    cursor: pointer;
+  }
 `
 export default ({ iconColor, children, ...boxprops }: IIconWrap) => (
   <IconWrap iconColor={iconColor} {...boxprops}>
