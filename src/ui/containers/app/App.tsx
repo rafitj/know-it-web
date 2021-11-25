@@ -5,14 +5,13 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/notes">
+        <Route exact path="/notes">
           <Editor />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <h1>Home</h1>
         </Route>
       </Switch>
-      <Editor />
     </Router>
   )
 }
