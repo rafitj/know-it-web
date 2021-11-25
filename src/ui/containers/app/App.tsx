@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Home from '../Home'
-import NoteSpace from '../NoteSpace'
+import { Home } from '../Home'
+import { NoteSpace } from '../NoteSpace'
+
 function App() {
   return (
     <Router>

@@ -7,7 +7,7 @@ import { SecondaryButton } from 'ui/components/Button/SecondaryButton'
 import { BigText } from 'ui/components/Typography/BigText'
 import { Text } from 'ui/components/Typography/Text'
 
-export default () => {
+export const LandingPage = () => {
   return (
     <>
       <Flex style={{ borderTop: '2px solid #1c1c1c' }}>
