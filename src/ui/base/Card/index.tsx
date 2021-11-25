@@ -17,6 +17,7 @@ export interface ICardProps extends AntDCardProps {
 
 const CardContainer = styled.div<ICardProps>`
   .ant-card {
+    font-family: Arial;
     border-radius: 8px;
     border: ${`2px solid ${colors.black}`};
     padding: 16px;
