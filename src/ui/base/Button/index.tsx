@@ -32,7 +32,16 @@ const ButtonContainer = styled.div<IButtonProps>`
     opacity: 0.5;
     box-shadow: none;
   }
-  .ant-btn:disabled:hover {
+  .ant-btn-loading {
+    box-shadow: none;
+  }
+  .ant-btn:hover {
+    transform: translate(2px, 2px);
+    cursor: pointer;
+    box-shadow: none;
+  }
+  .ant-btn:disabled:hover,
+  .ant-btn-loading:hover {
     transform: none;
     cursor: default;
     box-shadow: none;
@@ -40,13 +49,11 @@ const ButtonContainer = styled.div<IButtonProps>`
   .ant-btn-block {
     width: 100%;
   }
-  .ant-btn:hover {
-    transform: translate(2px, 2px);
-    cursor: pointer;
-    box-shadow: none;
-  }
   .ant-btn:focus {
     outline: none;
+  }
+  .ant-btn-loading-icon {
+    margin-right: 8px;
   }
 `
 export default ({

@@ -5,10 +5,18 @@ export interface CardProps {
   children: React.ReactNode
   width?: number
   height?: number
+  invert?: boolean
+  block?: boolean
 }
 
-export default ({ children, width, height }: CardProps) => (
-  <Card width={width} height={height} textAlign="center">
+export default ({ children, width, height, invert, block }: CardProps) => (
+  <Card
+    invert={invert}
+    width={width}
+    height={height}
+    block={block}
+    textAlign="center"
+  >
     {children}
   </Card>
 )

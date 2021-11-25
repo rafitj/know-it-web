@@ -1,0 +1,69 @@
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Edit, Send,FacebookOption, TextAlignCenter,TextAlignFull,TextAlignLeft,TextAlignRight} from '../../base/Icons';
+import {Box} from 'reflexbox';
+import Card from '../Card';
+
+<Meta title="Icons" />
+
+# Icons
+## Standard icons
+
+Grommet-icons are the standard icons. Visit https://icons.grommet.io/. 
+Icons should usually be wrapped in buttons or grids since they are unstyled and have no padding or margin.
+
+<Preview withToolbar>
+  <Story name="standard">
+    <div>
+        <Box m={3}>
+            <TextAlignCenter /> 
+        </Box>
+        <Box m={3}>
+            <TextAlignFull /> 
+        </Box>
+        <Box m={3}>
+            <TextAlignLeft /> 
+        </Box>
+        <Box m={3}>
+            <TextAlignRight />
+        </Box>
+    </div>
+  </Story>
+</Preview>
+
+### Card
+Icons can also be used with Cards
+<Preview withToolbar>
+    <Story name="cards">
+        <div>
+            <Card>
+                <Edit/>
+            </Card>
+        </div>
+    </Story>
+</Preview>
+
+
+### Sizes
+Change sizes accordingly 
+<Preview withToolbar>
+    <Story name="sizes">
+        <div>
+            <Send  size='xlarge'/>
+            <Send  size='large'/>
+            <Send  size='medium'/>
+            <Send  size='small'/>
+        </div>
+    </Story>
+</Preview>
+
+
+### Color
+Icons should only be black or white so explicitly add brand colors
+<Preview withToolbar>
+    <Story name="colors">
+        <div>
+            <FacebookOption/>
+            <FacebookOption color="black"/>
+        </div>
+    </Story>
+</Preview>
