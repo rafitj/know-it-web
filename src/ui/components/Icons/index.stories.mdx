@@ -1,69 +1,98 @@
-import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import { Edit, Send,FacebookOption, TextAlignCenter,TextAlignFull,TextAlignLeft,TextAlignRight} from '../../base/Icons';
-import {Box} from 'reflexbox';
-import Card from '../Card';
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
+import IconWrap, {
+  Edit,
+  Send,
+  FacebookOption,
+  TextAlignCenter,
+  TextAlignFull,
+  TextAlignLeft,
+  TextAlignRight,
+} from '../../base/Icons'
+import { Box } from 'reflexbox'
+import Card from '../Card'
+import SecondaryButton from '../Button/SecondaryButton'
 
 <Meta title="Icons" />
 
 # Icons
+
 ## Standard icons
 
-Grommet-icons are the standard icons. Visit https://icons.grommet.io/. 
-Icons should usually be wrapped in buttons or grids since they are unstyled and have no padding or margin.
+Grommet-icons are the standard icons. Visit https://icons.grommet.io/.
+Icons **must** be wrapped in `IconWrap` which is a wrapper of `reflexbox` `Box` but with color.
 
 <Preview withToolbar>
-  <Story name="standard">
+  <Story name="Standard">
     <div>
-        <Box m={3}>
-            <TextAlignCenter /> 
-        </Box>
-        <Box m={3}>
-            <TextAlignFull /> 
-        </Box>
-        <Box m={3}>
-            <TextAlignLeft /> 
-        </Box>
-        <Box m={3}>
-            <TextAlignRight />
-        </Box>
+      <IconWrap m={3}>
+        <TextAlignCenter />
+      </IconWrap>
+      <IconWrap m={3}>
+        <TextAlignFull />
+      </IconWrap>
+      <IconWrap m={3}>
+        <TextAlignLeft />
+      </IconWrap>
+      <IconWrap m={3}>
+        <TextAlignRight />
+      </IconWrap>
     </div>
   </Story>
 </Preview>
 
-### Card
-Icons can also be used with Cards
-<Preview withToolbar>
-    <Story name="cards">
-        <div>
-            <Card>
-                <Edit/>
-            </Card>
-        </div>
-    </Story>
-</Preview>
+### Combining
 
+Icons can also be used with `Cards` and `Buttons`
+
+<Preview withToolbar>
+  <Story name="Composites">
+    <div>
+      <Card>
+        <IconWrap>
+          <Edit />
+        </IconWrap>
+      </Card>
+      <SecondaryButton icon={<Edit />} text="Edit Profile" />
+    </div>
+  </Story>
+</Preview>
 
 ### Sizes
-Change sizes accordingly 
+
+Change sizes accordingly
+
 <Preview withToolbar>
-    <Story name="sizes">
-        <div>
-            <Send  size='xlarge'/>
-            <Send  size='large'/>
-            <Send  size='medium'/>
-            <Send  size='small'/>
-        </div>
-    </Story>
+  <Story name="Sizes">
+    <div>
+      <IconWrap>
+        <Send size="xlarge" />
+      </IconWrap>
+      <IconWrap>
+        <Send size="large" />
+      </IconWrap>
+      <IconWrap>
+        <Send size="medium" />
+      </IconWrap>
+      <IconWrap>
+        <Send size="small" />
+      </IconWrap>
+    </div>
+  </Story>
 </Preview>
 
-
 ### Color
-Icons should only be black or white so explicitly add brand colors
+
+Icons should usually only be black or white but you can add brand colors to `IconWrap`
+
 <Preview withToolbar>
-    <Story name="colors">
-        <div>
-            <FacebookOption/>
-            <FacebookOption color="black"/>
-        </div>
-    </Story>
+  <Story name="Colors">
+    <div>
+      <IconWrap m={3}>
+        <FacebookOption />
+      </IconWrap>
+      <IconWrap m={3} iconColor="blue">
+        <FacebookOption />
+      </IconWrap>
+    </div>
+  </Story>
 </Preview>

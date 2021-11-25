@@ -1,55 +1,57 @@
-import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import Card from './';
-import PrimaryButton from '../Button/PrimaryButton';
-import SecondaryButton from '../Button/SecondaryButton';
-import Text from '../Typography/Text';
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
+import Card from './'
+import PrimaryButton from '../Button/PrimaryButton'
+import SecondaryButton from '../Button/SecondaryButton'
+import Text from '../Typography/Text'
 
 <Meta title="Cards" component={Card} />
 
 # Cards
+
 ## Standard container to wrap content
 
 Children must be provided to a Card component.
+
 <Preview withToolbar>
-  <Story name="standard">
+  <Story name="Standard">
     <Card>
-        <Text>Registration Complete!</Text>
-        <PrimaryButton text="Take a tour" />
-        <SecondaryButton text="Chill I got this" />
+      <Text>Registration Complete!</Text>
+      <PrimaryButton text="Take a tour" />
+      <SecondaryButton text="Chill I got this" />
     </Card>
   </Story>
 </Preview>
 
-
 ### Width and Height
+
 Cards assume auto width and height so it is suggested to provide explicit values.
+
 <Preview withToolbar>
-  <Story name="sizes">
+  <Story name="Sizes">
     <div>
-        <Card width={500}>
-            <Text>
-                Width = 500
-            </Text>
-        </Card>
-        <Card>
-            <Text> Auto width </Text>
-        </Card>
+      <Card width={500}>
+        <Text>Width = 500</Text>
+      </Card>
+      <Card>
+        <Text> Auto width </Text>
+      </Card>
     </div>
   </Story>
 </Preview>
 
 ### Colors
+
 Cards can only be black or white. Cards are not grid elements, they are styled, use `reflexbox` instead.
+
 <Preview withToolbar>
-  <Story name="colors">
+  <Story name="Colors">
     <div>
-        <Card width={500} invert></Card>
-        <Card width={500}></Card>
+      <Card width={500} invert></Card>
+      <Card width={500}></Card>
     </div>
   </Story>
 </Preview>
 
-
-
 ### Props
+
 <Props of={Card} />

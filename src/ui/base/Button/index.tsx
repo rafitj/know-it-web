@@ -55,6 +55,10 @@ const ButtonContainer = styled.div<IButtonProps>`
   .ant-btn-loading-icon {
     margin-right: 8px;
   }
+  .ant-btn svg {
+    fill: ${(props) => colors[props.fontColor]};
+    stroke: ${(props) => colors[props.fontColor]};
+  }
 `
 export default ({
   borderColor,

@@ -1,74 +1,76 @@
-import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import Typography from '../../base/Typography';
-import BigText from './BigText';
-import Header from './Header';
-import Text from './Text';
-import Subheader from './Subheader';
-import StrongText from './StrongText';
-import Highlighter from '../../base/Highlighter';
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
+import Typography from '../../base/Typography'
+import BigText from './BigText'
+import Header from './Header'
+import Text from './Text'
+import Subheader from './Subheader'
+import StrongText from './StrongText'
+import Highlighter from '../../base/Highlighter'
 
 <Meta title="Typography" component={Typography} />
 
 # Typography
+
 ## Standard typography and text
 
 All fonts are a variation of Arial.
 
 <Preview withToolbar>
-  <Story name="standard">
-  <div>
-     <BigText>Learn Smart</BigText>
-     <Header>An app built for learners like you.</Header>
-  </div>
+  <Story name="Standard">
+    <div>
+      <BigText>Learn Smart</BigText>
+      <Header>An app built for learners like you.</Header>
+    </div>
   </Story>
 </Preview>
 
-
 ### Variations
-Use only the provided composite variations:
-<Preview withToolbar>
-    <Story name="variations">
-        <div>
-            <BigText>BigText</BigText>
-            <Header>Header</Header>
-            <Subheader>Subheader</Subheader>
-            <StrongText>StrongText</StrongText>
-            <Text>Text</Text>
-        </div>
-    </Story>
-</Preview>
 
+Use only the provided composite variations:
+
+<Preview withToolbar>
+  <Story name="Variations">
+    <div>
+      <BigText>BigText</BigText>
+      <Header>Header</Header>
+      <Subheader>Subheader</Subheader>
+      <StrongText>StrongText</StrongText>
+      <Text>Text</Text>
+    </div>
+  </Story>
+</Preview>
 
 ### Color
+
 Text should only ever be black or white.
+
 <Preview withToolbar>
-    <Story name="colors">
-        <div>
-            <Text>Black text</Text>
-            <Text invert>
-                <Highlighter highlight="black">
-                    White text
-                </Highlighter>
-            </Text>
-        </div>
-    </Story>
+  <Story name="Colors">
+    <div>
+      <Text>Black text</Text>
+      <Text invert>
+        <Highlighter highlight="black">White text</Highlighter>
+      </Text>
+    </div>
+  </Story>
 </Preview>
 
-
 ### Highlighter
+
 For `Text` typography, you can highlight in any non-b/w theme color. Only highlight black text.
+
 <Preview withToolbar>
-    <Story name="highlights">
-        <div>
-         <Text>
-            This is a fun little paragraph that showcases the use of
-            highlighters. Here's a cool <Highlighter highlight="blue">blue highlight</Highlighter>. 
-            Now let's do <Highlighter highlight="green">green. 
-            Wow isn't this dope.</Highlighter>
-         </Text>
-        </div>
-    </Story>
+  <Story name="Highlighter">
+    <div>
+      <Text>
+        This is a fun little paragraph that showcases the use of highlighters.
+        Here's a cool <Highlighter highlight="blue">blue highlight</Highlighter>.
+        Now let's do <Highlighter highlight="green">green. Wow isn't this dope.</Highlighter>
+      </Text>
+    </div>
+  </Story>
 </Preview>
 
 ### Props
+
 <Props of={Typography} />
