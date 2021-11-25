@@ -11,7 +11,7 @@ export interface HighlightTextProps {
 const HighlightText = styled(AntDText)<HighlightTextProps>`
   font-size: 1rem;
   border-radius: 5px;
-  padding: 5px;
+  padding: 7px;
   margin: 0 3px;
   transition: all 0.25s ease;
   &:hover {
