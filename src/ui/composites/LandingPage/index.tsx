@@ -1,36 +1,37 @@
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
-import Highlight from 'ui/base/Highlighter'
-import PrimaryButton from 'ui/components/Button/PrimaryButton'
-import SecondaryButton from 'ui/components/Button/SecondaryButton'
-import BigText from 'ui/components/Typography/BigText'
-import Text from 'ui/components/Typography/Text'
+import LandingPhoto from 'ui/assets/LandingPhoto.svg'
+import { Highlighter } from 'ui/base/Highlighter'
+import { PrimaryButton } from 'ui/components/Button/PrimaryButton'
+import { SecondaryButton } from 'ui/components/Button/SecondaryButton'
+import { BigText } from 'ui/components/Typography/BigText'
+import { Text } from 'ui/components/Typography/Text'
 
 export default () => {
   return (
     <>
-      <Flex>
-        <Box width={[1 / 2]} p={5}>
+      <Flex style={{ borderTop: '2px solid #1c1c1c' }}>
+        <Box width={[1 / 2]} p={6} pr={1}>
           <Flex flexDirection="column">
-            <Box>
-              <BigText>Learn to Learn.</BigText>
+            <Box ml={2}>
+              <BigText>Learn Smart.</BigText>
             </Box>
-            <Box>
+            <Box ml={2}>
               <Text>
-                KnowIt is changing how you learn. Study 20% faster with
+                We are changing how you learn. Study 20% faster with
                 personalized and
-                <Highlight highlight="blue">
+                <Highlighter highlight="blue">
                   premade study schedules
-                </Highlight>{' '}
-                to keep you on track, smart
-                <Highlight highlight="red">automatic flashcards</Highlight> that
-                will help you practice, a
-                <Highlight highlight="yellow">new notepad</Highlight> built
-                different for every topic and a learning experience you will
+                </Highlighter>
+                to keep you on track, smart, accurate and
+                <Highlighter highlight="red">automatic flashcards</Highlighter>
+                that will help you practice, a simple but awesome
+                <Highlighter highlight="yellow">new notepad</Highlighter>built
+                to organize your thoughts and a learning experience you will
                 never forget, literally.
               </Text>
             </Box>
-            <Box mt={2}>
+            <Box mt={3}>
               <PrimaryButton text="Sign Up" />
               <SecondaryButton text="Learn More" />
             </Box>
@@ -38,7 +39,9 @@ export default () => {
         </Box>
         <Box width={[1 / 2]}>
           <Flex>
-            <Box backgroundColor="red"/>
+            <Box pr={5} width={'100%'} height={'100%'} pl={1}>
+              <img src={LandingPhoto} alt="landing" height={'100%'} />
+            </Box>
           </Flex>
         </Box>
       </Flex>

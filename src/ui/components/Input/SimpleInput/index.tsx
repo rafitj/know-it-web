@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Input, { AntDInputProps, PasswordInput } from '../../../base/Input'
+import { AntDInputProps, Input, PasswordInput } from '../../../base/Input'
 import { colors } from '../../../base/theme'
 
 export interface SimpleInputProps extends AntDInputProps {
@@ -30,7 +30,11 @@ const StyledInputContainer = styled.div`
   }
 `
 
-export default ({ defaultVal, password, ...rest }: SimpleInputProps) =>
+export const SimpleInput = ({
+  defaultVal,
+  password,
+  ...rest
+}: SimpleInputProps) =>
   password ? (
     <StyledInputContainer>
       <PasswordInput {...rest} />

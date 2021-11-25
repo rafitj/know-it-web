@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+import { Button as AntDButton } from 'antd'
 import { ButtonProps } from 'antd/lib/button'
 import React from 'react'
 import styled from 'styled-components'
@@ -29,6 +29,7 @@ const ButtonContainer = styled.div<IButtonProps>`
     border-color: ${(props) => colors[props.borderColor]};
     color: ${(props) => colors[props.fontColor]};
     box-shadow: ${`3px 3px ${colors.grey}`};
+    font-size: 1.1rem;
   }
   .ant-btn:disabled {
     opacity: 0.5;
@@ -62,7 +63,7 @@ const ButtonContainer = styled.div<IButtonProps>`
     stroke: ${(props) => colors[props.fontColor]};
   }
 `
-export default ({
+export const Button = ({
   borderColor,
   text,
   backgroundColor,
@@ -74,6 +75,6 @@ export default ({
     borderColor={borderColor}
     backgroundColor={backgroundColor}
   >
-    <Button {...antdprops}>{text}</Button>
+    <AntDButton {...antdprops}>{text}</AntDButton>
   </ButtonContainer>
 )

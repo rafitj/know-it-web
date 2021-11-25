@@ -1,12 +1,12 @@
 import React from 'react'
-import Button, { IButtonProps } from '../../../base/Button'
+import { Button, IButtonProps } from '../../../base/Button'
 
 export type PrimaryButtonProps = Omit<
   IButtonProps,
   'fontColor' | 'borderColor' | 'backgroundColor'
 >
 
-export default ({ text, ...rest }: PrimaryButtonProps) => (
+export const PrimaryButton = ({ text, ...rest }: PrimaryButtonProps) => (
   <Button
     text={text}
     fontColor="white"

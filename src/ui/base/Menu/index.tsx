@@ -1,9 +1,9 @@
-import { Menu } from 'antd'
+import { Menu as AntDMenu } from 'antd'
 import { MenuProps } from 'antd/lib/menu'
 import React from 'react'
 import styled from 'styled-components'
 import { colors } from '../theme'
-export const { SubMenu, Item } = Menu
+export const { SubMenu, Item } = AntDMenu
 export type AntDMenuProps = MenuProps
 
 export interface IMenuProps extends AntDMenuProps {
@@ -24,8 +24,8 @@ const MenuContainer = styled.div`
   }
 `
 
-export default ({ children, ...antdprops }: IMenuProps) => (
+export const Menu = ({ children, ...antdprops }: IMenuProps) => (
   <MenuContainer>
-    <Menu {...antdprops}>{children}</Menu>
+    <AntDMenu {...antdprops}>{children}</AntDMenu>
   </MenuContainer>
 )

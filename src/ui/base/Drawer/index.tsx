@@ -1,4 +1,4 @@
-import { Drawer } from 'antd'
+import { Drawer as AntDDrawer } from 'antd'
 import { DrawerProps } from 'antd/lib/drawer'
 import React from 'react'
 import styled from 'styled-components'
@@ -10,12 +10,12 @@ export interface IDrawerProps extends AntDDrawerProps {
   children: React.ReactNode
 }
 
-const StyledDrawer = styled(Drawer)`
+const StyledDrawer = styled(AntDDrawer)`
   .ant-drawer-body {
     background-color: ${colors.black};
   }
 `
 
-export default ({ children, ...antdprops }: IDrawerProps) => (
+export const Drawer = ({ children, ...antdprops }: IDrawerProps) => (
   <StyledDrawer {...antdprops}>{children}</StyledDrawer>
 )
