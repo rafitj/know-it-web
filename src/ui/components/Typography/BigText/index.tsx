@@ -9,8 +9,7 @@ export interface BigTextProps {
 
 const BigText = styled(Title)`
   color: ${colors.black};
-  font-size: 5rem;
-  margin: 16px;
+  font-size: 6rem;
 `
 
 export default ({ children: text }: BigTextProps) => (

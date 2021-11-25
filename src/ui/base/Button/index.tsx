@@ -16,12 +16,14 @@ export interface IButtonProps extends AntDButtonProps {
 }
 
 const ButtonContainer = styled.div<IButtonProps>`
+  display: inline-block;
   .ant-btn {
+    height: auto;
     font-weight: bold;
     transition: all 0.2s ease;
     border-radius: 8px;
     border: 2px solid;
-    padding: 10px 25px;
+    padding: 8px 25px;
     margin: 8px;
     background-color: ${(props) => colors[props.backgroundColor]};
     border-color: ${(props) => colors[props.borderColor]};

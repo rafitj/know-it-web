@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { Box, Flex } from 'reflexbox'
+import { Folder } from 'types/files'
 import Editor from '../../composites/Editor'
 import FileDirectory from '../../composites/FileDirectory'
-import { Folder } from 'types/files'
 
 export default () => {
   const [noteId, setNoteId] = useState(0)
@@ -30,7 +31,11 @@ export default () => {
           setNoteId(noteId)
         }}
       />
-      <Editor noteId={noteId} />
+      <Flex>
+        <Box width={[1]} textAlign="center">
+          <Editor noteId={noteId} />
+        </Box>
+      </Flex>
     </>
   )
 }

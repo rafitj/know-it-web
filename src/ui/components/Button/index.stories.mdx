@@ -1,9 +1,9 @@
 import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks'
 import Button from '../../base/Button'
-import PrimaryButtonC from './PrimaryButton'
-import SecondaryButtonC from './SecondaryButton'
-import RedButtonC from './RedButton'
-import BlueButtonC from './BlueButton'
+import PrimaryButton from './PrimaryButton'
+import SecondaryButton from './SecondaryButton'
+import RedButton from './RedButton'
+import BlueButton from './BlueButton'
 
 <Meta title="Buttons" component={Button} />
 
@@ -13,7 +13,7 @@ import BlueButtonC from './BlueButton'
 
 <Preview withToolbar>
   <Story name="Standard">
-    <PrimaryButtonC text="Join now!" />
+    <PrimaryButton text="Join now!" />
   </Story>
 </Preview>
 
@@ -24,10 +24,10 @@ Use only the provided composite variations:
 <Preview withToolbar>
   <Story name="Variations">
     <div>
-      <PrimaryButtonC text="Primary Button" />
-      <SecondaryButtonC text="Secondary Button" />
-      <RedButtonC text="Red Button" />
-      <BlueButtonC text="Blue Button" />
+      <PrimaryButton text="Primary Button" />
+      <SecondaryButton text="Secondary Button" />
+      <RedButton text="Red Button" />
+      <BlueButton text="Blue Button" />
     </div>
   </Story>
 </Preview>
@@ -39,9 +39,8 @@ Buttons permit a few powerful Ant Design states/properties but not all.
 <Preview withToolbar>
   <Story name="Ant-Design">
     <div>
-      <PrimaryButtonC loading text="Loading" />
-      <SecondaryButtonC block text="Block Button" />
-      <BlueButtonC disabled text="Disabled Button" />
+      <PrimaryButton loading text="Loading" />
+      <BlueButton disabled text="Disabled Button" />
     </div>
   </Story>
 </Preview>
