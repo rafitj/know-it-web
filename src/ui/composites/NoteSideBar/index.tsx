@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Folder } from 'types/files'
 import { colors } from 'ui/base/theme'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
+import { MiniFolderMenu } from './MiniFolderMenu'
 import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
 
@@ -15,10 +16,11 @@ export interface INoteSideBar {
   setCurrFile: (fileId: number) => void
   collapsed: boolean
   onCollapse: (collapse: boolean) => void
+  currNoteFolderId: number
+  currNoteId: number
 }
 
 const StyledSider = styled(Sider)`
-  border-right: 2px solid;
   background-color: ${colors.black};
   .ant-layout-sider-trigger {
     background-color: ${colors.black};
@@ -40,6 +42,8 @@ export const NoteSideBar = ({
   setCurrFile,
   collapsed,
   onCollapse,
+  currNoteFolderId,
+  currNoteId,
 }: INoteSideBar) => {
   return (
     <StyledSider
@@ -50,12 +54,20 @@ export const NoteSideBar = ({
       width={275}
     >
       <ViewMenu />
-      <FileDirectoryMenu
-        folders={folders}
-        newNote={newNote}
-        newFolder={newFolder}
-        setCurrFile={setCurrFile}
-      />
+      {collapsed ? (
+        <MiniFolderMenu
+          folder={folders.find((folder) => folder.id === currNoteFolderId)}
+        />
+      ) : (
+        <FileDirectoryMenu
+          folders={folders}
+          newFile={newNote}
+          newFolder={newFolder}
+          setCurrFile={setCurrFile}
+          currNoteId={currNoteId}
+          currNoteFolderId={currNoteFolderId}
+        />
+      )}
     </StyledSider>
   )
 }

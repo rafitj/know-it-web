@@ -17,7 +17,7 @@ const StyledDrawer = styled(AntDDrawer)`
   }
 
   .ant-drawer-content-wrapper {
-    width 100% !important;
+    width: 100% !important;
   }
 `
 

@@ -3,7 +3,7 @@ import 'antd/dist/antd.css'
 import React, { useState } from 'react'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
-import { IconWrap, Plus as PlusIcon } from 'ui/base/Icons'
+import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 
 const LineInput = styled(Input)`
   &.ant-input {
@@ -15,14 +15,16 @@ const LineInput = styled(Input)`
 
 export interface INewFolder {
   newFolder: (name: string) => void
+  setAddFolderMode: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const NewFolder = ({ newFolder }: INewFolder) => {
+export const NewFolder = ({ newFolder, setAddFolderMode }: INewFolder) => {
   const [newFolderName, setNewFolderName] = useState('')
   return (
-    <Flex justifyContent="center" alignItems="center" px={3} pt={2}>
-      <Box justifyContent="center" alignItems="center" width={11 / 12}>
+    <Flex justifyContent="center" alignItems="center" px={3}>
+      <Box justifyContent="center" alignItems="center" width={10 / 12}>
         <LineInput
+          autoFocus
           placeholder="New Folder"
           value={newFolderName}
           onChange={(e) => {
@@ -32,7 +34,15 @@ export const NewFolder = ({ newFolder }: INewFolder) => {
             if (e.key === 'Enter' && newFolderName !== '') {
               newFolder(newFolderName)
               setNewFolderName('')
+              setAddFolderMode(false)
             }
+          }}
+          onBlur={() => {
+            if (newFolderName !== '') {
+              newFolder(newFolderName)
+              setNewFolderName('')
+            }
+            setAddFolderMode(false)
           }}
         />
       </Box>
@@ -44,9 +54,19 @@ export const NewFolder = ({ newFolder }: INewFolder) => {
             newFolder(newFolderName)
             setNewFolderName('')
           }
+          setAddFolderMode(false)
         }}
       >
         <PlusIcon size={15} />
+      </IconWrap>
+      <IconWrap
+        width={1 / 12}
+        pl={2}
+        onClick={() => {
+          setAddFolderMode(false)
+        }}
+      >
+        <XSquare size={15} />
       </IconWrap>
     </Flex>
   )

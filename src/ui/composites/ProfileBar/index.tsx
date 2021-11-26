@@ -1,10 +1,10 @@
+import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
 import styled from 'styled-components'
+import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import { MenuItem, Menu } from 'ui/base/Menu'
-import { UserOutlined, HomeOutlined } from '@ant-design/icons'
 
 const { Sider } = Layout
 
@@ -37,17 +37,17 @@ export const ProfileBar = ({ collapsed, onCollapse }: IProfileBar) => {
   return (
     <>
       <StyledSider
-        defaultCollapsed
+        defaultCollapsed={true}
         collapsible={true}
         collapsed={collapsed}
         onCollapse={onCollapse}
         breakpoint="lg"
-        reverseArrow
+        reverseArrow={true}
         width={0}
       >
         <Menu>
-          <MenuItem icon={<HomeOutlined />}> </MenuItem>
-          <MenuItem icon={<UserOutlined />}> </MenuItem>
+          <MenuItem icon={<HomeOutlined />} />
+          <MenuItem icon={<UserOutlined />} />
         </Menu>
       </StyledSider>
     </>

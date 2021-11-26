@@ -1,10 +1,10 @@
+import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
 import styled from 'styled-components'
+import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import { MenuItem, Menu } from 'ui/base/Menu'
-import { SearchOutlined, FilterOutlined } from '@ant-design/icons'
 
 const { Sider } = Layout
 
@@ -35,15 +35,14 @@ export const NoteUtilsSideBar = ({
   collapsed,
   onCollapse,
 }: INoteUtilsSideBar) => {
-  console.log('asdf', collapsed)
   return (
     <StyledSider
-      collapsible
-      defaultCollapsed
+      collapsible={true}
+      defaultCollapsed={true}
       collapsed={collapsed}
       onCollapse={onCollapse}
       breakpoint="lg"
-      reverseArrow
+      reverseArrow={true}
       width={275}
     >
       <Menu>
