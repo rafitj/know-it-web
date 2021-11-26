@@ -12,8 +12,8 @@ const { Sider } = Layout
 
 export interface INoteSideBar {
   folders: Folder[]
-  newNote: (name: string, folderId: number) => void
-  newFolder: (name: string) => void
+  newFile: (name: string, folderId: number) => void
+  newFolder: (name: string) => number
   setCurrFile: (fileId: number) => void
   collapsed: boolean
   onCollapse: (collapse: boolean) => void
@@ -38,7 +38,7 @@ const StyledSider = styled(Sider)`
 
 export const NoteSideBar = ({
   folders,
-  newNote,
+  newFile,
   newFolder,
   setCurrFile,
   collapsed,
@@ -63,7 +63,7 @@ export const NoteSideBar = ({
       ) : (
         <FileDirectoryMenu
           folders={folders}
-          newFile={newNote}
+          newFile={newFile}
           newFolder={newFolder}
           setCurrFile={setCurrFile}
           currNoteId={currNoteId}

@@ -11,7 +11,7 @@ export const NoteSearch = ({ selected }: NoteSearchProps) => {
     <>
       {selected && (
         <Box width={1} justifyContent="center">
-          <SimpleInput noShadow placeholder="Search" />
+          <SimpleInput noShadow={true} placeholder="Search" />
         </Box>
       )}
     </>

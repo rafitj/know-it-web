@@ -1,10 +1,8 @@
 import { Card as AntDCard } from 'antd'
-import { CardProps } from 'antd/lib/card'
+import { CardProps as AntDCardProps } from 'antd/lib/card'
 import React from 'react'
 import styled from 'styled-components'
 import { colors } from '../theme'
-
-export type AntDCardProps = Pick<CardProps, 'loading' | 'size'>
 
 export interface ICardProps extends AntDCardProps {
   children: React.ReactNode

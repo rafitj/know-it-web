@@ -19,7 +19,9 @@
     overflow-y: scroll;
 }
 
-.ce-toolbar__actions {}
+.ce-toolbar__actions {
+    background-color: red;
+}
 
 .ce-settings {
     min-width: 0;
