@@ -40,7 +40,7 @@ export const SimpleInput = ({
       <PasswordInput {...rest} />
     </StyledInputContainer>
   ) : (
-    <StyledInputContainer>
-      <Input defaultValue={defaultVal} {...rest} />
-    </StyledInputContainer>
-  )
+      <StyledInputContainer>
+        <Input defaultValue={defaultVal} {...rest} />
+      </StyledInputContainer>
+    )
