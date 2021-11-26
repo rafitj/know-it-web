@@ -1,7 +1,9 @@
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
+import styled from 'styled-components'
 import { Folder } from 'types/files'
+import { colors } from 'ui/base/theme'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
@@ -15,6 +17,22 @@ export interface INoteSideBar {
   onCollapse: (collapse: boolean) => void
 }
 
+const StyledSider = styled(Sider)`
+  border-right: 2px solid;
+  background-color: ${colors.black};
+  .ant-layout-sider-trigger {
+    background-color: ${colors.black};
+    margin-bottom: 30px;
+  }
+  border-radius: 10px;
+  margin: 20px;
+  height: 96vh;
+  position: fixed;
+  left: 0;
+  box-shadow: ${`3px 3px ${colors.grey}`};
+  overflow: auto;
+`
+
 export const NoteSideBar = ({
   folders,
   newNote,
@@ -24,17 +42,12 @@ export const NoteSideBar = ({
   onCollapse,
 }: INoteSideBar) => {
   return (
-    <Sider
+    <StyledSider
       collapsible={true}
       collapsed={collapsed}
       onCollapse={onCollapse}
-      breakpoint="xs"
-      style={{
-        overflow: 'auto',
-        height: '100vh',
-        position: 'fixed',
-        left: 0,
-      }}
+      breakpoint="lg"
+      width={275}
     >
       <ViewMenu />
       <FileDirectoryMenu
@@ -43,6 +56,6 @@ export const NoteSideBar = ({
         newFolder={newFolder}
         setCurrFile={setCurrFile}
       />
-    </Sider>
+    </StyledSider>
   )
 }

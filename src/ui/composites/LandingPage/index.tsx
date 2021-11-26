@@ -31,8 +31,12 @@ export const LandingPage = () => {
             </Text>
           </Box>
           <Box mt={3}>
-            <PrimaryButton text="Sign Up" />
-            <SecondaryButton text="Learn More" />
+            <Box display="inline-block" mr={3}>
+              <PrimaryButton text="Sign Up" />
+            </Box>
+            <Box display="inline-block">
+              <SecondaryButton text="Learn More" />
+            </Box>
           </Box>
         </Flex>
       </Box>
