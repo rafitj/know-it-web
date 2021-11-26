@@ -34,7 +34,9 @@ export const Nav = () => {
             </Link>
           </Box>
           <Box mx={3}>
-            <HighlightedText highlight="black">Login</HighlightedText>
+            <Link to="/login">
+              <HighlightedText highlight="black">Login</HighlightedText>
+            </Link>
           </Box>
         </Flex>
       </Box>

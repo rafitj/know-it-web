@@ -9,4 +9,4 @@ const StyledLine = styled.div`
   margin: 8px 0;
 `
 
-export const Line = () =>  <StyledLine/>
+export const Line = () => <StyledLine />
