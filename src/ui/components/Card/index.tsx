@@ -3,8 +3,8 @@ import { Card as CardBase } from '../../base/Card'
 
 export interface CardProps {
   children: React.ReactNode
-  width?: number
-  height?: number
+  width?: string
+  height?: string
   invert?: boolean
   block?: boolean
   textAlign?: 'center' | 'left' | 'right'

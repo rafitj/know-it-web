@@ -31,13 +31,6 @@ export const defaultData = (noteId?: number) => ({
     {
       type: 'header',
       data: {
-        text: `Note ID: ${noteId}`,
-        level: 2,
-      },
-    },
-    {
-      type: 'header',
-      data: {
         text: 'What are we learning today?',
         level: 3,
       },

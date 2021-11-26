@@ -1,10 +1,16 @@
-import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
+import {
+  BlockOutlined,
+  FilterOutlined,
+  SearchOutlined,
+} from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
 import styled from 'styled-components'
+import { NoteTools } from 'types/note'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
+import { NoteTool } from './NoteTool'
 
 const { Sider } = Layout
 
@@ -21,20 +27,32 @@ const StyledSider = styled(Sider)<INoteUtilsSideBar>`
     color: ${colors.black};
     margin-bottom: 30px;
   }
-  margin: 20px;
+  margin: 25px 35px;
   height: ${(props) => (props.collapsed ? '85vh' : '96vh')};
   position: fixed;
   top: ${(props) => (props.collapsed ? '110px' : '0')};
   right: 0;
   overflow: auto;
   border-radius: 10px;
-  box-shadow: ${`3px 3px ${colors.grey}`};
+  box-shadow: ${`5px 5px ${colors.grey}`};
+  overflow-x: hidden;
+`
+
+const StyledMenu = styled(Menu)`
+  &.ant-menu-horizontal > .ant-menu-item {
+    padding: 0 14.25px;
+  }
 `
 
 export const NoteUtilsSideBar = ({
   collapsed,
   onCollapse,
 }: INoteUtilsSideBar) => {
+  const [selectedTool, setSelectedTool] = React.useState<NoteTools>('cards')
+  const selectTool = (tool: NoteTools) => {
+    onCollapse(false)
+    setSelectedTool(tool)
+  }
   return (
     <StyledSider
       collapsible={true}
@@ -45,10 +63,24 @@ export const NoteUtilsSideBar = ({
       reverseArrow={true}
       width={275}
     >
-      <Menu>
-        <MenuItem icon={<SearchOutlined />}>Search</MenuItem>
-        <MenuItem icon={<FilterOutlined />}>Filter</MenuItem>
-      </Menu>
+      <StyledMenu mode={collapsed ? 'vertical' : 'horizontal'}>
+        <MenuItem icon={<BlockOutlined />} onClick={() => selectTool('cards')}>
+          Cards
+        </MenuItem>
+        <MenuItem
+          icon={<SearchOutlined />}
+          onClick={() => selectTool('search')}
+        >
+          Search
+        </MenuItem>
+        <MenuItem
+          icon={<FilterOutlined />}
+          onClick={() => selectTool('filter')}
+        >
+          Filter
+        </MenuItem>
+      </StyledMenu>
+      {!collapsed && <NoteTool selectedTool={selectedTool} />}
     </StyledSider>
   )
 }

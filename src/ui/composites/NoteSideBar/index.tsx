@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Folder } from 'types/files'
 import { colors } from 'ui/base/theme'
+import { Line } from 'ui/components/Line'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { MiniFolderMenu } from './MiniFolderMenu'
 import { ViewMenu } from './ViewMenu'
@@ -27,11 +28,11 @@ const StyledSider = styled(Sider)`
     margin-bottom: 30px;
   }
   border-radius: 10px;
-  margin: 20px;
+  margin: 25px 35px;
   height: 96vh;
   position: fixed;
   left: 0;
-  box-shadow: ${`3px 3px ${colors.grey}`};
+  box-shadow: ${`5px 5px ${colors.grey}`};
   overflow: auto;
 `
 
@@ -54,6 +55,7 @@ export const NoteSideBar = ({
       width={275}
     >
       <ViewMenu />
+      <Line color="white" />
       {collapsed ? (
         <MiniFolderMenu
           folder={folders.find((folder) => folder.id === currNoteFolderId)}

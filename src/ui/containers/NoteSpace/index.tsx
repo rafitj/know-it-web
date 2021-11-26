@@ -1,31 +1,13 @@
 import { Layout } from 'antd'
 import React from 'react'
-import { Box } from 'reflexbox'
-import styled from 'styled-components'
 import { Folder } from 'types/files'
 import { colors } from 'ui/base/theme'
-import { Card } from 'ui/components/Card'
-import { Header as TextHeader } from 'ui/components/Typography/Header'
 import { NoteUtilsSideBar } from 'ui/composites/NoteUtilsSideBar'
 import { ProfileBar } from 'ui/composites/ProfileBar'
-import { Editor } from '../../composites/Editor'
 import { NoteSideBar } from '../../composites/NoteSideBar'
+import { NoteEditor } from './NoteEditor'
 
-const { Header, Content } = Layout
-
-const StyledHeader = styled(Header)`
-  padding: 1.4rem 3rem;
-  background-color: ${colors.white};
-  text-align: center;
-  height: auto;
-`
-
-const HeaderContent = styled(Box)`
-  border-radius: 10px;
-  box-shadow: ${`3px 3px ${colors.grey}`};
-  background-color: ${colors.black};
-  color: ${colors.white};
-`
+const { Content } = Layout
 
 export const NoteSpace = () => {
   const [leftCollapsed, setLeftCollapsed] = React.useState(false)
@@ -41,7 +23,7 @@ export const NoteSpace = () => {
       setRightCollapsed(collapse)
     }
   }
-  const [currNoteId, setCurrNoteId] = React.useState(0)
+  const [currNoteId, setCurrNoteId] = React.useState(-1)
   const [currNoteFolderId, setCurrNoteFolderId] = React.useState(0)
   const [folders, setFolders] = React.useState<Folder[]>([])
   const pseudoID = () => Math.floor(Math.random() * 100000)
@@ -78,21 +60,17 @@ export const NoteSpace = () => {
           style={{
             transition: 'all 0.25s ease',
             backgroundColor: colors.white,
-            marginLeft: leftCollapsed ? '75px' : '275px',
-            marginRight: rightCollapsed ? '75px' : '275px',
+            marginLeft: leftCollapsed ? '110px' : '310px',
+            marginRight: rightCollapsed ? '110px' : '310px',
           }}
         >
-          <StyledHeader>
-            <HeaderContent>
-              <TextHeader color="white">
-                Folder: #{currNoteFolderId} / Note: #{currNoteId}
-              </TextHeader>
-            </HeaderContent>
-          </StyledHeader>
-          <Content style={{ backgroundColor: colors.white, margin: '0 50px' }}>
-            <Card textAlign="left" height={1280}>
-              <Editor noteId={currNoteId} />
-            </Card>
+          <Content
+            style={{ backgroundColor: colors.white, margin: '25px 50px 0' }}
+          >
+            <NoteEditor
+              currNoteId={currNoteId}
+              currNoteFolderId={currNoteFolderId}
+            />
           </Content>
         </Layout>
         <ProfileBar collapsed={rightCollapsed} onCollapse={onRightCollapse} />

@@ -1,7 +1,7 @@
 export const colors = {
   black: '#1C1C1C',
   white: '#FFF',
-  grey: '#C8C8C8',
+  grey: '#d5d5d5',
   red: '#FFBCBC',
   blue: '#C7E6FF',
   yellow: '#FFFDBB',
@@ -22,3 +22,4 @@ export type color =
   | 'purple'
   | 'whiteHover'
   | 'transparent'
+  | 'darkBlack'

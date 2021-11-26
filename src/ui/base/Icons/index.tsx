@@ -13,9 +13,10 @@ export const IconWrap = styled(Box)<IIconWrap>`
   &:hover {
     cursor: pointer;
     background-color: ${(props) =>
-      props.bgcolor ? colors[props.bgcolor] + '90' : 'transparent'};
+      props.bgcolor ? colors[props.bgcolor] : 'transparent'};
   }
   display: inline-block;
-  background-color: ${(props) =>
-    props.bgcolor ? colors[props.bgcolor] : 'transparent'};
+  height: ${(props) => (props.height ? props.height + 'px' : 'auto')};
+  border-radius: 5px;
+  padding: 4px;
 `

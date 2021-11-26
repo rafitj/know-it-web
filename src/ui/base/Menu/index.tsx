@@ -5,6 +5,7 @@ import { SubMenuProps } from 'antd/lib/menu/SubMenu'
 import React from 'react'
 import styled from 'styled-components'
 import { color, colors } from '../theme'
+export const { Divider: MenuDivider } = AntDMenu
 const { SubMenu: AntDSubMenu } = AntDMenu
 
 export interface IMenuItemProps extends MenuItemProps {
@@ -24,14 +25,16 @@ export interface ISubMenuProps extends SubMenuProps {
 const StyledSubMenu = styled(AntDSubMenu)<ISubMenuProps>`
   opacity: ${(props) => (props.selected ? 1 : 0.85)};
   .ant-menu-submenu-title {
+    transition: all 0.2s ease;
     ${(props) =>
       props.highlight
-        ? 'border-left: 5px solid' + colors[props.highlight]
+        ? 'border-left: 4px solid' + colors[props.highlight]
         : ''};
     ${(props) =>
       props.selected
         ? `background-color: ${colors.darkBlack} !important;`
         : ''};
+    ${(props) => (props.selected ? `border-left-width: 8px;` : '')};
   }
 
   &.ant-menu-submenu-active {
@@ -39,6 +42,9 @@ const StyledSubMenu = styled(AntDSubMenu)<ISubMenuProps>`
   }
   transition: all 0.25s ease;
   margin-bottom: 15px;
+  .ant-submenu-pop {
+    background-color: red;
+  }
 `
 
 export const SubMenu = ({

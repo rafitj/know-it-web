@@ -28,8 +28,27 @@ export const FileDirectoryMenu = ({
   const [currFolder, setCurrFolder] = React.useState(-1)
   const [addFolderMode, setAddFolderMode] = React.useState(false)
   const [addFileMode, setAddFileMode] = React.useState(false)
+  const [openFolders, setOpenFolders] = React.useState<string[]>([])
+  const onOpenChange = (openKeys: string[]) => {
+    setOpenFolders(openKeys)
+  }
+
+  const openFolder = (folderId: number) => {
+    if (!openFolders.includes(folderId.toString())) {
+      setOpenFolders((prevOpenFolders) => [
+        ...prevOpenFolders,
+        folderId.toString(),
+      ])
+    }
+  }
+
   return (
-    <Menu mode="inline" theme="dark">
+    <Menu
+      mode="inline"
+      theme="dark"
+      openKeys={openFolders}
+      onOpenChange={onOpenChange}
+    >
       <Flex justifyContent="space-around" alignItems="center" height={40}>
         My Notes
         <Box flexDirection="row">
@@ -42,13 +61,17 @@ export const FileDirectoryMenu = ({
           <IconWrap>
             <FileAddOutlined
               style={{ fontSize: 18 }}
-              onClick={() => setAddFileMode(true)}
+              onClick={() => {
+                openFolder(currFolder)
+                setAddFileMode(true)
+              }}
             />
           </IconWrap>
         </Box>
       </Flex>
       {folders.map((folder) => (
         <FolderSubMenu
+          key={folder.id}
           folder={folder}
           setCurrFile={setCurrFile}
           setCurrFolder={setCurrFolder}
@@ -61,7 +84,11 @@ export const FileDirectoryMenu = ({
         />
       ))}
       {addFolderMode && (
-        <NewFolder newFolder={newFolder} setAddFolderMode={setAddFolderMode} />
+        <NewFolder
+          newFolder={newFolder}
+          setAddFolderMode={setAddFolderMode}
+          setCurrFolder={setCurrFolder}
+        />
       )}
     </Menu>
   )

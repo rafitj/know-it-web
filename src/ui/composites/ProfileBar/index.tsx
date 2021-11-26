@@ -2,6 +2,7 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
@@ -23,7 +24,7 @@ const StyledSider = styled(Sider)`
   .ant-layout-sider-zero-width-trigger {
     display: none;
   }
-  margin: 20px;
+  margin: 25px 35px;
   position: fixed;
   right: 0;
   .ant-menu-item {
@@ -34,6 +35,10 @@ const StyledSider = styled(Sider)`
 `
 
 export const ProfileBar = ({ collapsed, onCollapse }: IProfileBar) => {
+  const history = useHistory()
+  const navigateTo = (dest: string) => {
+    history.push(dest)
+  }
   return (
     <>
       <StyledSider
@@ -46,8 +51,8 @@ export const ProfileBar = ({ collapsed, onCollapse }: IProfileBar) => {
         width={0}
       >
         <Menu>
-          <MenuItem icon={<HomeOutlined />} />
-          <MenuItem icon={<UserOutlined />} />
+          <MenuItem icon={<HomeOutlined />} onClick={() => navigateTo('/')} />
+          <MenuItem icon={<UserOutlined />} onClick={() => navigateTo('/')} />
         </Menu>
       </StyledSider>
     </>
