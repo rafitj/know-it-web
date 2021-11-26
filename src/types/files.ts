@@ -1,3 +1,5 @@
+import { color } from 'ui/base/theme'
+
 export interface Note {
   id: number
   folderId: number
@@ -9,4 +11,5 @@ export interface Folder {
   name: string
   id: number
   notes: Note[]
+  color: color
 }
