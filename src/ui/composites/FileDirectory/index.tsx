@@ -112,9 +112,9 @@ export const FileDirectory = ({
                       setCurrFile(note.id)
                     }}
                   >
-                    <Flex alignItems="center" >
+                    <Flex alignItems="center">
                       <Box width={11 / 12}>{note.name}</Box>
-                      <Settings size={15} style={{marginRight: 3}} />
+                      <Settings size={15} style={{ marginRight: 3 }} />
                       <Trash size={15} />
                     </Flex>
                   </MenuItem>
@@ -148,8 +148,8 @@ export const FileDirectory = ({
                     </Box>
                   </Flex>
                 ) : (
-                    <></>
-                  )}
+                  <></>
+                )}
               </SubMenu>
             ))}
             <Flex justifyContent="center" alignItems="center" px={3} pt={2}>

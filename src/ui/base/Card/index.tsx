@@ -17,11 +17,10 @@ export interface ICardProps extends AntDCardProps {
 
 const CardContainer = styled.div<ICardProps>`
   .ant-card {
+    width: 100%;
     font-family: Arial;
     border-radius: 8px;
     border: ${`2px solid ${colors.black}`};
-    padding: 16px;
-    margin: 16px;
     box-shadow: ${`3px 3px ${colors.grey}`};
     text-align: ${(props) => props.textAlign};
     background-color: ${(props) =>

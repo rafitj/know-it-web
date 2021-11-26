@@ -17,18 +17,18 @@ export const LandingPage = () => {
           </Box>
           <Box ml={2}>
             <Text>
-              We are changing how you learn. Study 20% faster with
-              personalized and
-                <Highlighter highlight="blue">
+              We are changing how you learn. Study 20% faster with personalized
+              and
+              <Highlighter highlight="blue">
                 premade study schedules
-                </Highlighter>
-                to keep you on track, smart, accurate and
-                <Highlighter highlight="red">automatic flashcards</Highlighter>
-                that will help you practice, a simple but awesome
-                <Highlighter highlight="yellow">new notepad</Highlighter>built
-                to organize your thoughts and a learning experience you will
-                never forget, literally.
-              </Text>
+              </Highlighter>
+              to keep you on track, smart, accurate and
+              <Highlighter highlight="red">automatic flashcards</Highlighter>
+              that will help you practice, a simple but awesome
+              <Highlighter highlight="yellow">new notepad</Highlighter>built to
+              organize your thoughts and a learning experience you will never
+              forget, literally.
+            </Text>
           </Box>
           <Box mt={3}>
             <PrimaryButton text="Sign Up" />

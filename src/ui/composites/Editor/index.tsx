@@ -38,28 +38,44 @@ const EditorContainer = styled.div`
 `
 export const Editor = ({ noteId }: EditorProps) => {
   const [data, setData] = React.useState<OutputData>(defaultData(noteId))
-
   const [status, setStatus] = React.useState('Loading')
-
-  let editorInstance: EditorJsType
+  const [editorInstance, setEditorInstance] = React.useState<EditorJsType>()
 
   const onEdit = async (api: EditorAPI) => {
-    const savedData = await editorInstance.save()
-    setData(savedData)
-    setStatus('Saved')
-    setTimeout(() => {
-      setStatus('')
-    }, 1000)
+    if (editorInstance) {
+      const savedData = await editorInstance.save()
+      setData(savedData)
+      setStatus('Saved')
+      setTimeout(() => {
+        setStatus('')
+      }, 1000)
+    }
   }
 
   console.log(status)
   return (
     <>
       <Box>
-        <EditorContainer onKeyUp={(e) => { console.log(e.keyCode) }}>
+        <EditorContainer
+          onKeyUp={(e) => {
+            console.log(e.keyCode)
+          }}
+          onClick={() => {
+            if (editorInstance) {
+              const index = editorInstance.blocks.getBlocksCount()
+              editorInstance.blocks.insert(
+                undefined,
+                undefined,
+                undefined,
+                index + 1,
+                true
+              )
+            }
+          }}
+        >
           <EditorJs
             instanceRef={(instance) => {
-              editorInstance = instance
+              setEditorInstance(instance)
             }}
             tools={EDITOR_TOOLS}
             data={data}

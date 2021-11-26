@@ -1,17 +1,14 @@
 import React from 'react'
-import { Card } from 'ui/base/Card'
-import { BigText } from 'ui/components/Typography/BigText'
-import { Flex, Box } from 'reflexbox';
+import { AuthForm } from 'ui/composites/AuthForm'
 
-export const SignUpForm = () => {
-  return (
-    <Flex justifyContent='center'>
-      <Box>
-        <BigText>Register.</BigText>
-
-        <Card>
-        </Card>
-      </Box>
-    </Flex>
-  )
-}
+export const SignUpForm = () => (
+  <AuthForm
+    title="Register."
+    emailText="Join with Email"
+    googleText="Join with Google"
+    fbText="Join with Facebook"
+    rerouteBtnText="Let's get you home"
+    rerouteText="Already have an account?"
+    reroute="/login"
+  />
+)

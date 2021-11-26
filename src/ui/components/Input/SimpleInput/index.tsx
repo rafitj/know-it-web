@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AntDInputProps, Input, PasswordInput } from '../../../base/Input'
+import { AntDInputProps, Input } from '../../../base/Input'
 import { colors } from '../../../base/theme'
 
 export interface SimpleInputProps extends AntDInputProps {
@@ -9,7 +9,6 @@ export interface SimpleInputProps extends AntDInputProps {
 }
 
 const StyledInputContainer = styled.div`
-  margin: 16px;
   font-family: Arial;
   .ant-input {
     font-size: 1rem;
@@ -18,6 +17,10 @@ const StyledInputContainer = styled.div`
     border: 2px solid ${colors.black};
     padding: 8px;
     border-radius: 8px;
+    width: 100%;
+  }
+  .ant-input: hover {
+    border-right-width: 2px !important;
   }
   .ant-input: focus {
     outline: none;
@@ -37,10 +40,10 @@ export const SimpleInput = ({
 }: SimpleInputProps) =>
   password ? (
     <StyledInputContainer>
-      <PasswordInput {...rest} />
+      <Input type="password" {...rest} />
     </StyledInputContainer>
   ) : (
-      <StyledInputContainer>
-        <Input defaultValue={defaultVal} {...rest} />
-      </StyledInputContainer>
-    )
+    <StyledInputContainer>
+      <Input defaultValue={defaultVal} {...rest} />
+    </StyledInputContainer>
+  )

@@ -1,6 +1,7 @@
 import { Button as AntDButton } from 'antd'
 import { ButtonProps } from 'antd/lib/button'
 import React from 'react'
+import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { color, colors } from '../theme'
 
@@ -13,9 +14,12 @@ export interface IButtonProps extends AntDButtonProps {
   borderColor: color
   backgroundColor: color
   fontColor: color
+  icon?: React.ReactNode
 }
 
 const ButtonContainer = styled.div<IButtonProps>`
+  width: 100%;
+  text-align: center;
   display: inline-block;
   .ant-btn {
     height: auto;
@@ -24,7 +28,6 @@ const ButtonContainer = styled.div<IButtonProps>`
     border-radius: 8px;
     border: 2px solid;
     padding: 8px 25px;
-    margin: 8px;
     background-color: ${(props) => colors[props.backgroundColor]};
     border-color: ${(props) => colors[props.borderColor]};
     color: ${(props) => colors[props.fontColor]};
@@ -68,6 +71,7 @@ export const Button = ({
   text,
   backgroundColor,
   fontColor,
+  icon,
   ...antdprops
 }: IButtonProps) => (
   <ButtonContainer
@@ -75,6 +79,11 @@ export const Button = ({
     borderColor={borderColor}
     backgroundColor={backgroundColor}
   >
-    <AntDButton {...antdprops}>{text}</AntDButton>
+    <AntDButton {...antdprops}>
+      <Flex justifyContent="center" alignItems="center" margin={'0 auto'}>
+        {icon}
+        <Box mx={2}>{text}</Box>
+      </Flex>
+    </AntDButton>
   </ButtonContainer>
 )

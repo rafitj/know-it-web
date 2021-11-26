@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Home } from '../Home'
+import { Login } from '../Login'
 import { NoteSpace } from '../NoteSpace'
 import { SignUp } from '../SignUp'
 
@@ -13,6 +14,9 @@ export const App = () => {
         </Route>
         <Route exact={true} path="/signup">
           <SignUp />
+        </Route>
+        <Route exact={true} path="/login">
+          <Login />
         </Route>
         <Route exact={true} path="/">
           <Home />
