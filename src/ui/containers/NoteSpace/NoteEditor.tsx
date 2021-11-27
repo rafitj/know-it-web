@@ -1,29 +1,19 @@
 import EditorJsType from '@editorjs/editorjs/types'
 import React from 'react'
+import { NoteStore } from 'stores/NoteStore'
 import { Card } from 'ui/components/Card'
 import { NoteView } from 'ui/composites/Editor/NoteView'
 import { UnselectedNoteView } from 'ui/composites/Editor/UnselectedNoteView'
 
-interface NoteEditorProps {
-  currNoteId: number
-  currNoteFolderId: number
-  newFolderAndFile: (folderName: string, fileName: string) => void
-}
-
-export const NoteEditor = ({
-  currNoteFolderId,
-  currNoteId,
-  newFolderAndFile,
-}: NoteEditorProps) => {
+export const NoteEditor = () => {
+  const note = NoteStore.note
   const [editorInstance, setEditorInstance] = React.useState<EditorJsType>()
   return (
     <Card textAlign="left" height="96vh">
-      {currNoteId === -1 ? (
-        <UnselectedNoteView newFolderAndFile={newFolderAndFile} />
+      {note ? (
+        <UnselectedNoteView />
       ) : (
         <NoteView
-          currNoteId={currNoteId}
-          currNoteFolderId={currNoteFolderId}
           editorInstance={editorInstance}
           setEditorInstance={setEditorInstance}
         />

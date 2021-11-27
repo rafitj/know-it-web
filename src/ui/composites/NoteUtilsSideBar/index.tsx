@@ -5,7 +5,9 @@ import {
 } from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React from 'react'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { NoteTools } from 'types/note'
 import { Menu, MenuItem } from 'ui/base/Menu'
@@ -14,12 +16,7 @@ import { NoteTool } from './NoteTool'
 
 const { Sider } = Layout
 
-export interface INoteUtilsSideBar {
-  collapsed: boolean
-  onCollapse: (collapse: boolean) => void
-}
-
-const StyledSider = styled(Sider)<INoteUtilsSideBar>`
+const StyledSider = styled(Sider)<{ collapsed: boolean }>`
   border: 2px solid ${colors.black};
   background-color: ${colors.white};
   .ant-layout-sider-trigger {
@@ -44,10 +41,11 @@ const StyledMenu = styled(Menu)`
   }
 `
 
-export const NoteUtilsSideBar = ({
-  collapsed,
-  onCollapse,
-}: INoteUtilsSideBar) => {
+export const NoteUtilsSideBar = observer(() => {
+  const collapsed = NoteViewStore.rightCollapsed
+  const onCollapse = (collapse: boolean) => {
+    NoteViewStore.collapseRight(collapse)
+  }
   const [selectedTool, setSelectedTool] = React.useState<NoteTools>('cards')
   const selectTool = (tool: NoteTools) => {
     onCollapse(false)
@@ -83,4 +81,4 @@ export const NoteUtilsSideBar = ({
       {!collapsed && <NoteTool selectedTool={selectedTool} />}
     </StyledSider>
   )
-}
+})

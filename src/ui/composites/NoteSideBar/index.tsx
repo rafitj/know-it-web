@@ -1,25 +1,15 @@
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React from 'react'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
-import { Folder } from 'types/files'
 import { colors } from 'ui/base/theme'
 import { Line } from 'ui/components/Line'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { MiniFolderMenu } from './MiniFolderMenu'
 import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
-
-export interface INoteSideBar {
-  folders: Folder[]
-  newFile: (name: string, folderId: number) => void
-  newFolder: (name: string) => number
-  setCurrFile: (fileId: number) => void
-  collapsed: boolean
-  onCollapse: (collapse: boolean) => void
-  currNoteFolderId: number
-  currNoteId: number
-}
 
 const StyledSider = styled(Sider)`
   background-color: ${colors.black};
@@ -36,16 +26,11 @@ const StyledSider = styled(Sider)`
   overflow: auto;
 `
 
-export const NoteSideBar = ({
-  folders,
-  newFile,
-  newFolder,
-  setCurrFile,
-  collapsed,
-  onCollapse,
-  currNoteFolderId,
-  currNoteId,
-}: INoteSideBar) => {
+export const NoteSideBar = observer(() => {
+  const collapsed = NoteViewStore.leftCollapsed
+  const onCollapse = (collapse: boolean) => {
+    NoteViewStore.collapseLeft(collapse)
+  }
   return (
     <StyledSider
       collapsible={true}
@@ -56,20 +41,7 @@ export const NoteSideBar = ({
     >
       <ViewMenu />
       <Line color="white" />
-      {collapsed ? (
-        <MiniFolderMenu
-          folder={folders.find((folder) => folder.id === currNoteFolderId)}
-        />
-      ) : (
-        <FileDirectoryMenu
-          folders={folders}
-          newFile={newFile}
-          newFolder={newFolder}
-          setCurrFile={setCurrFile}
-          currNoteId={currNoteId}
-          currNoteFolderId={currNoteFolderId}
-        />
-      )}
+      {collapsed ? <MiniFolderMenu /> : <FileDirectoryMenu />}
     </StyledSider>
   )
-}
+})

@@ -1,4 +1,4 @@
 export interface ICreateNoteRequest {
-    title?: string;
-    folderId?: string;
+  title?: string
+  folderId?: string
 }

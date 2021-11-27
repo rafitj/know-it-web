@@ -1,7 +1,10 @@
 import { FileAddOutlined, FolderAddOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
+import { FolderStore } from 'stores/FolderStore'
+import { NoteViewStore } from 'stores/NoteViewStore'
 import { Folder } from 'types/files'
 import { IconWrap } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
@@ -18,28 +21,17 @@ export interface IFileDirectoryMenu {
   currNoteFolderId: number
 }
 
-export const FileDirectoryMenu = ({
-  folders,
-  newFolder,
-  newFile,
-  setCurrFile,
-  currNoteId,
-  currNoteFolderId,
-}: IFileDirectoryMenu) => {
-  const [currFolder, setCurrFolder] = React.useState(-1)
-  const [addFolderMode, setAddFolderMode] = React.useState(false)
-  const [addFileMode, setAddFileMode] = React.useState(false)
-  const [openFolders, setOpenFolders] = React.useState<string[]>([])
+export const FileDirectoryMenu = observer(() => {
+  const folders = FolderStore.folders
+  const openFolders = NoteViewStore.openFolders
+  const selectedFolder = NoteViewStore.selectedFolderId
   const onOpenChange = (openKeys: string[]) => {
-    setOpenFolders(openKeys)
+    NoteViewStore.setOpenFolders(openKeys)
   }
 
-  const openFolder = (folderId: number) => {
-    if (!openFolders.includes(folderId.toString())) {
-      setOpenFolders((prevOpenFolders) => [
-        ...prevOpenFolders,
-        folderId.toString(),
-      ])
+  const openFolder = (folderId: string) => {
+    if (!openFolders.includes(folderId)) {
+      NoteViewStore.setOpenFolders([...openFolders, folderId.toString()])
     }
   }
 
@@ -56,15 +48,17 @@ export const FileDirectoryMenu = ({
           <IconWrap>
             <FolderAddOutlined
               style={{ fontSize: 21, marginRight: 20 }}
-              onClick={() => setAddFolderMode(true)}
+              onClick={() => NoteViewStore.setAddFolderMode(true)}
             />
           </IconWrap>
           <IconWrap>
             <FileAddOutlined
               style={{ fontSize: 18 }}
               onClick={() => {
-                openFolder(currFolder)
-                setAddFileMode(true)
+                if (selectedFolder) {
+                  openFolder(selectedFolder)
+                  NoteViewStore.setAddFileMode(true)
+                }
               }}
             />
           </IconWrap>
@@ -78,28 +72,11 @@ export const FileDirectoryMenu = ({
           onOpenChange={onOpenChange}
         >
           {folders.map((folder) => (
-            <FolderSubMenu
-              key={folder.id}
-              folder={folder}
-              setCurrFile={setCurrFile}
-              setCurrFolder={setCurrFolder}
-              addFileMode={addFileMode && currFolder === folder.id}
-              newFile={newFile}
-              setAddFileMode={setAddFileMode}
-              selected={currFolder === folder.id}
-              currNoteId={currNoteId}
-              currNoteFolderId={currNoteFolderId}
-            />
+            <FolderSubMenu key={folder.id} folder={folder} />
           ))}
-          {addFolderMode && (
-            <NewFolder
-              newFolder={newFolder}
-              setAddFolderMode={setAddFolderMode}
-              setCurrFolder={setCurrFolder}
-            />
-          )}
+          {NoteViewStore.addFolderMode && <NewFolder />}
         </Menu>
       </Box>
     </>
   )
-}
+})

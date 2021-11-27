@@ -4,8 +4,9 @@ import EditorJsType, {
 } from '@editorjs/editorjs/types'
 import React from 'react'
 import EditorJs from 'react-editor-js'
+import { NoteStore } from 'stores/NoteStore'
 import './editor.css'
-import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
+import { defaultData, EDITOR_TOOLS } from './Tools/EditorTools'
 
 export interface Note {
   id: number
@@ -15,19 +16,16 @@ export interface Note {
 }
 
 export interface EditorProps {
-  noteId?: number
   editorInstance?: EditorJsType
   setEditorInstance: React.Dispatch<
     React.SetStateAction<EditorJsType | undefined>
   >
 }
 
-export const Editor = ({
-  noteId,
-  editorInstance,
-  setEditorInstance,
-}: EditorProps) => {
-  const [data, setData] = React.useState<OutputData>(defaultData(noteId))
+export const Editor = ({ editorInstance, setEditorInstance }: EditorProps) => {
+  const note = NoteStore.note
+  console.log(note)
+  const [data, setData] = React.useState<OutputData>(defaultData(0))
   const [status, setStatus] = React.useState('Loading')
   const onEdit = async (api: EditorAPI) => {
     if (editorInstance) {
@@ -43,7 +41,7 @@ export const Editor = ({
   React.useEffect(() => {
     if (editorInstance?.blocks) {
       editorInstance?.blocks.clear()
-      editorInstance?.blocks.render(defaultData(noteId))
+      editorInstance?.blocks.render(defaultData(0))
     }
   })
 
