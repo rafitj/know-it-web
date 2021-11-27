@@ -26,19 +26,23 @@ class UserStoreImpl {
   }
 
   @action
-  async register(userCredentials: ISignUpUserRequest): Promise<void> {
-    const response = await axios.post(
-      'https://know-it-back-master-x3ikbzbziy.herokuapp.com/users/sign-up',
-      userCredentials,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+  async register(userCredentials: ISignUpUserRequest): Promise<boolean> {
+    try {
+      const response = await axios.post(
+        'https://know-it-back-master-x3ikbzbziy.herokuapp.com/users/sign-up',
+        userCredentials,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      if (response.status !== 200) {
+        throw new Error(response.data)
       }
-    )
-
-    if (response.status !== 200) {
-      throw new Error(response.data)
+      return true
+    } catch (err) {
+      return false
     }
   }
 

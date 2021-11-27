@@ -1,8 +1,11 @@
 import React from 'react'
-import { AuthForm } from 'ui/composites/AuthForm'
+import { useHistory } from 'react-router-dom'
 import { UserStore } from 'stores/UserStore'
+import { AuthForm } from 'ui/composites/AuthForm'
 
 export const SignUpForm = () => {
+  const history = useHistory()
+  const [showError, setShowError] = React.useState(false)
   const [passwordValue, setPasswordValue] = React.useState('')
   const [emailValue, setEmailValue] = React.useState('')
   const [nameValue, setNameValue] = React.useState('')
@@ -13,7 +16,12 @@ export const SignUpForm = () => {
       lastName: 'SMD',
       password: passwordValue,
     }
-    await UserStore.register(userRegisterInfo)
+    const registerSuccess = await UserStore.register(userRegisterInfo)
+    if (registerSuccess) {
+      history.push('/note-space')
+    } else {
+      setShowError(true)
+    }
   }
   const setPassword = (password: string) => {
     setPasswordValue(password)
@@ -23,6 +31,9 @@ export const SignUpForm = () => {
   }
   const setName = (name: string) => {
     setNameValue(name)
+  }
+  const closeError = () => {
+    setShowError(false)
   }
   return (
     <AuthForm
@@ -38,6 +49,8 @@ export const SignUpForm = () => {
       setEmail={setEmail}
       setName={setName}
       emailClick={emailRegister}
+      showError={showError}
+      closeError={closeError}
     />
   )
 }
