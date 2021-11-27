@@ -5,11 +5,14 @@ import { Card } from 'ui/components/Card'
 import { NoteView } from 'ui/composites/Editor/NoteView'
 import { UnselectedNoteView } from 'ui/composites/Editor/UnselectedNoteView'
 
-export const NoteEditor = observer(() => {
-  const note = NoteStore.note
-  return (
-    <Card textAlign="left" height="96vh">
-      {note ? <NoteView /> : <UnselectedNoteView />}
-    </Card>
-  )
-})
+@observer
+export class NoteEditor extends React.Component {
+  note = NoteStore.note
+  render() {
+    return (
+      <Card textAlign="left" height="96vh">
+        {this.note ? <NoteView /> : <UnselectedNoteView />}
+      </Card>
+    )
+  }
+}
