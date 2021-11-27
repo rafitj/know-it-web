@@ -11,28 +11,14 @@ export const UnselectedNoteView = ({
   newFolderAndFile,
 }: UnselectedNoteViewProps) => {
   const useTemplate = () => {
-    newFolderAndFile('Template File', 'Template Folder')
+    newFolderAndFile('Template Folder', 'Template File')
   }
   return (
     <Empty
       image={Empty.PRESENTED_IMAGE_SIMPLE}
-      description={<span>No Note Selected</span>}
+      description={<span>Select a Note</span>}
     >
       <Flex justifyContent="center" alignItems="center">
-        <Box>
-          <HighlightedText
-            bordered={true}
-            textColor="black"
-            highlight={'green'}
-          >
-            Create Note
-          </HighlightedText>
-        </Box>
-        <Box mx={2}>
-          <HighlightedText bordered={true} textColor="black" highlight={'blue'}>
-            Select Note
-          </HighlightedText>
-        </Box>
         <Box onClick={useTemplate}>
           <HighlightedText bordered={true} textColor="black" highlight={'red'}>
             Use Template

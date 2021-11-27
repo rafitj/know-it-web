@@ -1,11 +1,13 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex } from 'reflexbox'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 import { HighlightText } from 'ui/components/Typography/HighlightText'
 import { StrongText } from 'ui/components/Typography/StrongText'
+import { UserStore } from '../../../stores/UserStore'
 
-export const Nav = () => {
+export const Nav = observer(() => {
   return (
     <Flex
       alignItems="center"
@@ -28,18 +30,28 @@ export const Nav = () => {
           <Box mx={3}>
             <HighlightText highlight="green">Pricing</HighlightText>
           </Box>
-          <Box mx={3}>
-            <Link to="/signup">
-              <HighlightedText highlight="black">Sign Up</HighlightedText>
-            </Link>
-          </Box>
-          <Box mx={3}>
-            <Link to="/login">
-              <HighlightedText highlight="black">Login</HighlightedText>
-            </Link>
-          </Box>
+          {UserStore.isSignedIn ? (
+            <Box mx={3}>
+              <Link to="/note-space">
+                <HighlightedText highlight="black">Note Space</HighlightedText>
+              </Link>
+            </Box>
+          ) : (
+            <>
+              <Box mx={3}>
+                <Link to="/signup">
+                  <HighlightedText highlight="black">Sign Up</HighlightedText>
+                </Link>
+              </Box>
+              <Box mx={3}>
+                <Link to="/login">
+                  <HighlightedText highlight="black">Login</HighlightedText>
+                </Link>
+              </Box>
+            </>
+          )}
         </Flex>
       </Box>
     </Flex>
   )
-}
+})
