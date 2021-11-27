@@ -25,8 +25,8 @@ export const NewFile = observer(() => {
     if ((!e || e.key === 'Enter') && newFileName !== '') {
       await NoteStore.createNote({ title: newFileName, folderId })
       setNewFileName('')
+      NoteViewStore.setAddFileMode(false)
     }
-    NoteViewStore.setAddFileMode(false)
   }
   return (
     <Flex justifyContent="center" alignItems="center" px={4} mt={2}>

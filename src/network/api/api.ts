@@ -51,7 +51,7 @@ class ApiImpl {
 
   getNoteById = async (id: string): Promise<INoteResponse> => {
     const data = (await this.createRequest(
-      `notes${id}`,
+      `notes?id=${id}`,
       'get'
     )) as INoteResponse
     return data

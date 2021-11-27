@@ -5,21 +5,11 @@ import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { FolderStore } from 'stores/FolderStore'
 import { NoteViewStore } from 'stores/NoteViewStore'
-import { Folder } from 'types/files'
 import { IconWrap } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
 import { Menu } from '../../base/Menu'
 import { FolderSubMenu } from './FolderSubMenu'
 import { NewFolder } from './NewFolder'
-
-export interface IFileDirectoryMenu {
-  folders: Folder[]
-  newFile: (name: string, folderId: number) => void
-  newFolder: (name: string) => number
-  setCurrFile: (fileId: number) => void
-  currNoteId: number
-  currNoteFolderId: number
-}
 
 export const FileDirectoryMenu = observer(() => {
   const folders = FolderStore.folders
@@ -34,7 +24,6 @@ export const FileDirectoryMenu = observer(() => {
       NoteViewStore.setOpenFolders([...openFolders, folderId.toString()])
     }
   }
-
   return (
     <>
       <Flex

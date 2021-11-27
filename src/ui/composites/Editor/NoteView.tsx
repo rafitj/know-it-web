@@ -1,13 +1,14 @@
 import EditorJsType from '@editorjs/editorjs/types'
 import { PageHeader, Tag } from 'antd'
+import { observer } from 'mobx-react'
 import React from 'react'
+import { FolderStore } from 'stores/FolderStore'
+import { NoteStore } from 'stores/NoteStore'
 import styled from 'styled-components'
 import { Line } from 'ui/components/Line'
 import { Editor } from '.'
 
 interface NoteViewProps {
-  currNoteId?: string
-  currNoteFolderId?: string
   editorInstance?: EditorJsType
   setEditorInstance: React.Dispatch<
     React.SetStateAction<EditorJsType | undefined>
@@ -24,32 +25,33 @@ const StyledPageHeader = styled(PageHeader)`
     border-radius: 5px;
   }
 `
-export const NoteView = ({
-  currNoteId,
-  currNoteFolderId,
-  editorInstance,
-  setEditorInstance,
-}: NoteViewProps) => {
-  return (
-    <>
-      <Line />
-      <StyledPageHeader
-        tags={[
-          <Tag key="0" color="blue">
-            Midterm
-          </Tag>,
-          <Tag key="1" color="blue">
-            Quiz 5
-          </Tag>,
-        ]}
-        title={`Note ${currNoteId}`}
-        subTitle={`Folder ${currNoteFolderId}`}
-      />
-      <Line />
-      <Editor
-        editorInstance={editorInstance}
-        setEditorInstance={setEditorInstance}
-      />
-    </>
-  )
-}
+export const NoteView = observer(
+  ({ editorInstance, setEditorInstance }: NoteViewProps) => {
+    const note = NoteStore.note
+    const folder = FolderStore.folders.find(
+      (folder) => folder.id === note?.folderId
+    )
+    return (
+      <>
+        <Line />
+        <StyledPageHeader
+          tags={[
+            <Tag key="0" color="blue">
+              Midterm
+            </Tag>,
+            <Tag key="1" color="blue">
+              Quiz 5
+            </Tag>,
+          ]}
+          title={note?.title}
+          subTitle={folder?.title}
+        />
+        <Line />
+        <Editor
+          editorInstance={editorInstance}
+          setEditorInstance={setEditorInstance}
+        />
+      </>
+    )
+  }
+)

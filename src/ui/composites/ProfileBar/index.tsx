@@ -1,6 +1,7 @@
 import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { NoteViewStore } from 'stores/NoteViewStore'
@@ -30,7 +31,7 @@ const StyledSider = styled(Sider)`
   }
 `
 
-export const ProfileBar = () => {
+export const ProfileBar = observer(() => {
   const collapsed = NoteViewStore.rightCollapsed
   const onCollapse = (collapse: boolean) => {
     NoteViewStore.collapseRight(collapse)
@@ -57,4 +58,4 @@ export const ProfileBar = () => {
       </StyledSider>
     </>
   )
-}
+})
