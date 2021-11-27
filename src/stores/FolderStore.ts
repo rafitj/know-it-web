@@ -23,27 +23,24 @@ class FolderStoreImpl {
   async createFolder(
     newFolder: ICreateFolderRequest
   ): Promise<IFolderResponse> {
-    this.isLoading = true
-    const res = await Api.createNewFolder(newFolder)
-    await this.fetchFolders()
-    this.isLoading = false
-    return res
+    try {
+      const res = await Api.createNewFolder(newFolder)
+      return res
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   @action
   async updateFolder(folder: IUpdateFolderRequest) {
-    this.isLoading = true
     await Api.updateFolder(folder)
     await this.fetchFolders()
-    this.isLoading = false
   }
 
   @action
   async deleteFolder(folderId: string) {
-    this.isLoading = true
     await Api.deleteFolder(folderId)
     await this.fetchFolders()
-    this.isLoading = false
   }
 }
 
