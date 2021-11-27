@@ -20,7 +20,11 @@ export const UnselectedNoteView = ({
     >
       <Flex justifyContent="center" alignItems="center">
         <Box>
-          <HighlightedText bordered={true} textColor="black" highlight={'green'}>
+          <HighlightedText
+            bordered={true}
+            textColor="black"
+            highlight={'green'}
+          >
             Create Note
           </HighlightedText>
         </Box>

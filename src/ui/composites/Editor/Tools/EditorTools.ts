@@ -9,7 +9,7 @@ import Marker from '@editorjs/marker'
 import Paragraph from '@editorjs/paragraph'
 import SimpleImage from '@editorjs/simple-image'
 import Table from '@editorjs/table'
-import { QABlock } from './qablock'
+import { QABlock } from './QABlock'
 
 export const EDITOR_TOOLS = {
   embed: { class: Embed, inlineToolbar: true },
