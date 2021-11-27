@@ -1,6 +1,10 @@
+import EditorJsType from '@editorjs/editorjs/types'
 import { action, observable } from 'mobx'
 
 class NoteViewStoreImpl {
+  @observable
+  editorInstance?: EditorJsType
+
   @observable
   selectedFolderId?: string
 
@@ -21,6 +25,11 @@ class NoteViewStoreImpl {
 
   @observable
   addFileMode: boolean = false
+
+  @action
+  setEditorInstance(instance?: EditorJsType) {
+    this.editorInstance = instance
+  }
 
   @action
   setSelectedFolderId(id?: string) {

@@ -8,6 +8,7 @@ import { IUpdateNoteRequest } from 'network/proto/request/IUpdateNoteRequest'
 import { IFolderResponse } from 'network/proto/response/IFolderResponse'
 import { IGetFolderWithNotesResponse } from 'network/proto/response/IGetFolderWithNotesResponse'
 import { INoteResponse } from 'network/proto/response/INoteResponse'
+import { UserStore } from 'stores/UserStore'
 
 const baseUrl = 'https://know-it-back-master-x3ikbzbziy.herokuapp.com/'
 
@@ -23,8 +24,7 @@ class ApiImpl {
         url: `${baseUrl}${endpointSuffix}`,
         method: requestType as any,
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ZWM5ZjE2OGEwMTM3OTc2MjBmOWE4NGYiLCJleHAiOjE1OTA5MDgyNjh9.iDSXfAjjoiOcxn2vvmQMHwKo5QLXcRpVP70JrzzrWaaneB6oF92ZhLoEmbVAq9sd1Vf82YodNJbLQi076Bh_DA',
+          Authorization: UserStore.authenticationHeaders?.Authorization,
           'Content-Type': 'application/json',
         },
         data: payload || {},
