@@ -1,4 +1,5 @@
 import { Layout } from 'antd'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { FolderStore } from 'stores/FolderStore'
 import { NoteViewStore } from 'stores/NoteViewStore'
@@ -9,6 +10,7 @@ import { NoteSideBar } from '../../composites/NoteSideBar'
 import { NoteEditor } from './NoteEditor'
 const { Content } = Layout
 
+@observer
 export class NoteSpace extends React.Component {
   leftCollapsed = NoteViewStore.leftCollapsed
   rightCollapsed = NoteViewStore.rightCollapsed
