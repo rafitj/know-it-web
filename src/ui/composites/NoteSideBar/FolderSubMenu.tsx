@@ -1,5 +1,6 @@
 import 'antd/dist/antd.css'
 import { SubMenuProps } from 'antd/lib/menu/SubMenu'
+import { GetFolderWithNotesResponse } from 'network/proto/protos'
 import React from 'react'
 import { Zap } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
@@ -9,7 +10,6 @@ import { colors } from 'ui/base/theme'
 import { SubMenu } from '../../base/Menu'
 import { FileMenuItem } from './FileMenuItem'
 import { NewFile } from './NewFile'
-import GetFolderWithNotesResponse = INetwork.GetFolderWithNotesResponse
 
 export interface IFolderSubMenu {
   folder: GetFolderWithNotesResponse

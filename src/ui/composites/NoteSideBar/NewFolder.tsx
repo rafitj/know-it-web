@@ -32,8 +32,10 @@ export class NewFolder extends React.Component {
         colour: 'red',
       })
       this.setState({ newFolderName: '' })
-      NoteViewStore.setSelectedFolderId(folder.id)
-      NoteViewStore.setAddFolderMode(false)
+      if (folder) {
+        NoteViewStore.setSelectedFolderId(folder.id)
+        NoteViewStore.setAddFolderMode(false)
+      }
     }
   }
   render() {

@@ -13,7 +13,9 @@ export class UnselectedNoteView extends React.Component {
       title: 'Template Folder',
       colour: 'purple',
     })
-    NoteStore.createNote({ title: 'Template File', folderId: folder.id })
+    if (folder) {
+      NoteStore.createNote({ title: 'Template File', folderId: folder.id })
+    }
   }
   render() {
     return (
