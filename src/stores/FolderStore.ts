@@ -1,13 +1,13 @@
 import { action, observable } from 'mobx'
 import { Api } from 'network/api/api'
-import { IFolderResponse } from 'network/proto/response/IFolderResponse'
-import { ICreateFolderRequest } from '../network/proto/request/ICreateFolderRequest'
-import { IUpdateFolderRequest } from '../network/proto/request/IUpdateFolderRequest'
-import { IGetFolderWithNotesResponse } from '../network/proto/response/IGetFolderWithNotesResponse'
+import CreateFolderRequest = INetwork.CreateFolderRequest;
+import GetFolderWithNotesResponse = INetwork.GetFolderWithNotesResponse;
+import FolderResponse = INetwork.FolderResponse;
+import UpdateFolderRequest = INetwork.UpdateFolderRequest;
 
 class FolderStoreImpl {
   @observable
-  folders: IGetFolderWithNotesResponse[] = []
+  folders: GetFolderWithNotesResponse[] = []
 
   @observable
   isLoading: boolean = false
@@ -21,8 +21,8 @@ class FolderStoreImpl {
 
   @action
   async createFolder(
-    newFolder: ICreateFolderRequest
-  ): Promise<IFolderResponse> {
+    newFolder: CreateFolderRequest
+  ): Promise<FolderResponse> {
     try {
       const res = await Api.createNewFolder(newFolder)
       return res
@@ -32,7 +32,7 @@ class FolderStoreImpl {
   }
 
   @action
-  async updateFolder(folder: IUpdateFolderRequest) {
+  async updateFolder(folder: UpdateFolderRequest) {
     await Api.updateFolder(folder)
     await this.fetchFolders()
   }
