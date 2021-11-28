@@ -1,5 +1,6 @@
-import { GetUserDetailsResponse } from '../network/proto/protos'
-import { UserStore } from './UserStore'
+import { observable } from 'mobx';
+import { GetUserDetailsResponse } from '../network/proto/protos';
+import { UserStore } from './UserStore';
 
 export enum PersistenceKey {
   UserSession = 'UserSession',
@@ -19,8 +20,13 @@ const appLoadRoutine: AppLoadRoutineType[] = [
 ]
 
 class PersistenceStore {
-  constructor() {
-    appLoadRoutine.forEach((routine) => routine())
+  @observable
+  isLoading: boolean = true;
+
+  async fetchItems() {
+    this.isLoading = true;
+    await Promise.all(appLoadRoutine.map(routine => routine()));
+    this.isLoading = false;
   }
 
   setItem<T>(key: PersistenceKey, data: any) {
