@@ -1,10 +1,7 @@
-import { action, observable } from 'mobx'
-import {
-  GetUserDetailsResponse,
-  LogInUserRequest,
-  SignUpUserRequest,
-} from 'network/proto/protos'
-import { Api } from '../network/api/api'
+import { action, observable } from 'mobx';
+import { GetUserDetailsResponse, LogInUserRequest, SignUpUserRequest } from 'network/proto/protos';
+import { Api } from '../network/api/api';
+import { PersistenceKey, PersistenceStore } from './PersistenceStore';
 
 class UserStore {
   @observable
@@ -42,6 +39,7 @@ class UserStore {
     this.isLoading = true
     try {
       this.user = await Api.signInUser(userCredentials)
+      PersistenceStore.setItem(PersistenceKey.UserSession, this.user)
     } catch (err) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to sign in user.'
