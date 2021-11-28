@@ -1,35 +1,33 @@
-import { GetUserDetailsResponse } from '../network/proto/protos';
-import { UserStore } from './UserStore';
+import { GetUserDetailsResponse } from '../network/proto/protos'
+import { UserStore } from './UserStore'
 
 export enum PersistenceKey {
   UserSession = 'UserSession',
 }
 
-type AppLoadRoutineType = () => void;
+type AppLoadRoutineType = () => void
 
 const appLoadRoutine: AppLoadRoutineType[] = [
   async () => {
-    const storageValue = await localStorage.getItem(PersistenceKey.UserSession);
+    const storageValue = await localStorage.getItem(PersistenceKey.UserSession)
     if (storageValue === null) {
-      return;
+      return
     }
     const user = JSON.parse(storageValue) as GetUserDetailsResponse
-    UserStore.user = JSON.parse(user);
+    UserStore.user = user
   },
 ]
 
 class PersistenceStore {
-  async fetchItems() {
-    await Promise.all(appLoadRoutine.map(routine => routine()));
+  constructor() {
+    appLoadRoutine.forEach((routine) => routine())
   }
 
   setItem<T>(key: PersistenceKey, data: any) {
-    localStorage.setItem(key.valueOf(), JSON.stringify(data));
+    localStorage.setItem(key.valueOf(), JSON.stringify(data))
   }
 }
 
-const persistenceStore = new PersistenceStore();
+const persistenceStore = new PersistenceStore()
 
-export {
-  persistenceStore as PersistenceStore
-}
+export { persistenceStore as PersistenceStore }
