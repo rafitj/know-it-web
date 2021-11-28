@@ -7,46 +7,48 @@ import { SecondaryButton } from 'ui/components/Button/SecondaryButton'
 import { BigText } from 'ui/components/Typography/BigText'
 import { Text } from 'ui/components/Typography/Text'
 
-export const LandingPage = () => {
-  return (
-    <Flex>
-      <Box width={[1 / 2]} p={6} pr={1}>
-        <Flex flexDirection="column">
-          <Box ml={2}>
-            <BigText>Learn Smart.</BigText>
-          </Box>
-          <Box ml={2}>
-            <Text>
-              We are changing how you learn. Study 20% faster with personalized
-              and
-              <Highlighter highlight="blue">
-                premade study schedules
-              </Highlighter>
-              to keep you on track, smart, accurate and
-              <Highlighter highlight="red">automatic flashcards</Highlighter>
-              that will help you practice, a simple but awesome
-              <Highlighter highlight="yellow">new notepad</Highlighter>built to
-              organize your thoughts and a learning experience you will never
-              forget, literally.
-            </Text>
-          </Box>
-          <Box mt={3}>
-            <Box display="inline-block" mr={3}>
-              <PrimaryButton text="Sign Up" />
+export class LandingPage extends React.Component {
+  render() {
+    return (
+      <Flex>
+        <Box width={[1 / 2]} p={6} pr={1}>
+          <Flex flexDirection="column">
+            <Box ml={2}>
+              <BigText>Learn Smart.</BigText>
             </Box>
-            <Box display="inline-block">
-              <SecondaryButton text="Learn More" />
+            <Box ml={2}>
+              <Text>
+                We are changing how you learn. Study 20% faster with
+                personalized and
+                <Highlighter highlight="blue">
+                  premade study schedules
+                </Highlighter>
+                to keep you on track, smart, accurate and
+                <Highlighter highlight="red">automatic flashcards</Highlighter>
+                that will help you practice, a simple but awesome
+                <Highlighter highlight="yellow">new notepad</Highlighter>built
+                to organize your thoughts and a learning experience you will
+                never forget, literally.
+              </Text>
             </Box>
-          </Box>
-        </Flex>
-      </Box>
-      <Box width={[1 / 2]}>
-        <Flex>
-          <Box pr={5} width={'100%'} height={'100%'} pl={1}>
-            <img src={LandingPhoto} alt="landing" height={'100%'} />
-          </Box>
-        </Flex>
-      </Box>
-    </Flex>
-  )
+            <Box mt={3}>
+              <Box display="inline-block" mr={3}>
+                <PrimaryButton text="Sign Up" />
+              </Box>
+              <Box display="inline-block">
+                <SecondaryButton text="Learn More" />
+              </Box>
+            </Box>
+          </Flex>
+        </Box>
+        <Box width={[1 / 2]}>
+          <Flex>
+            <Box pr={5} width={'100%'} height={'100%'} pl={1}>
+              <img src={LandingPhoto} alt="landing" height={'100%'} />
+            </Box>
+          </Flex>
+        </Box>
+      </Flex>
+    )
+  }
 }

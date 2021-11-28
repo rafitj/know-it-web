@@ -6,19 +6,21 @@ interface NoteCardsProps {
   selected: boolean
 }
 
-export const NoteCards = ({ selected }: NoteCardsProps) => {
-  return (
-    <>
-      {selected && (
-        <Empty
-          image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description={<span>No Flashcards</span>}
-        >
-          <HighlightedText highlight={'black'}>
-            Generate Flashcards
-          </HighlightedText>
-        </Empty>
-      )}
-    </>
-  )
+export class NoteCards extends React.Component<NoteCardsProps> {
+  render() {
+    return (
+      <>
+        {this.props.selected && (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description={<span>No Flashcards</span>}
+          >
+            <HighlightedText highlight={'black'}>
+              Generate Flashcards
+            </HighlightedText>
+          </Empty>
+        )}
+      </>
+    )
+  }
 }

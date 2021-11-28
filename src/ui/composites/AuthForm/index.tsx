@@ -43,97 +43,94 @@ const StyledAlert = styled(Alert)`
   }
 `
 
-export const AuthForm = ({
-  title,
-  emailText,
-  googleText,
-  fbText,
-  rerouteBtnText,
-  rerouteText,
-  reroute,
-  hasNameInput,
-  setPassword,
-  setEmail,
-  setName,
-  emailClick,
-  showError,
-  closeError,
-}: IAuthForm) => {
-  return (
-    <>
-      <Flex justifyContent="center" p={6}>
-        <Flex
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <BigText>{title}</BigText>
-          <Box width={1} my={2}>
-            <Card>
-              <Box alignItems="center" mb={showError ? 1 : 0}>
-                {hasNameInput && setName && (
-                  <Box>
+export class AuthForm extends React.Component<IAuthForm> {
+  render() {
+    return (
+      <>
+        <Flex justifyContent="center" p={6}>
+          <Flex
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <BigText>{this.props.title}</BigText>
+            <Box width={1} my={2}>
+              <Card>
+                <Box alignItems="center" mb={this.props.showError ? 1 : 0}>
+                  {this.props.hasNameInput && (
+                    <Box>
+                      <SimpleInput
+                        placeholder="Name"
+                        onChange={(e) => {
+                          if (this.props.setName) {
+                            this.props.setName(e.target.value)
+                          }
+                        }}
+                      />
+                    </Box>
+                  )}
+                  <Box my={3}>
                     <SimpleInput
-                      placeholder="Name"
+                      placeholder="Email"
                       onChange={(e) => {
-                        setName(e.target.value)
+                        this.props.setEmail(e.target.value)
                       }}
                     />
                   </Box>
-                )}
-                <Box my={3}>
-                  <SimpleInput
-                    placeholder="Email"
-                    onChange={(e) => {
-                      setEmail(e.target.value)
-                    }}
-                  />
-                </Box>
-                <Box my={3}>
-                  <SimpleInput
-                    password={true}
-                    placeholder="Password"
-                    onChange={(e) => {
-                      setPassword(e.target.value)
-                    }}
-                  />
-                </Box>
-                <PrimaryButton
-                  icon={<Send />}
-                  text={emailText}
-                  onClick={emailClick}
-                />
-                {showError && (
-                  <Box mt={3}>
-                    <StyledAlert
-                      message=""
-                      description="Bro wtf are you doing?"
-                      type="error"
-                      closable={true}
-                      onClose={closeError}
+                  <Box my={3}>
+                    <SimpleInput
+                      password={true}
+                      placeholder="Password"
+                      onChange={(e) => {
+                        this.props.setPassword(e.target.value)
+                      }}
                     />
                   </Box>
-                )}
-              </Box>
-            </Card>
-          </Box>
-          <Box width={1} my={2}>
-            <RedButton icon={<Google />} text={googleText} block={true} />
-          </Box>
-          <Box width={1} my={2} mb={3}>
-            <BlueButton icon={<Facebook />} text={fbText} block={true} />
-          </Box>
-          <Line />
-          <Box mt={2}>{rerouteText}</Box>
-          <Box mt={3}>
-            <Link to={reroute}>
-              <HighlightedText highlight="black">
-                {rerouteBtnText}
-              </HighlightedText>
-            </Link>
-          </Box>
+                  <PrimaryButton
+                    icon={<Send />}
+                    text={this.props.emailText}
+                    onClick={this.props.emailClick}
+                  />
+                  {this.props.showError && (
+                    <Box mt={3}>
+                      <StyledAlert
+                        message=""
+                        description="Bro wtf are you doing?"
+                        type="error"
+                        closable={true}
+                        onClose={this.props.closeError}
+                      />
+                    </Box>
+                  )}
+                </Box>
+              </Card>
+            </Box>
+            <Box width={1} my={2}>
+              <RedButton
+                icon={<Google />}
+                text={this.props.googleText}
+                block={true}
+              />
+            </Box>
+            <Box width={1} my={2} mb={3}>
+              <BlueButton
+                icon={<Facebook />}
+                text={this.props.fbText}
+                block={true}
+              />
+            </Box>
+            <Line />
+            <Box mt={2}>{this.props.rerouteText}</Box>
+            <Box mt={3}>
+              <Link to={this.props.reroute}>
+                <HighlightedText highlight="black">
+                  {this.props.rerouteBtnText}
+                </HighlightedText>
+              </Link>
+            </Box>
+          </Flex>
         </Flex>
-      </Flex>
-    </>
-  )
+      </>
+    )
+  }
 }

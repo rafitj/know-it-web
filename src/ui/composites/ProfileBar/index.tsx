@@ -31,31 +31,40 @@ const StyledSider = styled(Sider)`
   }
 `
 
-export const ProfileBar = observer(() => {
-  const collapsed = NoteViewStore.rightCollapsed
-  const onCollapse = (collapse: boolean) => {
+@observer
+export class ProfileBar extends React.Component {
+  collapsed = NoteViewStore.rightCollapsed
+  onCollapse = (collapse: boolean) => {
     NoteViewStore.collapseRight(collapse)
   }
-  const history = useHistory()
-  const navigateTo = (dest: string) => {
-    history.push(dest)
+  history = useHistory()
+  navigateTo = (dest: string) => {
+    this.history.push(dest)
   }
-  return (
-    <>
-      <StyledSider
-        defaultCollapsed={true}
-        collapsible={true}
-        collapsed={collapsed}
-        onCollapse={onCollapse}
-        breakpoint="lg"
-        reverseArrow={true}
-        width={0}
-      >
-        <Menu>
-          <MenuItem icon={<HomeOutlined />} onClick={() => navigateTo('/')} />
-          <MenuItem icon={<UserOutlined />} onClick={() => navigateTo('/')} />
-        </Menu>
-      </StyledSider>
-    </>
-  )
-})
+  render() {
+    return (
+      <>
+        <StyledSider
+          defaultCollapsed={true}
+          collapsible={true}
+          collapsed={this.collapsed}
+          onCollapse={this.onCollapse}
+          breakpoint="lg"
+          reverseArrow={true}
+          width={0}
+        >
+          <Menu>
+            <MenuItem
+              icon={<HomeOutlined />}
+              onClick={() => this.navigateTo('/')}
+            />
+            <MenuItem
+              icon={<UserOutlined />}
+              onClick={() => this.navigateTo('/')}
+            />
+          </Menu>
+        </StyledSider>
+      </>
+    )
+  }
+}

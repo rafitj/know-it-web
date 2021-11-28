@@ -17,28 +17,32 @@ const StyledPageHeader = styled(PageHeader)`
     border-radius: 5px;
   }
 `
-export const NoteView = observer(() => {
-  const note = NoteStore.note
-  const folder = FolderStore.folders.find(
-    (folder) => folder.id === note?.folderId
+
+@observer
+export class NoteView extends React.Component {
+  note = NoteStore.note
+  folder = FolderStore.folders.find(
+    (folder) => folder.id === this.note?.folderId
   )
-  return (
-    <>
-      <Line />
-      <StyledPageHeader
-        tags={[
-          <Tag key="0" color="blue">
-            Midterm
-          </Tag>,
-          <Tag key="1" color="blue">
-            Quiz 5
-          </Tag>,
-        ]}
-        title={note?.title}
-        subTitle={folder?.title}
-      />
-      <Line />
-      <Editor />
-    </>
-  )
-})
+  render() {
+    return (
+      <>
+        <Line />
+        <StyledPageHeader
+          tags={[
+            <Tag key="0" color="blue">
+              Midterm
+            </Tag>,
+            <Tag key="1" color="blue">
+              Quiz 5
+            </Tag>,
+          ]}
+          title={this.note?.title}
+          subTitle={this.folder?.title}
+        />
+        <Line />
+        <Editor />
+      </>
+    )
+  }
+}

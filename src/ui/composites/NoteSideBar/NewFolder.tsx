@@ -1,7 +1,6 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
-import { observer } from 'mobx-react'
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { FolderStore } from 'stores/FolderStore'
 import { NoteViewStore } from 'stores/NoteViewStore'
@@ -18,47 +17,55 @@ const LineInput = styled(Input)`
   }
 `
 
-export const NewFolder = observer(() => {
-  const [newFolderName, setNewFolderName] = useState('')
-  const addFolder = async (e?: any) => {
-    if ((!e || e.key === 'Enter') && newFolderName !== '') {
+export class NewFolder extends React.Component {
+  state = {
+    newFolderName: '',
+  }
+  addFolder = async (e?: any) => {
+    if (
+      (!e || e.key === 'Enter') &&
+      this.state.newFolderName !== '' &&
+      this.state.newFolderName
+    ) {
       const folder = await FolderStore.createFolder({
-        title: newFolderName,
+        title: this.state.newFolderName,
         colour: 'red',
       })
-      setNewFolderName('')
+      this.setState({ newFolderName: '' })
       NoteViewStore.setSelectedFolderId(folder.id)
       NoteViewStore.setAddFolderMode(false)
     }
   }
-  return (
-    <Flex justifyContent="center" alignItems="center" px={3}>
-      <Box justifyContent="center" alignItems="center" width={10 / 12}>
-        <LineInput
-          autoFocus={true}
-          placeholder="New Folder"
-          value={newFolderName}
-          onChange={(e) => {
-            setNewFolderName(e.target.value)
+  render() {
+    return (
+      <Flex justifyContent="center" alignItems="center" px={3}>
+        <Box justifyContent="center" alignItems="center" width={10 / 12}>
+          <LineInput
+            autoFocus={true}
+            placeholder="New Folder"
+            value={this.state.newFolderName}
+            onChange={(e) => {
+              this.setState({ newFolderName: e.target.value })
+            }}
+            onKeyDown={(e) => {
+              this.addFolder(e)
+            }}
+            onBlur={this.addFolder}
+          />
+        </Box>
+        <IconWrap width={1 / 12} pl={2} onClick={this.addFolder}>
+          <PlusIcon size={15} />
+        </IconWrap>
+        <IconWrap
+          width={1 / 12}
+          pl={2}
+          onClick={() => {
+            NoteViewStore.setAddFolderMode(false)
           }}
-          onKeyDown={(e) => {
-            addFolder(e)
-          }}
-          onBlur={addFolder}
-        />
-      </Box>
-      <IconWrap width={1 / 12} pl={2} onClick={addFolder}>
-        <PlusIcon size={15} />
-      </IconWrap>
-      <IconWrap
-        width={1 / 12}
-        pl={2}
-        onClick={() => {
-          NoteViewStore.setAddFolderMode(false)
-        }}
-      >
-        <XSquare size={15} />
-      </IconWrap>
-    </Flex>
-  )
-})
+        >
+          <XSquare size={15} />
+        </IconWrap>
+      </Flex>
+    )
+  }
+}

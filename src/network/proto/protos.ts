@@ -5,8 +5,8 @@
 // @ts-ignore
 declare namespace INetwork {
   interface CreateFolderRequest {
-    title: string;
-    colour: string;
+    title: string
+    colour: string
   }
 
   interface LogInUserRequest {
@@ -15,59 +15,58 @@ declare namespace INetwork {
   }
 
   interface CreateNoteRequest {
-    title: string;
-    folderId: string;
+    title: string
+    folderId: string
   }
 
   interface SignUpUserRequest {
-    email: string;
-    firstName: string;
-    lastName: string;
-    password: string;
+    email: string
+    firstName: string
+    lastName: string
+    password: string
   }
 
   interface UpdateFolderRequest {
-    id: string;
-    title: string;
-    colour: string;
+    id: string
+    title: string
+    colour: string
   }
 
   interface UpdateNoteRequest {
-    id: string;
-    title: string;
-    contents: string;
+    id: string
+    title: string
+    contents: string
   }
 
   interface BriefNoteDescriptionResponse {
-    id: string;
-    title: string;
-    timeUpdated: Date;
-    folderId: string;
+    id: string
+    title: string
+    timeUpdated: Date
+    folderId: string
   }
 
   interface FolderResponse {
-    id: string;
-    title: string;
-    colour: string;
+    id: string
+    title: string
+    colour: string
   }
 
   interface GetFolderWithNotesResponse extends FolderResponse {
-    notes: BriefNoteDescriptionResponse[];
+    notes: BriefNoteDescriptionResponse[]
   }
 
   interface GetUserDetailsResponse {
-    id: string;
-    username: string;
-    firstName: string;
-    lastName: string;
-    authToken: string;
+    id: string
+    username: string
+    firstName: string
+    lastName: string
   }
 
   interface NoteResponse {
-    id: string;
-    title: string;
-    contents: string;
-    timeUpdated: Date;
-    folderId: string;
+    id: string
+    title: string
+    contents: string
+    timeUpdated: Date
+    folderId: string
   }
 }

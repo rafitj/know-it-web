@@ -7,16 +7,19 @@ import { FolderStore } from 'stores/FolderStore'
 import { NoteStore } from 'stores/NoteStore'
 import { Menu, MenuItem } from '../../base/Menu'
 
-export const MiniFolderMenu = observer(() => {
-  const folderId = NoteStore.note?.folderId
-  const folder = FolderStore.folders.find((folder) => folder.id === folderId)
-  return (
-    <Menu mode="inline" theme="dark">
-      <SubMenu icon={folder && <FolderOpenOutlined />}>
-        {folder &&
-          folder.notes &&
-          folder.notes.map((note) => <MenuItem>{note.title}</MenuItem>)}
-      </SubMenu>
-    </Menu>
-  )
-})
+@observer
+export class MiniFolderMenu extends React.Component {
+  folderId = NoteStore.note?.folderId
+  folder = FolderStore.folders.find((folder) => folder.id === this.folderId)
+  render() {
+    return (
+      <Menu mode="inline" theme="dark">
+        <SubMenu icon={this.folder && <FolderOpenOutlined />}>
+          {this.folder &&
+            this.folder.notes &&
+            this.folder.notes.map((note) => <MenuItem>{note.title}</MenuItem>)}
+        </SubMenu>
+      </Menu>
+    )
+  }
+}
