@@ -3,13 +3,13 @@ import 'antd/dist/antd.css'
 import { MenuItemProps } from 'antd/lib/menu/MenuItem'
 import { observer } from 'mobx-react'
 import { BriefNoteDescriptionResponse } from 'network/proto/protos'
-import React from 'react'
+import React from 'react';
 import { Box, Flex } from 'reflexbox'
-import { NoteStore } from 'stores/NoteStore'
 import styled from 'styled-components'
 import { Download, Edit, IconWrap, Settings, Trash } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
+import { NoteSpaceContext } from './NoteSpaceContext';
 
 export interface IFileMenuItem {
   note: BriefNoteDescriptionResponse
@@ -59,18 +59,26 @@ const PopoverContent = (
 )
 
 @observer
-export class FileMenuItem extends React.Component<
+class FileMenuItem extends React.Component<
   IFileMenuItem & MenuItemProps
 > {
-  selected = NoteStore.note && NoteStore.note.id === this.props.note.id
-  StyledMenuItem = this.selected ? SelectedFileMenuItem : RegularFileMenuItem
-  setNoteViewById = () => {
-    this.props.note.id && NoteStore.fetchNote(this.props.note.id)
-  }
+  state = this.context
+
   render() {
+    const { noteState } = this.state;
+
+    const selected = noteState.note && noteState.note.id === this.props.note.id
+    const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
+
+    const setNoteViewById = () => {
+      if (this.props.note.id) {
+        noteState.fetchNote(this.props.note.id)
+      }
+    }
+
     return (
-      <Box onClick={this.setNoteViewById}>
-        <this.StyledMenuItem key={this.props.note.id} {...this.props}>
+      <Box onClick={setNoteViewById}>
+        <StyledMenuItem key={this.props.note.id} {...this.props}>
           <Flex justifyContent="space-between" alignItems="center">
             <Box
               width={11 / 12}
@@ -78,13 +86,18 @@ export class FileMenuItem extends React.Component<
             >
               {this.props.note.title}
             </Box>
-            {this.selected && <StyledBadge count={1} />}
+            {selected && <StyledBadge count={1} />}
             <Popover placement="right" content={PopoverContent} trigger="click">
               <Settings size={15} style={{ marginRight: 3 }} />
             </Popover>
           </Flex>
-        </this.StyledMenuItem>
+        </StyledMenuItem>
       </Box>
     )
   }
 }
+
+FileMenuItem.contextType = NoteSpaceContext
+
+export { FileMenuItem }
+

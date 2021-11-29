@@ -7,7 +7,7 @@ import {
 } from 'network/proto/protos'
 import { Api } from '../network/api/api'
 
-class FolderStore {
+export class FolderState {
   @observable
   folders: GetFolderWithNotesResponse[] = []
 
@@ -78,6 +78,3 @@ class FolderStore {
     this.requestErrorDetail = undefined
   }
 }
-
-const folderStore = new FolderStore()
-export { folderStore as FolderStore }

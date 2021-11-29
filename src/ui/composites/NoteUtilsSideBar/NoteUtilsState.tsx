@@ -1,10 +1,16 @@
 import { action, observable } from 'mobx'
-import { NoteViewStore } from 'stores/NoteViewStore'
 import { NoteTools } from 'types/note'
+import { NoteViewState } from '../../../stores/NoteViewStore';
 
 export class NoteUtilsState {
   @observable
   selectedTool: NoteTools = 'cards'
+
+  private noteViewState: NoteViewState;
+
+  constructor(noteViewState: NoteViewState) {
+    this.noteViewState = noteViewState;
+  }
 
   @action
   setSelectedTool = (tool: NoteTools) => {
@@ -13,12 +19,12 @@ export class NoteUtilsState {
 
   @action
   selectTool = (tool: NoteTools) => {
-    NoteViewStore.collapseRight(false)
+    this.noteViewState.collapseRight(false)
     this.setSelectedTool(tool)
   }
 
   @action
   onCollapse = (collapse: boolean) => {
-    NoteViewStore.collapseRight(collapse)
+    this.noteViewState.collapseRight(collapse)
   }
 }

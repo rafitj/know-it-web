@@ -2,15 +2,15 @@ import 'antd/dist/antd.css'
 import { SubMenuProps } from 'antd/lib/menu/SubMenu'
 import { observer } from 'mobx-react'
 import { GetFolderWithNotesResponse } from 'network/proto/protos'
-import React from 'react'
+import React from 'react';
 import { Zap } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
-import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { SubMenu } from '../../base/Menu'
 import { FileMenuItem } from './FileMenuItem'
 import { NewFile } from './NewFile'
+import { NoteSpaceContext } from './NoteSpaceContext';
 
 export interface IFolderSubMenu {
   folder: GetFolderWithNotesResponse
@@ -29,29 +29,33 @@ const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`
   }
 `
 @observer
-export class FolderSubMenu extends React.Component<
+class FolderSubMenu extends React.Component<
   IFolderSubMenu & SubMenuProps
 > {
-  selected = this.props.folder.id === NoteViewStore.selectedFolderId
+  state = this.context;
+
   render() {
+    const { noteViewState } = this.state;
+    const selected = this.props.folder.id === noteViewState.selectedFolderId;
+
     return (
       <SubMenu
         {...this.props}
-        selected={this.selected}
+        selected={selected}
         highlight={this.props.folder.colour}
         key={this.props.folder.id}
         title={
           <span>
             <Flex alignItems="center">
               <SubMenuTitle>{this.props.folder.title}</SubMenuTitle>
-              <ViewFolderSymbol selected={this.selected} mx={2}>
+              <ViewFolderSymbol selected={selected} mx={2}>
                 <Zap color={colors.yellow} size={12} />
               </ViewFolderSymbol>
             </Flex>
           </span>
         }
         onTitleClick={() =>
-          NoteViewStore.setSelectedFolderId(this.props.folder.id)
+          noteViewState.setSelectedFolderId(this.props.folder.id)
         }
       >
         {this.props.folder &&
@@ -59,8 +63,13 @@ export class FolderSubMenu extends React.Component<
           this.props.folder.notes.map((note) => (
             <FileMenuItem key={note.id} note={note} />
           ))}
-        {this.selected && NoteViewStore.addFileMode && <NewFile />}
+        {selected && noteViewState.addFileMode && <NewFile />}
       </SubMenu>
     )
   }
 }
+
+FolderSubMenu.contextType = NoteSpaceContext
+
+export { FolderSubMenu }
+

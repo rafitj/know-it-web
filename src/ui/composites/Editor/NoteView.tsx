@@ -1,11 +1,11 @@
 import { PageHeader, Tag } from 'antd'
 import { observer } from 'mobx-react'
-import React from 'react'
-import { FolderStore } from 'stores/FolderStore'
-import { NoteStore } from 'stores/NoteStore'
+import React from 'react';
 import styled from 'styled-components'
 import { Line } from 'ui/components/Line'
 import { Editor } from '.'
+import { GetFolderWithNotesResponse } from '../../../network/proto/protos';
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
 
 const StyledPageHeader = styled(PageHeader)`
   background-color: transparent;
@@ -19,9 +19,13 @@ const StyledPageHeader = styled(PageHeader)`
 `
 
 @observer
-export class NoteView extends React.Component {
-  note = NoteStore.note
+class NoteView extends React.Component {
+  state = this.context
+
   render() {
+    const { note } = this.state.noteState;
+    const { folders } = this.state.folderState;
+
     return (
       <>
         <Line />
@@ -34,10 +38,10 @@ export class NoteView extends React.Component {
               Quiz 5
             </Tag>,
           ]}
-          title={this.note?.title}
+          title={note?.title}
           subTitle={
-            FolderStore.folders.find(
-              (folder) => folder.id === this.note?.folderId
+            folders.find(
+              (folder: GetFolderWithNotesResponse) => folder.id === note?.folderId
             )?.title
           }
         />
@@ -47,3 +51,7 @@ export class NoteView extends React.Component {
     )
   }
 }
+
+NoteView.contextType = NoteSpaceContext
+
+export { NoteView }

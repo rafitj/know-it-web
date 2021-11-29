@@ -1,7 +1,7 @@
 import './qablock.css'
 import { QAIcon } from './QAIcon'
 
-export class QABlock {
+export class Qablock {
   css: any
 
   constructor({ api }: any) {
