@@ -21,9 +21,6 @@ const StyledPageHeader = styled(PageHeader)`
 @observer
 export class NoteView extends React.Component {
   note = NoteStore.note
-  folder = FolderStore.folders.find(
-    (folder) => folder.id === this.note?.folderId
-  )
   render() {
     return (
       <>
@@ -38,7 +35,11 @@ export class NoteView extends React.Component {
             </Tag>,
           ]}
           title={this.note?.title}
-          subTitle={this.folder?.title}
+          subTitle={
+            FolderStore.folders.find(
+              (folder) => folder.id === this.note?.folderId
+            )?.title
+          }
         />
         <Line />
         <Editor />
