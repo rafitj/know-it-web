@@ -1,5 +1,9 @@
 name: PR Check
-on: [push]
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
 jobs:
   pr-checks:
     runs-on: ubuntu-latest
