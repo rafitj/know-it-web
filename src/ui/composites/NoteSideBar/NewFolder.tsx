@@ -64,14 +64,14 @@ class NewFolder extends React.Component {
           />
         </Box>
         <IconWrap width={1 / 12} pl={2} onClick={this.addFolder}>
-          <PlusIcon size={16} />
+          <PlusIcon size={15} />
         </IconWrap>
         <IconWrap
           width={1 / 12}
           pl={2}
           onClick={() => noteViewState.setAddFolderMode(false)}
         >
-          <XSquare size={16} />
+          <XSquare size={15} />
         </IconWrap>
       </Flex>
     )
