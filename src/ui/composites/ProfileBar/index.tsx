@@ -3,7 +3,6 @@ import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import { NoteViewStore } from 'stores/NoteViewStore'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
@@ -37,10 +36,6 @@ export class ProfileBar extends React.Component {
   onCollapse = (collapse: boolean) => {
     NoteViewStore.collapseRight(collapse)
   }
-  history = useHistory()
-  navigateTo = (dest: string) => {
-    this.history.push(dest)
-  }
   render() {
     return (
       <>
@@ -56,11 +51,11 @@ export class ProfileBar extends React.Component {
           <Menu>
             <MenuItem
               icon={<HomeOutlined />}
-              onClick={() => this.navigateTo('/')}
+              // onClick={() => this.navigateTo('/')}
             />
             <MenuItem
               icon={<UserOutlined />}
-              onClick={() => this.navigateTo('/')}
+              // onClick={() => this.navigateTo('/')}
             />
           </Menu>
         </StyledSider>
