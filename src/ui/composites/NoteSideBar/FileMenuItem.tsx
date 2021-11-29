@@ -1,6 +1,7 @@
 import { Badge, Popover } from 'antd'
 import 'antd/dist/antd.css'
 import { MenuItemProps } from 'antd/lib/menu/MenuItem'
+import { observer } from 'mobx-react'
 import { BriefNoteDescriptionResponse } from 'network/proto/protos'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
@@ -57,6 +58,7 @@ const PopoverContent = (
   </Flex>
 )
 
+@observer
 export class FileMenuItem extends React.Component<
   IFileMenuItem & MenuItemProps
 > {

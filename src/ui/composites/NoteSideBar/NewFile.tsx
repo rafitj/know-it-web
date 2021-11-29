@@ -1,5 +1,6 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { NoteStore } from 'stores/NoteStore'
@@ -16,7 +17,7 @@ const LineInput = styled(Input)`
     border-color: ${colors.green};
   }
 `
-
+@observer
 export class NewFile extends React.Component {
   state = {
     newFileName: '',

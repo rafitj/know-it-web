@@ -1,5 +1,6 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import { FolderStore } from 'stores/FolderStore'
@@ -17,6 +18,7 @@ const LineInput = styled(Input)`
   }
 `
 
+@observer
 export class NewFolder extends React.Component {
   state = {
     newFolderName: '',
