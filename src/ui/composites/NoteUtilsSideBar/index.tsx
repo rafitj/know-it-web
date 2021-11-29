@@ -6,11 +6,11 @@ import {
 import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
 import { NoteTool } from './NoteTool'
 import { NoteUtilsState } from './NoteUtilsState'
 
@@ -46,10 +46,10 @@ class NoteUtilsSideBar extends React.Component {
   state = {
     utils: new NoteUtilsState(this.context.noteViewState),
     context: this.context,
-  };
+  }
 
   render() {
-    const { rightCollapsed: collapsed } = this.state.context.noteViewState;
+    const { rightCollapsed: collapsed } = this.state.context.noteViewState
 
     return (
       <StyledSider
@@ -81,7 +81,9 @@ class NoteUtilsSideBar extends React.Component {
             Filter
           </MenuItem>
         </StyledMenu>
-        {!collapsed && <NoteTool selectedTool={this.state.utils.selectedTool} />}
+        {!collapsed && (
+          <NoteTool selectedTool={this.state.utils.selectedTool} />
+        )}
       </StyledSider>
     )
   }

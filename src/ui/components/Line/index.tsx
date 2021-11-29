@@ -12,4 +12,6 @@ const StyledLine = styled.div<LineProps>`
 interface LineProps {
   color?: color
 }
-export const Line = ({ color }: LineProps) => <StyledLine color={color} />
+export const Line = ({ color: lineColor }: LineProps) => (
+  <StyledLine color={lineColor} />
+)

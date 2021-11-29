@@ -1,12 +1,12 @@
 import { Input } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import React from 'react';
+import React from 'react'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { IconWrap, PlusCircle as PlusIcon, XSquare } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
-import { NoteSpaceContext } from './NoteSpaceContext';
+import { NoteSpaceContext } from './NoteSpaceContext'
 
 const LineInput = styled(Input)`
   &.ant-input {
@@ -24,8 +24,9 @@ class NewFolder extends React.Component {
     context: this.context,
   }
 
+  // tslint:disable-next-line:no-any
   addFolder = async (e?: any) => {
-    const { folderState, noteViewState } = this.state.context;
+    const { folderState, noteViewState } = this.state.context
 
     if (
       (!e || e.key === 'Enter') &&
@@ -44,7 +45,7 @@ class NewFolder extends React.Component {
     }
   }
   render() {
-    const { noteViewState } = this.state.context;
+    const { noteViewState } = this.state.context
 
     return (
       <Flex justifyContent="center" alignItems="center" px={3}>
