@@ -1,5 +1,6 @@
 import { action, observable } from 'mobx'
 import { UserStore } from 'stores/UserStore'
+import { RouterStore } from '../RouterStore'
 
 export class LoginState {
   @observable
@@ -12,7 +13,7 @@ export class LoginState {
   emailValue: string = ''
 
   @observable
-  errorMessage?: string;
+  errorMessage?: string
 
   @action
   setPassword = (password: string) => {
@@ -43,7 +44,10 @@ export class LoginState {
       if (!this.errorMessage) {
         this.errorMessage = 'Invalid email or password'
       }
+    } else {
+      RouterStore.push('/note-space')
     }
+
     UserStore.resetErrors()
   }
 }

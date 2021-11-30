@@ -8,21 +8,13 @@ export class AuthRoute extends React.Component<RouteProps> {
   isAuthenticated = UserStore.isSignedIn
   render() {
     return (
-      <Route
-        {...this.props}
-        render={({ location }) =>
-          this.isAuthenticated ? (
-            this.props.children
-          ) : (
-            <Redirect
-              to={{
-                pathname: '/note-space',
-                state: { from: location },
-              }}
-            />
-          )
-        }
-      />
+      <Route {...this.props}>
+        {!this.isAuthenticated ? (
+          this.props.children
+        ) : (
+          <Redirect to="/note-space" />
+        )}
+      </Route>
     )
   }
 }

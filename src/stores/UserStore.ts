@@ -31,7 +31,7 @@ class UserStore {
       await Api.signUpUser(userCredentials)
     } catch (err) {
       this.requestError = true
-      this.requestErrorDetail = err.message;
+      this.requestErrorDetail = err.message
     }
     this.isLoading = false
   }

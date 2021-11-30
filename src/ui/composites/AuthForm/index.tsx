@@ -29,7 +29,7 @@ export interface IAuthForm {
   emailClick: () => void
   showError?: boolean
   closeError: () => void
-  errorMessage?: string;
+  errorMessage?: string
 }
 
 const StyledAlert = styled(Alert)`

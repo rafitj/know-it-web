@@ -38,9 +38,11 @@ export class Api {
         }
 
         resolve(response.data as S)
-      }catch (e) {
-        const { response: { data } } = e;
-        reject(data);
+      } catch (e) {
+        const {
+          response: { data },
+        } = e
+        reject(data)
       }
     })
 
