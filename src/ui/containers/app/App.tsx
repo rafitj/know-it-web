@@ -1,4 +1,3 @@
-import { createBrowserHistory } from 'history'
 import { observer } from 'mobx-react'
 import React from 'react'
 import { Route, Router, Switch } from 'react-router-dom'
@@ -13,9 +12,6 @@ import { SignUp } from '../SignUp'
 
 @observer
 export class App extends React.Component {
-  constructor(props: {}) {
-    super(props)
-  }
   fetchUser = async () => {
     await PersistenceStore.fetchItems()
   }
