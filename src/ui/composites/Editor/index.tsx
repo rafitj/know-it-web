@@ -4,16 +4,18 @@ import React from 'react';
 import EditorJs from 'react-editor-js';
 import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
 import './editor.css';
-import { defaultData, EDITOR_TOOLS } from './Tools/EditorTools';
+import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools';
 
 @observer
 class Editor extends React.Component {
   state = this.context
 
   onEdit = async (api: EditorAPI) => {
-    if (this.state.noteViewState.editorInstance && this.state.noteState.note) {
-      const savedData = await this.state.noteViewState.editorInstance.save()
-      this.state.noteState.updateNoteById({
+    const { noteState, noteViewState: { editorInstance, note } } = this.state;
+
+    if (editorInstance && note) {
+      const savedData = await editorInstance.save()
+      await noteState.updateNoteById({
         id: this.state.noteState.note?.id!,
         title: this.state.noteState.note?.title!,
         contents: JSON.stringify(savedData),
@@ -31,7 +33,7 @@ class Editor extends React.Component {
   }
 
   render() {
-    const { note } = this.state.noteState
+    const { noteState: { note }, noteViewState } = this.state
     const data = note?.contents
       ? (JSON.parse(note.contents) as OutputData)
       : defaultData(0)
@@ -40,7 +42,7 @@ class Editor extends React.Component {
       <EditorJs
         instanceRef={async (instance) => {
           await instance.isReady
-          this.state.noteViewState.setEditorInstance(instance)
+          noteViewState.setEditorInstance(instance)
         }}
         tools={EDITOR_TOOLS}
         data={data}

@@ -27,39 +27,39 @@ export class NoteViewState {
   addFileMode: boolean = false
 
   @action
-  setEditorInstance(instance?: EditorJsType) {
+  setEditorInstance = (instance?: EditorJsType) => {
     this.editorInstance = instance
   }
 
   @action
-  setSelectedFolderId(id?: string) {
+  setSelectedFolderId = (id?: string) => {
     this.selectedFolderId = id
   }
 
   @action
-  setOpenFolders(openFolders: string[]) {
+  setOpenFolders = (openFolders: string[]) => {
     this.openFolders = openFolders
   }
   @action
-  setAddFileMode(open: boolean) {
+  setAddFileMode = (open: boolean) => {
     this.addFileMode = open
   }
 
   @action
-  setAddFolderMode(open: boolean) {
+  setAddFolderMode = (open: boolean) => {
     this.addFolderMode = open
   }
   @action
-  collapseLeft(collapse: boolean) {
+  collapseLeft = (collapse: boolean) => {
     this.leftCollapsed = collapse
   }
   @action
-  collapseRight(collapse: boolean) {
+  collapseRight = (collapse: boolean) => {
     this.rightCollapsed = collapse
   }
 
   @action
-  unsetInitial() {
+  unsetInitial = () => {
     this.initial = false
   }
 }

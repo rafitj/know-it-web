@@ -20,7 +20,7 @@ export class NoteState {
   requestErrorDetail?: string
 
   @action
-  async fetchNote(id: string) {
+  fetchNote = async (id: string) => {
     this.isLoading = true
     try {
       this.note = await Api.fetchNote(id)
@@ -32,7 +32,7 @@ export class NoteState {
   }
 
   @action
-  async createNote(payload: CreateNoteRequest) {
+  createNote = async (payload: CreateNoteRequest) => {
     this.isLoading = true
     try {
       this.note = await Api.createNote(payload)
@@ -45,7 +45,7 @@ export class NoteState {
   }
 
   @action
-  async updateNoteById(payload: UpdateNoteRequest) {
+  updateNoteById = async (payload: UpdateNoteRequest) => {
     this.isLoading = true
     try {
       this.note = await Api.updateNote(payload)
@@ -58,7 +58,7 @@ export class NoteState {
   }
 
   @action
-  async deleteNoteById(id: string) {
+  deleteNoteById = async (id: string) => {
     this.isLoading = true
     try {
       await Api.deleteNoteById(id)
@@ -71,7 +71,7 @@ export class NoteState {
   }
 
   @action
-  resetErrors(): void {
+  resetErrors = (): void => {
     this.requestError = false
     this.requestErrorDetail = undefined
   }
