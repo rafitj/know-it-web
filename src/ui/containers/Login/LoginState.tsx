@@ -11,6 +11,9 @@ export class LoginState {
   @observable
   emailValue: string = ''
 
+  @observable
+  errorMessage?: string;
+
   @action
   setPassword = (password: string) => {
     this.passwordValue = password
@@ -32,9 +35,15 @@ export class LoginState {
       username: this.emailValue,
       password: this.passwordValue,
     }
-    const loginSuccess = await UserStore.loginUser(userRegisterInfo)
-    if (!loginSuccess) {
-      this.showError = true
+    await UserStore.loginUser(userRegisterInfo)
+    this.showError = UserStore.requestError
+
+    if (this.showError) {
+      this.errorMessage = UserStore.requestErrorDetail
+      if (!this.errorMessage) {
+        this.errorMessage = 'Invalid email or password'
+      }
     }
+    UserStore.resetErrors()
   }
 }

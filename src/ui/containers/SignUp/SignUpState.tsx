@@ -6,6 +6,9 @@ export class SignUpState {
   showError: boolean = false
 
   @observable
+  errorMessage?: string;
+
+  @observable
   passwordValue: string = ''
 
   @observable
@@ -42,9 +45,9 @@ export class SignUpState {
       lastName: 'SMD',
       password: this.passwordValue,
     }
-    const registerSuccess = await UserStore.signUpUser(userRegisterInfo)
-    if (!registerSuccess) {
-      this.showError = true
-    }
+    await UserStore.signUpUser(userRegisterInfo)
+    this.errorMessage = UserStore.requestErrorDetail;
+    this.showError = UserStore.requestError
+    UserStore.resetErrors()
   }
 }

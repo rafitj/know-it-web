@@ -23,6 +23,7 @@ export class SignUpForm extends React.Component {
         emailClick={this.state.attemptRegister}
         showError={this.state.showError}
         closeError={this.state.closeError}
+        errorMessage={this.state.errorMessage}
       />
     )
   }

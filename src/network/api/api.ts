@@ -22,25 +22,30 @@ export class Api {
     payload?: T
   ): Promise<S> =>
     new Promise(async (resolve, reject) => {
-      const response = await axios.request({
-        url: `${baseUrl}${endpoint}`,
-        method: requestType,
-        headers: {
-          Authorization: (UserStore.user && UserStore.user.authToken) || '',
-          'Content-Type': 'application/json',
-        },
-        data: payload || {},
-      })
+      try {
+        const response = await axios.request({
+          url: `${baseUrl}${endpoint}`,
+          method: requestType,
+          headers: {
+            Authorization: (UserStore.user && UserStore.user.authToken) || '',
+            'Content-Type': 'application/json',
+          },
+          data: payload || {},
+        })
 
-      if (response.status !== 200) {
-        reject(response.data.error)
+        if (response.status !== 200) {
+          reject()
+        }
+
+        resolve(response.data as S)
+      }catch (e) {
+        const { response: { data } } = e;
+        reject(data);
       }
-
-      resolve(response.data as S)
     })
 
   static signUpUser = async (payload: SignUpUserRequest): Promise<void> => {
-    await Api.createRequest('users/sign-up', 'GET', payload)
+    await Api.createRequest('users/sign-up', 'POST', payload)
   }
 
   static signInUser = async (
@@ -84,7 +89,7 @@ export class Api {
   }
 
   static deleteNoteById = async (id: string): Promise<void> => {
-    await Api.createRequest<null, void>(`notes/${id}`, 'delete')
+    await Api.createRequest<null, void>(`notes/${id}`, 'DELETE')
   }
 
   static fetchFolders = async (): Promise<FolderResponse[]> => {

@@ -25,32 +25,28 @@ class UserStore {
   }
 
   @action
-  async signUpUser(userCredentials: SignUpUserRequest): Promise<boolean> {
+  async signUpUser(userCredentials: SignUpUserRequest): Promise<void> {
     this.isLoading = true
     try {
       await Api.signUpUser(userCredentials)
     } catch (err) {
       this.requestError = true
-      this.requestErrorDetail = 'Failed to sign up user.'
-      return false
+      this.requestErrorDetail = err.message;
     }
     this.isLoading = false
-    return true
   }
 
   @action
-  async loginUser(userCredentials: LogInUserRequest): Promise<boolean> {
+  async loginUser(userCredentials: LogInUserRequest): Promise<void> {
     this.isLoading = true
     try {
       this.user = await Api.signInUser(userCredentials)
       PersistenceStore.setItem(PersistenceKey.UserSession, this.user)
     } catch (err) {
       this.requestError = true
-      this.requestErrorDetail = 'Failed to sign in user.'
-      return false
+      this.requestErrorDetail = err.message
     }
     this.isLoading = false
-    return true
   }
 
   @action
