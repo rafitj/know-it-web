@@ -1,19 +1,21 @@
-import { API as EditorAPI, OutputData } from '@editorjs/editorjs';
-import { observer } from 'mobx-react';
-import React from 'react';
-import EditorJs from 'react-editor-js';
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext';
-import './editor.css';
-import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools';
+import { API as EditorAPI, OutputData } from '@editorjs/editorjs'
+import { observer } from 'mobx-react'
+import React from 'react'
+import EditorJs from 'react-editor-js'
+import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
+import './editor.css'
+import { EDITOR_TOOLS, defaultData } from './Tools/EditorTools'
 
 @observer
 class Editor extends React.Component {
   state = this.context
 
   onEdit = async (api: EditorAPI) => {
-    const { noteState, noteViewState: { editorInstance, note } } = this.state;
-
-    if (editorInstance && note) {
+    const {
+      noteState,
+      noteViewState: { editorInstance },
+    } = this.state
+    if (editorInstance && noteState.note) {
       const savedData = await editorInstance.save()
       await noteState.updateNoteById({
         id: this.state.noteState.note?.id!,
@@ -33,7 +35,10 @@ class Editor extends React.Component {
   }
 
   render() {
-    const { noteState: { note }, noteViewState } = this.state
+    const {
+      noteState: { note },
+      noteViewState,
+    } = this.state
     const data = note?.contents
       ? (JSON.parse(note.contents) as OutputData)
       : defaultData(0)
