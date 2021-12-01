@@ -8,6 +8,7 @@ export interface CardProps extends AntDCardProps {
   height?: string
   invert?: boolean
   block?: boolean
+  noShadow?: boolean
   textAlign?: 'center' | 'left' | 'right'
 }
 
@@ -17,6 +18,7 @@ export const Card = ({
   height,
   invert,
   block,
+  noShadow,
   textAlign = 'center',
   ...other
 }: CardProps) => (
@@ -26,6 +28,7 @@ export const Card = ({
     height={height}
     block={block}
     textAlign={textAlign}
+    noShadow={noShadow}
     {...other}
   >
     {children}

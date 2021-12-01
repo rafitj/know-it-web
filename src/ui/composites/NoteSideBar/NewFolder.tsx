@@ -27,7 +27,6 @@ class NewFolder extends React.Component {
   // tslint:disable-next-line:no-any
   addFolder = async (e?: any) => {
     const { folderState, noteViewState } = this.state.context
-
     if (
       (!e || e.key === 'Enter') &&
       this.state.newFolderName !== '' &&
@@ -60,7 +59,10 @@ class NewFolder extends React.Component {
             onKeyDown={(e) => {
               this.addFolder(e)
             }}
-            onBlur={this.addFolder}
+            onBlur={() => {
+              this.addFolder()
+              noteViewState.setAddFolderMode(false)
+            }}
           />
         </Box>
         <IconWrap width={1 / 12} pl={2} onClick={this.addFolder}>

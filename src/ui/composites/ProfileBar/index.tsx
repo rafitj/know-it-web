@@ -16,20 +16,17 @@ const { Sider } = Layout
 const StyledSider = styled(Sider)`
   background-color: ${colors.white};
   .ant-layout-sider-trigger {
-    background-color: transparent;
-    color: ${colors.black};
-    margin-bottom: 30px;
+    display: none;
   }
   .ant-layout-sider-zero-width-trigger {
     display: none;
   }
-  margin: 25px 35px;
+  margin: 20px;
   position: fixed;
   right: 0;
   .ant-menu-item {
     border: 2px solid ${colors.black};
     border-radius: 10px;
-    box-shadow: ${`3px 3px ${colors.grey}`};
   }
 `
 

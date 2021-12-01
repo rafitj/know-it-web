@@ -1,67 +1,68 @@
 :root {
-    --blue: #c7e6ff;
-    --black: #1c1c1c;
+  --blue: #c7e6ff;
+  --black: #1c1c1c;
 }
 
 .qa-title {
-    background-color: var(--blue);
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    border: 2px solid var(--black);
-    border-radius: 5px;
-    padding: 5px 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+  background-color: var(--blue);
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  border: 2px solid var(--black);
+  border-radius: 5px;
+  padding: 5px 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .qa-title-input:focus {
-    outline: none;
+  outline: none;
 }
 
 .qa-title-input {
-    background: transparent;
-    border: none;
-    text-align: center;
-    font-weight: bold;
+  background: transparent;
+  border: none;
+  text-align: center;
+  font-weight: bold;
 }
 
 .qa-title-label {
-    font-weight: bold;
-    opacity: 75%;
-    margin-right: 25px;
+  font-weight: bold;
+  opacity: 75%;
+  margin-right: 25px;
 }
 
 .qa-block {
-    border: 2px solid var(--black);
-    border-radius: 10px;
-    margin: 15px 0;
-    padding: 35px 20px 20px;
-    display: flex;
-    flex-direction: column;
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  margin: 25px 0;
+  padding: 35px 20px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .qblock,
 .ablock {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .qblock {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .qlabel,
 .alabel {
-    padding: 0 5px 5px;
-    font-weight: bold;
+  padding: 0 5px 5px;
+  font-weight: bold;
 }
 
 .answer-input,
 .question-input {
-    padding: 0 5px;
-    max-width: 96%;
-    display: inline;
+  padding: 0 5px;
+  max-width: 96%;
+  min-width: 96%;
+  display: inline;
 }
