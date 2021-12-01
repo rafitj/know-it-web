@@ -1,28 +1,34 @@
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
-import { BriefNoteDescriptionResponse } from 'network/proto/protos'
+import { GetFolderWithNotesResponse } from 'network/proto/protos'
 import React from 'react'
 import { Flex } from 'reflexbox'
 import { Download, Edit, IconWrap, Trash } from 'ui/base/Icons'
+import { ColorPicker } from '../../components/ColorPicker'
 import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
-export interface IFileMenuSettingsItem {
-  note: BriefNoteDescriptionResponse
+export interface IFolderMenuSettingsItem {
+  folder: GetFolderWithNotesResponse
   editTitle: () => void
 }
 
 @observer
-class FileMenuItemSettings extends React.Component<IFileMenuSettingsItem> {
+class FolderMenuSettings extends React.Component<IFolderMenuSettingsItem> {
   state = this.context as INoteSpaceState
-  deleteNote = () => {
-    this.state.noteState.deleteNoteById(this.props.note.id)
-    if (this.props.note.id === this.state.noteState.note?.id) {
+  deleteFolder = () => {
+    const folderIsInView = this.props.folder.notes.find(
+      (note) => note.id === this.state.noteState.note?.id
+    )
+    this.state.folderState.deleteFolder(this.props.folder.id)
+
+    if (folderIsInView) {
       this.state.noteState.deselectNote()
     }
   }
   render() {
     return (
       <Flex flexDirection="row">
+        <ColorPicker />
         <IconWrap
           mx={1}
           height={25}
@@ -34,7 +40,7 @@ class FileMenuItemSettings extends React.Component<IFileMenuSettingsItem> {
         <IconWrap mx={1} height={25} bgcolor="purple">
           <Download size={15} />
         </IconWrap>
-        <IconWrap mx={1} height={25} bgcolor="red" onClick={this.deleteNote}>
+        <IconWrap mx={1} height={25} bgcolor="red" onClick={this.deleteFolder}>
           <Trash size={15} />
         </IconWrap>
       </Flex>
@@ -42,6 +48,6 @@ class FileMenuItemSettings extends React.Component<IFileMenuSettingsItem> {
   }
 }
 
-FileMenuItemSettings.contextType = NoteSpaceContext
+FolderMenuSettings.contextType = NoteSpaceContext
 
-export { FileMenuItemSettings }
+export { FolderMenuSettings }

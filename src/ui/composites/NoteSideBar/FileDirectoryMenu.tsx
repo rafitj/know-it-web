@@ -1,8 +1,9 @@
-import { FileAddOutlined, FolderAddOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
 import { GetFolderWithNotesResponse } from 'network/proto/protos'
 import React from 'react'
+import { ChevronsUp, FilePlus, FolderPlus } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
 import { IconWrap } from 'ui/base/Icons'
 import { colors } from 'ui/base/theme'
@@ -34,31 +35,54 @@ class FileDirectoryMenu extends React.Component {
     return (
       <>
         <Flex
-          justifyContent="space-around"
+          justifyContent="space-between"
           alignItems="center"
           height={40}
           color={colors.white}
+          px={3}
         >
           My Notes
-          <Box flexDirection="row">
-            <IconWrap>
-              <FolderAddOutlined
-                style={{ fontSize: 21, marginRight: 20 }}
-                onClick={() => noteViewState.setAddFolderMode(true)}
-              />
+          <Flex flexDirection="row" alignItems="center">
+            {folderState.folders.length > 5 ? (
+              <IconWrap disabled={true} size={25}>
+                <Tooltip title={'Max 6 Folders'}>
+                  <FolderPlus size={15} style={{ opacity: 0.5 }} />
+                </Tooltip>
+              </IconWrap>
+            ) : (
+              <IconWrap size={25} bgcolor="darkBlack">
+                <Tooltip title={'Add New Folder'}>
+                  <FolderPlus
+                    size={15}
+                    onClick={() => noteViewState.setAddFolderMode(true)}
+                  />
+                </Tooltip>
+              </IconWrap>
+            )}
+            <IconWrap size={25} bgcolor="darkBlack">
+              <Tooltip title={'Add New File'}>
+                <FilePlus
+                  size={15}
+                  onClick={() => {
+                    if (selectedFolder) {
+                      openFolder(selectedFolder)
+                      noteViewState.setAddFileMode(true)
+                    }
+                  }}
+                />
+              </Tooltip>
             </IconWrap>
-            <IconWrap>
-              <FileAddOutlined
-                style={{ fontSize: 18 }}
-                onClick={() => {
-                  if (selectedFolder) {
-                    openFolder(selectedFolder)
-                    noteViewState.setAddFileMode(true)
-                  }
-                }}
-              />
+            <IconWrap size={25} bgcolor="darkBlack">
+              <Tooltip title={'Close All Folders'}>
+                <ChevronsUp
+                  size={15}
+                  onClick={() => {
+                    noteViewState.setOpenFolders([])
+                  }}
+                />
+              </Tooltip>
             </IconWrap>
-          </Box>
+          </Flex>
         </Flex>
         <Box overflowY="scroll" height={'70vh'}>
           <Menu
