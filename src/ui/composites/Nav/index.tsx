@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import { Box, Flex } from 'reflexbox'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 import { HighlightText } from 'ui/components/Typography/HighlightText'
-import { StrongText } from 'ui/components/Typography/StrongText'
 import { UserStore } from '../../../stores/UserStore'
-
+import KnowItLogo from '.././../assets/KnowIt.svg'
 @observer
 export class Nav extends React.Component {
   render() {
@@ -20,7 +19,13 @@ export class Nav extends React.Component {
       >
         <Box>
           <Link to="/">
-            <StrongText>Logo</StrongText>
+            <div style={{ backgroundColor: 'black', borderRadius: 5 }}>
+              <img
+                alt="logo"
+                src={KnowItLogo}
+                style={{ width: 50, height: 50 }}
+              />
+            </div>
           </Link>
         </Box>
         <Box>
