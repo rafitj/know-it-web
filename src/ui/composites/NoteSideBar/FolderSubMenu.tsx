@@ -10,7 +10,7 @@ import { colors } from 'ui/base/theme'
 import { SubMenu } from '../../base/Menu'
 import { FileMenuItem } from './FileMenuItem'
 import { NewFile } from './NewFile'
-import { NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFolderSubMenu {
   folder: GetFolderWithNotesResponse
@@ -30,7 +30,7 @@ const ViewFolderSymbol = styled(Box)<{ selected: boolean }>`
 `
 @observer
 class FolderSubMenu extends React.Component<IFolderSubMenu & SubMenuProps> {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   render() {
     const { noteViewState } = this.state

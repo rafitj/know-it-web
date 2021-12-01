@@ -6,7 +6,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import { NoteSpaceContext } from '../NoteSideBar/NoteSpaceContext'
+import {
+  INoteSpaceState,
+  NoteSpaceContext,
+} from '../NoteSideBar/NoteSpaceContext'
 
 const { Sider } = Layout
 
@@ -32,7 +35,7 @@ const StyledSider = styled(Sider)`
 
 @observer
 class ProfileBar extends React.Component {
-  state = this.context
+  state = this.context as INoteSpaceState
 
   onCollapse = (collapse: boolean) => {
     this.state.noteViewState.collapseRight(collapse)

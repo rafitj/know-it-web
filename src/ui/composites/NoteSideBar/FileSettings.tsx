@@ -4,7 +4,7 @@ import { BriefNoteDescriptionResponse } from 'network/proto/protos'
 import React from 'react'
 import { Flex } from 'reflexbox'
 import { Download, Edit, IconWrap, Trash } from 'ui/base/Icons'
-import { NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFileMenuSettingsItem {
   note: BriefNoteDescriptionResponse
@@ -13,10 +13,10 @@ export interface IFileMenuSettingsItem {
 
 @observer
 class FileMenuItemSettings extends React.Component<IFileMenuSettingsItem> {
-  state = this.context
+  state = this.context as INoteSpaceState
   deleteNote = () => {
     this.state.noteState.deleteNoteById(this.props.note.id)
-    if (this.props.note.id === this.state.noteState.note.id) {
+    if (this.props.note.id === this.state.noteState.note?.id) {
       this.state.noteState.deselectNote()
     }
   }
