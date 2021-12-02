@@ -69,3 +69,8 @@ export interface GetUserLoginResponse {
   imageUrl: string
   emailVerified: boolean
 }
+
+export interface RecentNote {
+  id: string
+  title: string
+}
