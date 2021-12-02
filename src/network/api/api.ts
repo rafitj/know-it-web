@@ -3,6 +3,7 @@ import {
   BriefNoteDescriptionResponse,
   CreateFolderRequest,
   CreateNoteRequest,
+  FlashcardResponse,
   FolderResponse,
   GetFolderWithNotesResponse,
   GetUserDetailsResponse,
@@ -175,6 +176,26 @@ export class Api {
   > => {
     const data = await Api.createRequest<null, GetFolderWithNotesResponse[]>(
       'folders/with-notes',
+      'GET'
+    )
+    return data
+  }
+
+  static fetchFlashcards = async (
+    noteId: string
+  ): Promise<FlashcardResponse[]> => {
+    const data = await Api.createRequest<null, FlashcardResponse[]>(
+      `flashcards?id=${noteId}`,
+      'GET'
+    )
+    return data
+  }
+
+  static generateFlashcards = async (
+    noteId: string
+  ): Promise<FlashcardResponse[]> => {
+    const data = await Api.createRequest<null, FlashcardResponse[]>(
+      `flashcards/generate?id=${noteId}`,
       'GET'
     )
     return data
