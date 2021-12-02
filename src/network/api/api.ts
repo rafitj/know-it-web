@@ -1,5 +1,6 @@
 import axios, { Method } from 'axios'
 import {
+  BriefNoteDescriptionResponse,
   CreateFolderRequest,
   CreateNoteRequest,
   FolderResponse,
@@ -11,7 +12,7 @@ import {
   SignUpUserRequest,
   UpdateFolderRequest,
   UpdateNoteRequest,
-} from 'network/proto/protos'
+} from 'network/proto/protos';
 import { UserStore } from 'stores/UserStore'
 
 export const baseUrl =
@@ -75,6 +76,22 @@ export class Api {
     return data
   }
 
+  static fetchNotesInTrash = async (): Promise<BriefNoteDescriptionResponse[]> => {
+    const data = await Api.createRequest<null, BriefNoteDescriptionResponse[]>(
+      `notes/in-trash`,
+      'GET'
+    )
+    return data
+  }
+
+  static recoverNote = async (id: string): Promise<NoteResponse> => {
+    const data = await Api.createRequest<null, NoteResponse>(
+      `notes/recover-note?id=${id}`,
+      'GET'
+    )
+    return data
+  }
+
   static createNote = async (
     payload: CreateNoteRequest
   ): Promise<NoteResponse> => {
@@ -91,6 +108,17 @@ export class Api {
   ): Promise<NoteResponse> => {
     const data = await Api.createRequest<UpdateNoteRequest, NoteResponse>(
       'notes',
+      'PUT',
+      payload
+    )
+    return data
+  }
+
+  static updateNoteTitle = async (
+    payload: UpdateNoteRequest
+  ): Promise<NoteResponse> => {
+    const data = await Api.createRequest<UpdateNoteRequest, NoteResponse>(
+      'notes/title',
       'PUT',
       payload
     )
