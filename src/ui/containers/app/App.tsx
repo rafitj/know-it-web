@@ -32,6 +32,9 @@ export class App extends React.Component {
             <AuthRoute exact={true} path="/login">
               <Login />
             </AuthRoute>
+            <AuthRoute exact={true} path="/oauth2/authorize">
+              <div>OAUTH</div>
+            </AuthRoute>
             <Route exact={true} path="/">
               <Home />
             </Route>
