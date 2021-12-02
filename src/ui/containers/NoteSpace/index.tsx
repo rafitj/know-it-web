@@ -9,8 +9,8 @@ import {
   INoteSpaceState,
   NoteSpaceContext,
 } from '../../composites/NoteSideBar/NoteSpaceContext'
+import { CardEditor } from './CardEditor'
 import { NoteEditor } from './NoteEditor'
-const { Content } = Layout
 
 @observer
 export class NoteSpace extends React.Component {
@@ -38,14 +38,11 @@ export class NoteSpace extends React.Component {
             marginRight: rightCollapsed ? '100px' : '300px',
           }}
         >
-          <Content
-            style={{
-              backgroundColor: colors.white,
-              margin: '20px',
-            }}
-          >
+          {this.state.noteViewState.viewMode === 'Notes' ? (
             <NoteEditor />
-          </Content>
+          ) : (
+            <CardEditor />
+          )}
         </Layout>
         <ProfileBar />
         <NoteUtilsSideBar />

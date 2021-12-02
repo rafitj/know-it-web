@@ -1,25 +1,22 @@
 import { observer } from 'mobx-react'
 import React from 'react'
-import { Line } from 'ui/components/Line'
-import { Editor } from '.'
 import { GetFolderWithNotesResponse } from '../../../network/proto/protos'
 import { NoteCardHeader } from '../Common/NoteCardHeader'
 import {
   INoteSpaceState,
   NoteSpaceContext,
 } from '../NoteSideBar/NoteSpaceContext'
+import { CardDisplayButtons } from './CardDisplayButtons'
+import { CardsDisplay } from './CardsDisplay'
 
 @observer
-class NoteView extends React.Component {
+class CardsViewMode extends React.Component<any, any> {
   state = this.context as INoteSpaceState
-
   render() {
     const { note } = this.state.noteState
     const { folders } = this.state.folderState
-
     return (
       <>
-        <Line />
         <NoteCardHeader
           title={note?.title}
           subTitle={
@@ -29,13 +26,11 @@ class NoteView extends React.Component {
             )?.title
           }
         />
-        <Line />
-        <Editor note={note} />
+        <CardsDisplay />
+        <CardDisplayButtons />
       </>
     )
   }
 }
-
-NoteView.contextType = NoteSpaceContext
-
-export { NoteView }
+CardsViewMode.contextType = NoteSpaceContext
+export { CardsViewMode }

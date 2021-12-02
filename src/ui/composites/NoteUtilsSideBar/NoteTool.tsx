@@ -12,11 +12,13 @@ export interface NoteToolProps {
 export class NoteTool extends React.Component<NoteToolProps> {
   render() {
     return (
-      <Flex p={4} justifyContent="center">
+      <>
         <NoteCards selected={this.props.selectedTool === 'cards'} />
-        <NoteSearch selected={this.props.selectedTool === 'search'} />
-        <NoteFilter selected={this.props.selectedTool === 'filter'} />
-      </Flex>
+        <Flex p={4} justifyContent="center">
+          <NoteSearch selected={this.props.selectedTool === 'search'} />
+          <NoteFilter selected={this.props.selectedTool === 'filter'} />
+        </Flex>
+      </>
     )
   }
 }
