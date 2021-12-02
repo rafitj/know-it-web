@@ -16,8 +16,7 @@ import {
 } from 'network/proto/protos'
 import { UserStore } from 'stores/UserStore'
 
-export const baseUrl =
-  'https://know-it-back-master-uawaixtnp7.herokuapp.com/api/v1/'
+export const baseUrl = 'https://blooming-reef-87123.herokuapp.com/api/v1/'
 // export const baseUrl = 'http://localhost:8081/api/v1/'
 
 export class Api {
