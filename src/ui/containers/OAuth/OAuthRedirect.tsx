@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react'
 import React from 'react'
+import { Flex } from 'reflexbox'
 import {
   PersistenceKey,
   PersistenceStore,
@@ -37,6 +38,15 @@ export class OAuthRedirect extends React.Component {
   }
 
   render() {
-    return <BigText>Loading.</BigText>
+    return (
+      <Flex
+        width="100%"
+        height="100vh"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <BigText>Loading.</BigText>
+      </Flex>
+    )
   }
 }

@@ -38,6 +38,7 @@ export interface BriefNoteDescriptionResponse {
   title: string
   timeUpdated: Date
   folderId: string
+  folderTitle?: string
 }
 
 export interface FolderResponse {
