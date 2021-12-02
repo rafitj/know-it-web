@@ -14,6 +14,7 @@ const appLoadRoutine: AppLoadRoutineType[] = [
       return
     }
     const token = storageValue
+    UserStore.authToken = token
     UserStore.fetchUser(token)
   },
 ]

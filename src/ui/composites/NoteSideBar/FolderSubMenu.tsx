@@ -73,7 +73,7 @@ class FolderSubMenu extends React.Component<IFolderSubMenu & SubMenuProps> {
       await folderState.updateFolder({
         id: this.props.folder.id,
         title: this.state.newFolderTitle,
-        colour: 'white',
+        colour: this.props.folder.colour,
       })
       this.setState({ editTitleMode: false })
     }

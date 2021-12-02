@@ -19,6 +19,9 @@ class MiniFolderMenu extends React.Component {
     const folder = this.state.folderState.folders.find(
       (f: GetFolderWithNotesResponse) => f.id === folderId
     )
+    const setNoteViewById = async (noteId: string) => {
+      await this.state.noteState.fetchNote(noteId)
+    }
 
     return (
       <Menu mode="inline" theme="dark">
@@ -26,7 +29,15 @@ class MiniFolderMenu extends React.Component {
           {folder &&
             folder.notes &&
             folder.notes.map((note: BriefNoteDescriptionResponse) => (
-              <MenuItem key={note.id}>{note.title}</MenuItem>
+              <MenuItem
+                key={note.id}
+                onClick={(e) => {
+                  e.domEvent.stopPropagation()
+                  setNoteViewById(note.id)
+                }}
+              >
+                {note.title}
+              </MenuItem>
             ))}
         </SubMenu>
       </Menu>

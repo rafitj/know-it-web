@@ -1,8 +1,8 @@
 import { action, observable } from 'mobx'
 import {
+  GetUserLoginResponse,
   LogInUserRequest,
   SignUpUserRequest,
-  UserLoginResponse,
 } from 'network/proto/protos'
 import { Api } from '../network/api/api'
 import { RouterStore } from '../ui/containers/RouterStore'
@@ -10,7 +10,7 @@ import { PersistenceKey, PersistenceStore } from './PersistenceStore'
 
 class UserStore {
   @observable
-  user?: UserLoginResponse
+  user?: GetUserLoginResponse
 
   @observable
   authToken?: string
@@ -25,7 +25,11 @@ class UserStore {
   requestErrorDetail?: string
 
   get isSignedIn(): boolean {
-    return this.user !== undefined && this.user !== null
+    return (
+      this.authToken !== undefined &&
+      this.authToken !== null &&
+      this.authToken.length > 0
+    )
   }
 
   @action
@@ -67,6 +71,7 @@ class UserStore {
     this.user = undefined
     this.authToken = undefined
     PersistenceStore.clearItem(PersistenceKey.UserSession)
+    RouterStore.push('/')
   }
 
   async fetchUser(token?: string) {

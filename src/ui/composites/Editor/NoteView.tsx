@@ -1,4 +1,4 @@
-import { PageHeader, Tag } from 'antd'
+import { PageHeader } from 'antd'
 import { observer } from 'mobx-react'
 import React from 'react'
 import styled from 'styled-components'
@@ -33,14 +33,14 @@ class NoteView extends React.Component {
       <>
         <Line />
         <StyledPageHeader
-          tags={[
-            <Tag key="0" color="blue">
-              Midterm
-            </Tag>,
-            <Tag key="1" color="blue">
-              Quiz 5
-            </Tag>,
-          ]}
+          // tags={[
+          //   <Tag key="0" color="blue">
+          //     Midterm
+          //   </Tag>,
+          //   <Tag key="1" color="blue">
+          //     Quiz 5
+          //   </Tag>,
+          // ]}
           title={note?.title}
           subTitle={
             folders.find(
