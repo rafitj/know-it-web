@@ -1,15 +1,19 @@
 import { action, observable } from 'mobx'
 import {
+  BriefNoteDescriptionResponse,
   CreateFolderRequest,
   FolderResponse,
   GetFolderWithNotesResponse,
   UpdateFolderRequest,
-} from 'network/proto/protos'
+} from 'network/proto/protos';
 import { Api } from '../network/api/api'
 
 export class FolderState {
   @observable
   folders: GetFolderWithNotesResponse[] = []
+
+  @observable
+  notesInTrash: BriefNoteDescriptionResponse[] = []
 
   @observable
   isLoading: boolean = false
@@ -30,6 +34,20 @@ export class FolderState {
       this.requestErrorDetail = 'Failed to fetch folders.'
     }
     this.isLoading = false
+  }
+
+  @action
+  fetchNotesInTrash = async () => {
+    this.isLoading = true;
+
+    try {
+      this.notesInTrash = await Api.fetchNotesInTrash();
+    } catch (e) {
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to fetch notes in trash.'
+    }
+
+    this.isLoading = false;
   }
 
   @action
