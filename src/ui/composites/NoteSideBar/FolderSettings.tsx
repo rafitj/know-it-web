@@ -3,7 +3,8 @@ import { observer } from 'mobx-react'
 import { GetFolderWithNotesResponse } from 'network/proto/protos'
 import React from 'react'
 import { Flex } from 'reflexbox'
-import { Download, Edit, IconWrap, Trash } from 'ui/base/Icons'
+import { Edit, IconWrap, Trash } from 'ui/base/Icons'
+import { color } from '../../base/theme'
 import { ColorPicker } from '../../components/ColorPicker'
 import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
@@ -25,22 +26,40 @@ class FolderMenuSettings extends React.Component<IFolderMenuSettingsItem> {
       this.state.noteState.deselectNote()
     }
   }
+  updateFolderColor = async (c: color) => {
+    await this.state.folderState.updateFolder({
+      id: this.props.folder.id,
+      colour: c,
+      title: this.props.folder.title,
+    })
+  }
   render() {
     return (
       <Flex flexDirection="row">
-        <ColorPicker />
+        <ColorPicker
+          color={this.props.folder.colour}
+          setColor={this.updateFolderColor}
+        />
         <IconWrap
           mx={1}
           height={25}
           bgcolor="blue"
-          onClick={this.props.editTitle}
+          onClick={(e) => {
+            e.stopPropagation()
+            this.props.editTitle()
+          }}
         >
           <Edit size={15} />
         </IconWrap>
-        <IconWrap mx={1} height={25} bgcolor="purple">
-          <Download size={15} />
-        </IconWrap>
-        <IconWrap mx={1} height={25} bgcolor="red" onClick={this.deleteFolder}>
+        <IconWrap
+          mx={1}
+          height={25}
+          bgcolor="red"
+          onClick={(e) => {
+            e.stopPropagation()
+            this.deleteFolder()
+          }}
+        >
           <Trash size={15} />
         </IconWrap>
       </Flex>

@@ -20,7 +20,6 @@
 .codex-editor {
   margin-top: 0;
   text-align: left;
-  overflow-y: scroll;
 }
 
 .ce-settings {
@@ -40,10 +39,11 @@
   background-color: white;
 }
 
-.ant-layout-has-sider {
-  background-color: transparent !important;
-}
-
 .ce-toolbar__actions {
   display: none;
+}
+
+@media (min-width: 651px) {
+  .codex-editor--narrow .ce-toolbar__plus {
+  }
 }

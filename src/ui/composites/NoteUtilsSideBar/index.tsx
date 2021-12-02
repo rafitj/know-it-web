@@ -25,10 +25,10 @@ const StyledSider = styled(Sider)<{ collapsed: boolean }>`
   .ant-layout-sider-trigger {
     background-color: transparent;
     color: ${colors.black};
-    bottom: 5%;
+    bottom: 4%;
   }
   margin: 20px;
-  height: ${(props) => (props.collapsed ? '85%' : '95%')};
+  height: ${(props) => (props.collapsed ? '86%' : '96%')};
   position: fixed;
   top: ${(props) => (props.collapsed ? '10%' : '0')};
   right: 0;

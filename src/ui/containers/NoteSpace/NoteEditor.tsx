@@ -15,7 +15,7 @@ class NoteEditor extends React.Component {
   render() {
     const { note } = this.state.noteState
     return (
-      <Card noShadow={true} textAlign="left">
+      <Card noShadow={true} textAlign="left" style={{ minHeight: '96vh' }}>
         {note ? <NoteView /> : <UnselectedNoteView />}
       </Card>
     )

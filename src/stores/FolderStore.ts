@@ -38,8 +38,9 @@ export class FolderState {
   ): Promise<FolderResponse | void> => {
     this.isLoading = true
     try {
-      await Api.createFolder(newFolder)
+      const folder = await Api.createFolder(newFolder)
       await this.fetchFolders()
+      return folder
     } catch (e) {
       this.requestError = true
       this.requestErrorDetail = 'Failed to create folder.'

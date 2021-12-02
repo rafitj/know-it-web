@@ -19,11 +19,11 @@ const StyledSider = styled(Sider)`
   background-color: ${colors.black};
   .ant-layout-sider-trigger {
     background-color: ${colors.black};
-    bottom: 5%;
+    bottom: 4%;
   }
   border-radius: 10px;
   margin: 20px;
-  height: 95%;
+  height: 96%;
   position: fixed;
   left: 0;
   overflow: auto;
