@@ -1,6 +1,5 @@
-import { observable } from 'mobx';
-import { GetUserDetailsResponse } from '../network/proto/protos';
-import { UserStore } from './UserStore';
+import { action, observable } from 'mobx'
+import { UserStore } from './UserStore'
 
 export enum PersistenceKey {
   UserSession = 'UserSession',
@@ -14,8 +13,8 @@ const appLoadRoutine: AppLoadRoutineType[] = [
     if (storageValue === null) {
       return
     }
-    const user = JSON.parse(storageValue) as GetUserDetailsResponse
-    UserStore.user = user
+    const token = storageValue
+    UserStore.fetchUser(token)
   },
 ]
 
@@ -29,8 +28,12 @@ class PersistenceStore {
     this.isLoading = false;
   }
 
-  setItem<T>(key: PersistenceKey, data: object) {
-    localStorage.setItem(key.valueOf(), JSON.stringify(data))
+  setItem<T>(key: PersistenceKey, data: string) {
+    localStorage.setItem(key.valueOf(), data)
+  }
+
+  clearItem(key: PersistenceKey) {
+    localStorage.removeItem(key.valueOf())
   }
 }
 

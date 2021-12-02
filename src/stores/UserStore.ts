@@ -1,15 +1,19 @@
 import { action, observable } from 'mobx'
 import {
-  GetUserDetailsResponse,
   LogInUserRequest,
   SignUpUserRequest,
+  UserLoginResponse,
 } from 'network/proto/protos'
 import { Api } from '../network/api/api'
+import { RouterStore } from '../ui/containers/RouterStore'
 import { PersistenceKey, PersistenceStore } from './PersistenceStore'
 
 class UserStore {
   @observable
-  user?: GetUserDetailsResponse
+  user?: UserLoginResponse
+
+  @observable
+  authToken?: string
 
   @observable
   isLoading: boolean = false
@@ -40,8 +44,11 @@ class UserStore {
   async loginUser(userCredentials: LogInUserRequest): Promise<void> {
     this.isLoading = true
     try {
-      this.user = await Api.signInUser(userCredentials)
-      PersistenceStore.setItem(PersistenceKey.UserSession, this.user)
+      const user = await Api.signInUser(userCredentials)
+      this.authToken = user.authToken
+      PersistenceStore.setItem(PersistenceKey.UserSession, this.authToken)
+      await this.fetchUser()
+      RouterStore.push('/note-space')
     } catch (err) {
       this.requestError = true
       this.requestErrorDetail = err.message
@@ -58,6 +65,15 @@ class UserStore {
   @action
   logout(): void {
     this.user = undefined
+    this.authToken = undefined
+    PersistenceStore.clearItem(PersistenceKey.UserSession)
+  }
+
+  async fetchUser(token?: string) {
+    if (token) {
+      this.authToken = token
+    }
+    this.user = await Api.fetchUser()
   }
 }
 
