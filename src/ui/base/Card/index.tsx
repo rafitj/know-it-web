@@ -20,7 +20,7 @@ const CardContainer = styled.div<ICardProps>`
     font-family: Arial;
     border-radius: 8px;
     border: ${`2px solid ${colors.black}`};
-    ${(props) => !props.noShadow && `box-shadow: ${`5px 5px ${colors.grey}`};`}
+    ${(props) => !props.noShadow && `box-shadow: ${`6px 6px ${colors.black}`};`}
     text-align: ${(props) => props.textAlign};
     background-color: ${(props) =>
       props.invert ? colors.black : colors.white};
@@ -28,6 +28,7 @@ const CardContainer = styled.div<ICardProps>`
     height: ${(props) => (props.height ? props.height : 'auto')};
     display: ${(props) => (props.block ? 'block' : 'inline-block')};
   }
+
 `
 
 export const Card = ({

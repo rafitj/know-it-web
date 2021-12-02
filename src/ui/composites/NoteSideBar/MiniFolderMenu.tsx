@@ -8,7 +8,7 @@ import {
   GetFolderWithNotesResponse,
 } from '../../../network/proto/protos'
 import { Menu, MenuItem } from '../../base/Menu'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 @observer
 class MiniFolderMenu extends React.Component {
@@ -21,6 +21,7 @@ class MiniFolderMenu extends React.Component {
     )
     const setNoteViewById = async (noteId: string) => {
       await this.state.noteState.fetchNote(noteId)
+      await this.state.cardState.fetchCards(noteId)
     }
 
     return (

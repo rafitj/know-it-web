@@ -1,40 +1,54 @@
 import { action, observable } from 'mobx'
-export type CardType = {
-  q: string
-  a: string
-  id: number
-}
-
-export type CardModes = 'view' | 'create'
+import { Api } from '../network/api/api'
+import { FlashcardResponse } from '../network/proto/protos'
 
 export class CardState {
   @observable
-  cardMode: CardModes = 'view'
+  cardInFocusIndex?: number
 
   @observable
-  cards: CardType[] = []
+  cards: FlashcardResponse[] = []
+
+  @observable
+  isLoading: boolean = false
+
+  @observable
+  requestError: boolean = false
+
+  @observable
+  requestErrorDetail?: string
 
   @action
-  setCards = () => {
-    this.cards = [
-      { q: 'What is', a: 'your mom', id: 1 },
-      { q: 'What is 9+11?', a: '21', id: 2 },
-      { q: 'What is 9+11?', a: '21', id: 31 },
-      { q: 'What is 9+11?', a: '21', id: 41 },
-      { q: 'What is 9+11?', a: '21', id: 561 },
-      { q: 'What is 9+11?', a: '21', id: 176 },
-      { q: 'What is 9+11?', a: '21', id: 11 },
-      { q: 'What is 9+11?', a: '21', id: 12 },
-      { q: 'What is 9+11?', a: '21', id: 31 },
-      { q: 'What is', a: 'your mom', id: 111 },
-      { q: 'What is 9+11?', a: '21', id: 1112 },
-      { q: 'What is 9+11?', a: '21', id: 11131 },
-      { q: 'What is 9+11?', a: '21', id: 11141 },
-      { q: 'What is 9+11?', a: '21', id: 111561 },
-      { q: 'What is 9+11?', a: '21', id: 111176 },
-      { q: 'What is 9+11?', a: '21', id: 111211 },
-      { q: 'What is 9+11?', a: '21', id: 12212 },
-      { q: 'What is 9+11?', a: '21', id: 31121 },
-    ]
+  setCardInFocusIndex = (index?: number) => {
+    this.cardInFocusIndex = index
+  }
+  @action
+  setCardInFocusIndexById = (id?: string) => {
+    const index = this.cards.findIndex((card) => card.id === id)
+    this.cardInFocusIndex = index
+  }
+
+  @action
+  generateCards = async (noteId: string) => {
+    this.isLoading = true
+    try {
+      this.cards = await Api.generateFlashcards(noteId)
+    } catch (e) {
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to generate cards.'
+    }
+    this.isLoading = false
+  }
+
+  @action
+  fetchCards = async (noteId: string) => {
+    this.isLoading = true
+    try {
+      this.cards = await Api.fetchFlashcards(noteId)
+    } catch (e) {
+      this.requestError = true
+      this.requestErrorDetail = 'Failed to fetch cards.'
+    }
+    this.isLoading = false
   }
 }

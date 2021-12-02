@@ -11,7 +11,7 @@ const StyledStrongText = styled(Title)`
   color: ${colors.black};
   font-size: 1.2rem;
   font-weight: bold;
-  margin: 16px;
+  margin-bottom: 0 !important;
 `
 
 export const StrongText = ({ children: text }: StrongTextProps) => (

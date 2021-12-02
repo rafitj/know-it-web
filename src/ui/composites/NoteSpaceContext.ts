@@ -1,8 +1,8 @@
 import React from 'react'
-import { CardState } from '../../../stores/CardStore'
-import { FolderState } from '../../../stores/FolderStore'
-import { NoteState } from '../../../stores/NoteStore'
-import { NoteViewState } from '../../../stores/NoteViewStore'
+import { CardState } from '../../stores/CardStore'
+import { FolderState } from '../../stores/FolderStore'
+import { NoteState } from '../../stores/NoteStore'
+import { NoteViewState } from '../../stores/NoteViewStore'
 
 export interface INoteSpaceState {
   noteViewState: NoteViewState

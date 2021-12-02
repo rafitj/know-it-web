@@ -68,6 +68,9 @@ export class AuthForm extends React.Component<IAuthForm> {
                             this.props.setName(e.target.value)
                           }
                         }}
+                        onKeyPress={(e) =>
+                          e.key === 'Enter' && this.props.emailClick()
+                        }
                       />
                     </Box>
                   )}
@@ -77,6 +80,9 @@ export class AuthForm extends React.Component<IAuthForm> {
                       onChange={(e) => {
                         this.props.setEmail(e.target.value)
                       }}
+                      onKeyPress={(e) =>
+                        e.key === 'Enter' && this.props.emailClick()
+                      }
                     />
                   </Box>
                   <Box my={3}>
@@ -86,6 +92,9 @@ export class AuthForm extends React.Component<IAuthForm> {
                       onChange={(e) => {
                         this.props.setPassword(e.target.value)
                       }}
+                      onKeyPress={(e) =>
+                        e.key === 'Enter' && this.props.emailClick()
+                      }
                     />
                   </Box>
                   <PrimaryButton

@@ -15,22 +15,30 @@ export class Nav extends React.Component {
         alignItems="center"
         justifyContent="space-between"
         px={5}
-        py={2}
+        py={3}
         style={{ borderBottom: '2px solid #1c1c1c' }}
       >
         <Box>
-          <StrongText>Logo</StrongText>
+          <Link to="/">
+            <StrongText>Logo</StrongText>
+          </Link>
         </Box>
         <Box>
           <Flex justifyContent="space-between" alignItems="center">
             <Box mx={3}>
-              <HighlightText highlight="red">Product</HighlightText>
+              <Link to="/about">
+                <HighlightText highlight="red">About</HighlightText>
+              </Link>
             </Box>
             <Box mx={3}>
-              <HighlightText highlight="blue">Download</HighlightText>
+              <Link to="/product">
+                <HighlightText highlight="blue">Product</HighlightText>
+              </Link>
             </Box>
             <Box mx={3}>
-              <HighlightText highlight="green">Pricing</HighlightText>
+              <Link to="/downloads">
+                <HighlightText highlight="green">Downloads</HighlightText>
+              </Link>
             </Box>
             {UserStore.isSignedIn ? (
               <>

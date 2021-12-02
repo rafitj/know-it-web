@@ -6,10 +6,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { Line } from 'ui/components/Line'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { FileTrash } from '../Trash'
 import { FileDirectoryMenu } from './FileDirectoryMenu'
 import { MiniFolderMenu } from './MiniFolderMenu'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 import { ViewMenu } from './ViewMenu'
 const { Sider } = Layout
 

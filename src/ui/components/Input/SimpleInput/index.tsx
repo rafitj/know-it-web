@@ -15,7 +15,7 @@ const StyledInputContainer = styled.div<SimpleInputProps>`
     font-size: 1rem;
     color: ${colors.black};
     ${(props) =>
-      props.noShadow ? '' : `filter: drop-shadow(3px 3px ${colors.grey})`};
+      props.noShadow ? '' : `filter: drop-shadow(3px 3px ${colors.black})`};
     border: 2px solid ${colors.black};
     padding: 8px;
     border-radius: 8px;
@@ -26,6 +26,7 @@ const StyledInputContainer = styled.div<SimpleInputProps>`
   }
   .ant-input: focus {
     outline: none;
+    border-right-width: 2px !important;
   }
   .ant-input-password-icon svg {
     fill: ${colors.black};

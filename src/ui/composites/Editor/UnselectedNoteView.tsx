@@ -5,10 +5,7 @@ import { Box, Flex } from 'reflexbox'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
 import { NoteState } from '../../../stores/NoteStore'
 
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 
 @observer
 class UnselectedNoteView extends React.Component {
@@ -67,6 +64,8 @@ class UnselectedNoteView extends React.Component {
                   key={rNote.id}
                   onClick={() => {
                     this.state.noteState.fetchNote(rNote.id)
+                    this.state.cardState.fetchCards(rNote.id)
+                    this.state.cardState.setCardInFocusIndex()
                   }}
                 >
                   <HighlightedText

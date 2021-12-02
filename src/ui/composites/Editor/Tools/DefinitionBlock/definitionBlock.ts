@@ -1,31 +1,34 @@
-import './qablock.css'
-import { QAIcon } from './QAIcon'
+import './definitionBlock.css'
+import { DefinitionIcon } from './DefinitionIcon'
 
-export class Qablock {
+export class DefinitionBlock {
   // tslint:disable-next-line:no-any
   css: any
+  // tslint:disable-next-line:no-any
+  data: any
 
   // tslint:disable-next-line:no-any
-  constructor({ api }: any) {
+  constructor({ api, data }: any) {
     this.css = {
       block: api.styles.block,
       wrapper: 'ce-paragraph',
     }
+    this.data = data
   }
 
   static get toolbox() {
     return {
       title: 'QA Block',
-      icon: QAIcon,
+      icon: DefinitionIcon,
     }
   }
 
   render() {
     const qatitle = document.createElement('div')
-    qatitle.classList.add('qa-title')
+    qatitle.classList.add('def-title')
 
     const qatitleinput = document.createElement('div')
-    qatitleinput.textContent = 'Question + Answer'
+    qatitleinput.textContent = 'Q/A'
     qatitleinput.classList.add('qa-title-input')
     qatitle.append(qatitleinput)
     qatitleinput.id = 'qa-title'
@@ -46,12 +49,15 @@ export class Qablock {
     const question = document.createElement('div')
     question.id = 'question-input'
     question.contentEditable = 'true'
+    question.textContent =
+      this.data && this.data.question ? this.data.question : ''
     question.style.cssText = 'display: inline-block;'
     question.classList.add('question-input', this.css.wrapper, this.css.block)
 
     const answer = document.createElement('div')
     answer.contentEditable = 'true'
     answer.id = 'answer-input'
+    answer.textContent = this.data && this.data.answer ? this.data.answer : ''
     answer.style.cssText = 'display: inline-block;'
     answer.classList.add('answer-input', this.css.wrapper, this.css.block)
 
@@ -69,11 +75,10 @@ export class Qablock {
   }
 
   // tslint:disable-next-line:no-any
-  save(blockContent: any) {
+  save(blockContent: HTMLDivElement) {
     return {
-      title: document.getElementById('qa-title')?.innerHTML,
-      question: document.getElementById('question-input')?.innerHTML,
-      answer: document.getElementById('answer-input')?.innerHTML,
+      question: blockContent.querySelector('#question-input')?.innerHTML,
+      answer: blockContent.querySelector('#answer-input')?.innerHTML,
     }
   }
 }

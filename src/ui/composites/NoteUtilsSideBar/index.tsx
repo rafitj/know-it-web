@@ -7,13 +7,11 @@ import { Layout } from 'antd'
 import 'antd/dist/antd.css'
 import { observer } from 'mobx-react'
 import React from 'react'
+import { Box } from 'reflexbox'
 import styled from 'styled-components'
 import { Menu, MenuItem } from 'ui/base/Menu'
 import { colors } from 'ui/base/theme'
-import {
-  INoteSpaceState,
-  NoteSpaceContext,
-} from '../NoteSideBar/NoteSpaceContext'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { NoteTool } from './NoteTool'
 import { NoteUtilsState } from './NoteUtilsState'
 
@@ -52,7 +50,8 @@ class NoteUtilsSideBar extends React.Component {
 
   render() {
     const { rightCollapsed: collapsed } = this.state.context.noteViewState
-
+    const { note } = this.state.context.noteState
+    const disableUtils = note === undefined
     return (
       <StyledSider
         collapsible={true}
@@ -65,25 +64,33 @@ class NoteUtilsSideBar extends React.Component {
       >
         <StyledMenu mode={collapsed ? 'vertical' : 'horizontal'}>
           <MenuItem
+            disabled={disableUtils}
             icon={<BlockOutlined />}
             onClick={() => this.state.utils.selectTool('cards')}
           >
             Cards
           </MenuItem>
           <MenuItem
+            disabled={disableUtils}
             icon={<SearchOutlined />}
             onClick={() => this.state.utils.selectTool('search')}
           >
             Search
           </MenuItem>
           <MenuItem
+            disabled={disableUtils}
             icon={<FilterOutlined />}
             onClick={() => this.state.utils.selectTool('filter')}
           >
             Filter
           </MenuItem>
         </StyledMenu>
-        {!collapsed && (
+        {disableUtils && !collapsed && (
+          <Box textAlign="center" p={4}>
+            Select a Note
+          </Box>
+        )}
+        {!collapsed && !disableUtils && (
           <NoteTool selectedTool={this.state.utils.selectedTool} />
         )}
       </StyledSider>

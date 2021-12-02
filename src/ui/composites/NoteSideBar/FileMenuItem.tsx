@@ -9,8 +9,8 @@ import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { colors } from 'ui/base/theme'
 import { MenuItem } from '../../base/Menu'
+import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 import { FileMenuItemSettings } from './FileSettings'
-import { INoteSpaceState, NoteSpaceContext } from './NoteSpaceContext'
 
 export interface IFileMenuItem {
   note: BriefNoteDescriptionResponse
@@ -71,7 +71,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
   }
 
   render() {
-    const { noteState } = this.state.context
+    const { noteState, cardState } = this.state.context
 
     const selected = noteState.note && noteState.note.id === this.props.note.id
     const StyledMenuItem = selected ? SelectedFileMenuItem : RegularFileMenuItem
@@ -79,6 +79,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
     const setNoteViewById = async () => {
       if (this.props.note.id) {
         await noteState.fetchNote(this.props.note.id)
+        await cardState.fetchCards(this.props.note.id)
       }
     }
 
