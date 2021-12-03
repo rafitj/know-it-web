@@ -4,6 +4,7 @@ import React from 'react'
 import { colors } from 'ui/base/theme'
 import { NoteUtilsSideBar } from 'ui/composites/NoteUtilsSideBar'
 import { ProfileBar } from 'ui/composites/ProfileBar'
+import { StudyCardsView } from 'ui/composites/StudyCards/StudyCardsView'
 import { NoteSideBar } from '../../composites/NoteSideBar'
 import {
   INoteSpaceState,
@@ -38,10 +39,10 @@ export class NoteSpace extends React.Component {
             marginRight: rightCollapsed ? '100px' : '300px',
           }}
         >
-          {this.state.noteViewState.viewMode === 'Notes' ? (
-            <NoteEditor />
-          ) : (
-            <CardEditor />
+          {this.state.noteViewState.viewMode === 'Notes' && <NoteEditor />}
+          {this.state.noteViewState.viewMode === 'Cards' && <CardEditor />}
+          {this.state.noteViewState.viewMode === 'StudyCards' && (
+            <StudyCardsView />
           )}
         </Layout>
         <ProfileBar />

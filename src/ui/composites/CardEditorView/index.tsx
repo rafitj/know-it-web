@@ -27,7 +27,7 @@ class CardEditorView extends React.Component {
                 )?.title
               }
             />
-            {this.state.cardState.cardInFocusIndex ? (
+            {this.state.cardState.cardToEditIndx ? (
               <CardsCreateMode />
             ) : (
               <CardsViewMode />

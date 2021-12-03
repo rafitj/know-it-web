@@ -1,7 +1,7 @@
 import { Empty, Tooltip } from 'antd'
 import { observer } from 'mobx-react'
 import React from 'react'
-import { CheckSquare, Maximize } from 'react-feather'
+import { CheckSquare, Maximize, RefreshCcw } from 'react-feather'
 import { Box, Flex } from 'reflexbox'
 import styled from 'styled-components'
 import { HighlightedText } from 'ui/components/Typography/HighlightedText'
@@ -43,14 +43,7 @@ const StyledCardFlex = styled(Flex)`
 @observer
 class NoteCards extends React.Component<NoteCardsProps> {
   state = {
-    visibleModal: null,
     context: this.context as INoteSpaceState,
-  }
-  openModal = (id: string) => {
-    this.setState({ visibleModal: id })
-  }
-  closeModal = () => {
-    this.setState({ visibleModal: null })
   }
   generateFlashcards = () => {
     return this.state.context.cardState.generateCards(
@@ -68,6 +61,7 @@ class NoteCards extends React.Component<NoteCardsProps> {
   }
   render() {
     const { cardState } = this.state.context
+    const { cardInFocusIndex, setCardInFocusIndex } = cardState
     return (
       <>
         {this.props.selected && cardState.cards.length === 0 && (
@@ -97,12 +91,12 @@ class NoteCards extends React.Component<NoteCardsProps> {
               </Box>
             </Flex>
             <StyledCardFlex my={3} p={3} width={1}>
-              {cardState.cards.map((card) => (
+              {cardState.cards.map((card, i) => (
                 <>
                   <SmallFlashcard
                     mb={3}
                     onClick={() => {
-                      this.openModal(card.id)
+                      setCardInFocusIndex(i)
                     }}
                     justifyContent="center"
                     alignItems="center"
@@ -110,24 +104,43 @@ class NoteCards extends React.Component<NoteCardsProps> {
                     <span>{this.formatQuestionText(card.question)}</span>
                   </SmallFlashcard>
                   <CardModal
-                    closeModal={this.closeModal}
-                    isVisible={this.state.visibleModal === card.id}
+                    closeModal={() => {
+                      setCardInFocusIndex(undefined)
+                    }}
+                    isVisible={cardInFocusIndex === i}
                     card={card}
                   />
                 </>
               ))}
             </StyledCardFlex>
-            <Flex justifyContent="center">
+            <Flex justifyContent="center" mx={2} px={2}>
               <HighlightedText
                 bordered={true}
                 textColor="white"
-                highlight={'green'}
+                highlight={'blue'}
                 invert={true}
                 withIcon={true}
+                disabled={true}
               >
-                <CheckSquare size={15} style={{ marginRight: 4 }} />
-                Study Now
+                <RefreshCcw size={14} style={{ marginRight: 4 }} />
+                Sync Deck
               </HighlightedText>
+              <div
+                onClick={() => {
+                  this.state.context.noteViewState.setViewMode('StudyCards')
+                }}
+              >
+                <HighlightedText
+                  bordered={true}
+                  textColor="white"
+                  highlight={'green'}
+                  invert={true}
+                  withIcon={true}
+                >
+                  <CheckSquare size={14} style={{ marginRight: 4 }} />
+                  Study Now
+                </HighlightedText>
+              </div>
             </Flex>
           </Flex>
         )}

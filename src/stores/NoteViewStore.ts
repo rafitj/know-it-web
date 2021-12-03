@@ -1,7 +1,7 @@
 import EditorJsType from '@editorjs/editorjs/types'
 import { action, observable } from 'mobx'
 
-type ViewModes = 'Cards' | 'Notes'
+type ViewModes = 'Cards' | 'Notes' | 'StudyCards'
 
 export class NoteViewState {
   @observable

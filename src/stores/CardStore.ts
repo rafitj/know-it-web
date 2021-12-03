@@ -7,6 +7,9 @@ export class CardState {
   cardInFocusIndex?: number
 
   @observable
+  cardToEditIndx?: number
+
+  @observable
   cards: FlashcardResponse[] = []
 
   @observable
@@ -17,6 +20,17 @@ export class CardState {
 
   @observable
   requestErrorDetail?: string
+
+  @action
+  setCardToEditIndx = (i?: number) => {
+    this.cardToEditIndx = i
+  }
+
+  @action
+  setCardToEditIndxById = (id?: string) => {
+    const index = this.cards.findIndex((card) => card.id === id)
+    this.cardToEditIndx = index
+  }
 
   @action
   setCardInFocusIndex = (index?: number) => {

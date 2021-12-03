@@ -48,8 +48,10 @@ interface ICardModal {
 class CardModal extends React.Component<ICardModal> {
   state = this.context as INoteSpaceState
   enterEditCardMode = () => {
-    this.state.cardState.setCardInFocusIndexById(this.props.card.id)
     this.props.closeModal()
+    this.state.cardState.setCardToEditIndx(
+      this.state.cardState.cardInFocusIndex
+    )
     this.state.noteViewState.setViewMode('Cards')
   }
 
@@ -60,12 +62,15 @@ class CardModal extends React.Component<ICardModal> {
       setCardInFocusIndex,
     } = this.state.cardState
     const goPrevCard = () => {
-      setCardInFocusIndex(cardInFocusIndex || 0 - 1)
+      if (cardInFocusIndex !== 0) {
+        setCardInFocusIndex((cardInFocusIndex || 0) - 1)
+      }
     }
     const goNextCard = () => {
-      setCardInFocusIndex(cardInFocusIndex || 0 + 1)
+      if (cardInFocusIndex !== cards.length - 1) {
+        setCardInFocusIndex((cardInFocusIndex || 0) + 1)
+      }
     }
-
     return (
       <FlashcardModal
         centered={true}

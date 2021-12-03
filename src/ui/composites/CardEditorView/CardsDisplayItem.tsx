@@ -9,9 +9,9 @@ import { INoteSpaceState, NoteSpaceContext } from '../NoteSpaceContext'
 const CardItem = styled(Box)`
   border-radius: 10px;
   border: 2px solid black;
-  padding: 0 20px;
+  padding: 0 15px;
   width: 30%;
-  height: 200px;
+  height: 100px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -30,8 +30,8 @@ const CardItem = styled(Box)`
 class CardsDisplayItem extends React.Component<{ card: FlashcardResponse }> {
   state = this.context as INoteSpaceState
   enterEditCardMode = () => {
-    const { setCardInFocusIndexById } = this.state.cardState
-    setCardInFocusIndexById(this.props.card.id)
+    const { setCardToEditIndxById } = this.state.cardState
+    setCardToEditIndxById(this.props.card.id)
     this.state.noteViewState.setViewMode('Cards')
   }
 

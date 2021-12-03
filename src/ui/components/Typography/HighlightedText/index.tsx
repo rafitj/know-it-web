@@ -10,9 +10,12 @@ export interface HighlightedTextProps {
   bordered?: boolean
   invert?: boolean
   withIcon?: boolean
+  disabled?: boolean
 }
 
 const StyledHighlightedText = styled(AntDText)<HighlightedTextProps>`
+  display: inline-block;
+  white-space: nowrap;
   font-size: 1rem;
   border-radius: 5px;
   border: 2px solid transparent;
@@ -26,13 +29,14 @@ const StyledHighlightedText = styled(AntDText)<HighlightedTextProps>`
   align-items: center;`}
   border: ${(props) => (props.bordered ? `2px solid ${colors.black}` : 'none')};
   color: ${(props) =>
-    props.textColor ? colors[props.textColor] : colors.white};
+    props.textColor ? colors[props.textColor] : colors.white} !important;
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   &:hover {
-    cursor: pointer;
+    cursor: ${(props) => (props.disabled ? `not-allowed` : 'pointer')};
     background-color: white;
     border-color: ${(props) =>
       props.highlight && !props.bordered ? colors[props.highlight] : ''};
-    color: ${colors.black};
+    color: ${colors.black} !important;
     background-color: ${(props) =>
       props.highlight && props.bordered ? colors[props.highlight] : ''};
   }
@@ -51,6 +55,7 @@ export const HighlightedText = ({
   bordered,
   invert,
   withIcon,
+  disabled,
 }: HighlightedTextProps) => (
   <Typography>
     <StyledHighlightedText
@@ -59,6 +64,7 @@ export const HighlightedText = ({
       highlight={highlight}
       invert={invert}
       withIcon={withIcon}
+      disabled={disabled}
     >
       {text}
     </StyledHighlightedText>

@@ -1,3 +1,4 @@
+import { Empty } from 'antd'
 import { observer } from 'mobx-react'
 import React from 'react'
 import { Box } from 'reflexbox'
@@ -13,6 +14,12 @@ class CardsDisplay extends React.Component {
     return (
       <>
         <Box height={'80vh'} overflowY="scroll">
+          {this.context.cardState.cards.length === 0 && (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={<span>No Cards Generated for Note</span>}
+            />
+          )}
           {this.context.cardState.cards.map((card: FlashcardResponse) => (
             <CardsDisplayItem key={card.id} card={card} />
           ))}

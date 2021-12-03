@@ -1,4 +1,4 @@
-import { Badge, Popover } from 'antd'
+import { Popover } from 'antd'
 import 'antd/dist/antd.css'
 import { MenuItemProps } from 'antd/lib/menu/MenuItem'
 import { observer } from 'mobx-react'
@@ -36,14 +36,14 @@ const SelectedFileMenuItem = styled(MenuItem)`
   background: ${colors.white} !important;
   color: ${colors.black} !important;
 `
-const StyledBadge = styled(Badge)`
-  margin: 0 4px;
-  .ant-badge-count {
-    background-color: #fff;
-    color: #999;
-    box-shadow: 0 0 0 1px #d9d9d9 inset;
-  }
-`
+// const StyledBadge = styled(Badge)`
+//   margin: 0 4px;
+//   .ant-badge-count {
+//     background-color: #fff;
+//     color: #999;
+//     box-shadow: 0 0 0 1px #d9d9d9 inset;
+//   }
+// `
 const StyledInput = styled.input`
   background-color: transparent;
   border: none;
@@ -118,7 +118,7 @@ class FileMenuItem extends React.Component<IFileMenuItem & MenuItemProps> {
                 this.props.note.title
               )}
             </Box>
-            {selected && <StyledBadge count={1} />}
+            {/* {selected && <StyledBadge count={1} />} */}
             <Popover
               placement="right"
               content={() => (
