@@ -1,6 +1,7 @@
 import { PageHeader } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
+
 const StyledPageHeader = styled(PageHeader)`
   background-color: transparent;
   .ant-page-header-heading-tags {
